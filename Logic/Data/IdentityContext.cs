@@ -9,6 +9,7 @@ namespace Logic.Data;
 public class IdentityContext : IdentityDbContext<User, Role, string>
 {
     public DbSet<Doctor> Doctors { get; set; }
+    public DbSet<Subject> Subjects { get; set; }
     public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
 
     public IdentityContext(DbContextOptions options) : base(options)
@@ -21,6 +22,7 @@ public class IdentityContext : IdentityDbContext<User, Role, string>
         builder.ApplyConfiguration(new UserRefreshTokenConfiguration());
         builder.ApplyConfiguration(new RoleConfiguration());
         builder.ApplyConfiguration(new DoctorConfiguration());
+        builder.ApplyConfiguration(new SubjectConfiguration());
         base.OnModelCreating(builder);
     }
 }
