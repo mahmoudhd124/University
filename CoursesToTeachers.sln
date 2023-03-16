@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{43D97A73-2C2E-49A7-A66F-61AED821B875}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{A36A63DE-BC05-44FF-B307-315819B0BA6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{43D97A73-2C2E-49A7-A66F-61AED821B875}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43D97A73-2C2E-49A7-A66F-61AED821B875}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43D97A73-2C2E-49A7-A66F-61AED821B875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A36A63DE-BC05-44FF-B307-315819B0BA6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36A63DE-BC05-44FF-B307-315819B0BA6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36A63DE-BC05-44FF-B307-315819B0BA6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36A63DE-BC05-44FF-B307-315819B0BA6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
