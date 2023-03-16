@@ -34,4 +34,10 @@ public static class UserErrors
 
     public static readonly Error WrongRefreshToken = new("User.WrongRefreshTokenError",
         "The Refresh Token Is Wrong, Sign In Again");
+
+    public static readonly Error UnAuthorizedEdit = new("User.UnAuthorizedEdit",
+        "You can not edit an user that is not you");
+
+    public static readonly Error NationalNumberAlreadyExists = new("User.NationalNumberAlreadyExists",
+        "The national number already exists");
 }

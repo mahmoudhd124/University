@@ -34,6 +34,9 @@ public class AddRoleHandler : IRequestHandler<AddRoleCommand, Response<bool>>
             Name = addRoleDto.Name
         });
 
-        return result.Succeeded ? true : Response<bool>.Failure(RoleErrors.UnknownError);
+        return result.Succeeded
+            ? true
+            : Response<bool>.Failure(new Error("Role.UnknownError",
+                string.Join("\n", result.Errors.Select(e => e.Description))));
     }
 }
