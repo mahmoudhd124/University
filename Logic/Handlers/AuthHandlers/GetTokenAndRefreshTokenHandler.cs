@@ -17,15 +17,13 @@ namespace Logic.Handlers.AuthHandlers;
 
 public class GetTokenAndRefreshTokenHandler : IRequestHandler<GetTokenAndRefreshTokenQuery, Response<RefreshTokenDto>>
 {
-    private readonly IdentityContext _context;
     private readonly UserManager<User> _userManager;
     private readonly Expiry _expiry;
     private readonly JWT _jwt;
 
-    public GetTokenAndRefreshTokenHandler(IdentityContext context, UserManager<User> userManager, IOptions<JWT> jwt,
+    public GetTokenAndRefreshTokenHandler(UserManager<User> userManager, IOptions<JWT> jwt,
         IOptions<Expiry> expiry)
     {
-        _context = context;
         _userManager = userManager;
         _expiry = expiry.Value;
         _jwt = jwt.Value;
@@ -59,7 +57,8 @@ public class GetTokenAndRefreshTokenHandler : IRequestHandler<GetTokenAndRefresh
         var roles = await _userManager.GetRolesAsync(user);
         var claims = roles
             .Select(r => new Claim(ClaimTypes.Role, r))
-            .Append(new Claim(ClaimTypes.NameIdentifier, user.UserName!));
+            .Append(new Claim(ClaimTypes.NameIdentifier, user.UserName!))
+            .Append(new Claim(ClaimTypes.Sid, user.Id!));
         return (roles, claims);
     }
 
@@ -77,7 +76,7 @@ public class GetTokenAndRefreshTokenHandler : IRequestHandler<GetTokenAndRefresh
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.Now.AddMinutes(_expiry.TokenExpiryInMinutes).ToLocalTime(),
-            // Expires = DateTime.Now.AddSeconds(7).ToLocalTime(),
+            // Expires = DateTime.Now.AddSeconds(5).ToLocalTime(),
             SigningCredentials = new SigningCredentials(_jwt.SecurityKey, SecurityAlgorithms.HmacSha256)
         };
 

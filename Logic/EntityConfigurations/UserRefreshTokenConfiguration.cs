@@ -17,7 +17,8 @@ public class UserRefreshTokenConfiguration : IEntityTypeConfiguration<UserRefres
         builder
             .HasOne(u => u.User)
             .WithMany()
-            .HasForeignKey(u => u.UserId);
+            .HasForeignKey(u => u.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(u => new { u.UserId, u.UserAgent }).IsUnique();
     }

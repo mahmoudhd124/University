@@ -14,6 +14,7 @@ public class BaseController : ControllerBase
     public IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
     public string Username => User?.Claims?.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+    public string Id => User?.Claims?.FirstOrDefault(c => c.Type.Equals(ClaimTypes.Sid))?.Value;
 
     public string Useragent => HttpContext.Request.Headers.UserAgent;
     public ActionResult Return<T>(Response<T> response) =>

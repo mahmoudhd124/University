@@ -39,25 +39,25 @@ public static class ProgramConfigurations
                 .AllowCredentials()
                 .Build();
         }));
-        
+
         //add helper classes configurations
         services.Configure<JWT>(configuration.GetSection("Jwt"));
         services.Configure<Expiry>(configuration.GetSection("Expiry"));
-        
-        //add token configuration
-        // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        //     .AddJwtBearer(opt =>
-        //     {
-        //         opt.TokenValidationParameters = new TokenValidationParameters
-        //         {
-        //             ValidateIssuerSigningKey = true,
-        //             IssuerSigningKey =
-        //                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:key"]!)),
-        //             ValidateIssuer = false,
-        //             ValidateAudience = false,
-        //             ValidateLifetime = true,
-        //             ClockSkew = TimeSpan.Zero
-        //         };
-        //     });
+
+        // add token configuration
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:key"]!)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
     }
 }
