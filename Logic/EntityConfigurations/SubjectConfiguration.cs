@@ -10,8 +10,10 @@ public class SubjectConfiguration : IEntityTypeConfiguration<Subject>
     {
         builder.HasKey(s => s.Id);
 
-        builder.Property(s => s.Name).HasMaxLength(8).IsRequired();
+        builder.Property(s => s.Department).HasMaxLength(3).IsRequired();
+        builder.Property(s => s.Code).HasMaxLength(3).IsRequired();
 
-        builder.HasIndex(s => s.Name).IsUnique();
+        builder.HasIndex(s => s.Code).IsUnique();
+        builder.HasIndex(s => s.Department);
     }
 }

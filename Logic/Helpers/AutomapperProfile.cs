@@ -1,6 +1,7 @@
 using AutoMapper;
 using Logic.Dtos.AuthDto;
 using Logic.Dtos.DoctorDto;
+using Logic.Dtos.SubjectDto;
 using Logic.Models;
 using Logic.Models.IdentityModels;
 
@@ -16,5 +17,12 @@ public class AutomapperProfile : Profile
         CreateMap<EditDoctorDto, Doctor>();
         CreateMap<Doctor, DoctorDto>();
         CreateMap<Doctor, DoctorForPageDto>();
+        CreateMap<Subject, SubjectForPageDto>()
+            .ForMember(dest => dest.Name, opt =>
+                opt.MapFrom(src => src.Department + src.Code));
+        CreateMap<AddSubjectDto, Subject>();
+        CreateMap<Subject, SubjectDto>()
+            .ForMember(dest => dest.Name, opt =>
+                opt.MapFrom(src => src.Department + src.Code));
     }
 }

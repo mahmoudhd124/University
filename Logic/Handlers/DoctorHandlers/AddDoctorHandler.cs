@@ -50,17 +50,18 @@ public class AddDoctorHandler : IRequestHandler<AddDoctorCommand, Response<bool>
         var foundNationalNumber =
             await _context.Doctors.AnyAsync(d => d.NationalNumber.Equals(registerUserDto.NationalNumber),
                 cancellationToken);
-        if(foundNationalNumber)
+        if (foundNationalNumber)
             return Response<bool>.Failure(UserErrors.NationalNumberAlreadyExists);
 
 
         var doctor = _mapper.Map<AddDoctorDto, Doctor>(registerUserDto);
         var result = await _userManager.CreateAsync(doctor, registerUserDto.Password);
 
-        if (result.Succeeded)
-            return true;
+        if (result.Succeeded == false)
+            return Response<bool>.Failure(new Error("User.UnknownError",
+                string.Join("\n", result.Errors.Select(e => e.Description))));
 
-        return Response<bool>.Failure(new Error("User.UnknownError",
-            string.Join("\n", result.Errors.Select(e => e.Description))));
+        await _userManager.AddToRoleAsync(doctor, "Doctor");
+        return true;
     }
 }
