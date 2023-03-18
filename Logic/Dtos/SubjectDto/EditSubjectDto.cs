@@ -1,6 +1,6 @@
-﻿namespace Logic.Models;
+﻿namespace Logic.Dtos.SubjectDto;
 
-public class Subject
+public class EditSubjectDto
 {
     public int Id { get; set; }
     public string Department { get; set; }

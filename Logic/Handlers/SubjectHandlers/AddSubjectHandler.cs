@@ -24,10 +24,15 @@ public class AddSubjectHandler : IRequestHandler<AddSubjectCommand, Response<boo
     {
         var addSubjectDto = request.AddSubjectDto;
 
-        var found = await _context.Subjects
+        var sameCodeFound = await _context.Subjects
             .AnyAsync(s => s.Code == addSubjectDto.Code, cancellationToken);
-        if(found)
+        if(sameCodeFound)
             return Response<bool>.Failure(SubjectErrors.CodeAlreadyExists);
+
+        var sameNameFound = await _context.Subjects
+            .AnyAsync(s => s.Name.ToUpper().Equals(addSubjectDto.Name.ToUpper()), cancellationToken);
+        if(sameNameFound)
+            return Response<bool>.Failure(SubjectErrors.NameAlreadyExists);
 
         _context.Add(_mapper.Map<Subject>(addSubjectDto));
         await _context.SaveChangesAsync(cancellationToken);

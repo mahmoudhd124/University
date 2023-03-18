@@ -21,6 +21,11 @@ public class SubjectController : BaseController
         Return(await Mediator.Send(new GetSubjectByNameQuery(name)));
 
     [Authorize(Roles = "Admin")]
+    [HttpPut]
+    public async Task<ActionResult> Edit([FromBody] EditSubjectDto editSubjectDto) =>
+        Return(await Mediator.Send(new EditSubjectCommand(editSubjectDto)));
+
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult> Add([FromBody] AddSubjectDto addSubjectDto) =>
         Return(await Mediator.Send(new AddSubjectCommand(addSubjectDto)));

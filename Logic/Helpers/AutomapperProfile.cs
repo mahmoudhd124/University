@@ -17,12 +17,9 @@ public class AutomapperProfile : Profile
         CreateMap<EditDoctorDto, Doctor>();
         CreateMap<Doctor, DoctorDto>();
         CreateMap<Doctor, DoctorForPageDto>();
-        CreateMap<Subject, SubjectForPageDto>()
-            .ForMember(dest => dest.Name, opt =>
-                opt.MapFrom(src => src.Department + src.Code));
+        CreateMap<Subject, SubjectForPageDto>();
         CreateMap<AddSubjectDto, Subject>();
-        CreateMap<Subject, SubjectDto>()
-            .ForMember(dest => dest.Name, opt =>
-                opt.MapFrom(src => src.Department + src.Code));
+        CreateMap<Subject, SubjectDto>();
+        CreateMap<EditSubjectDto, Subject>();
     }
 }
