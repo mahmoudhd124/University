@@ -35,4 +35,10 @@ public class SubjectController : BaseController
     [Route("{id:int}")]
     public async Task<ActionResult> Delete(int id) =>
         Return(await Mediator.Send(new DeleteSubjectCommand(id)));
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete]
+    [Route("DeleteAssignedDoctor/{subjectId:int}")]
+    public async Task<ActionResult> DeleteAssignedDoctor(int subjectId) =>
+        Return(await Mediator.Send(new DeleteAssignedDoctorCommand(subjectId)));
 }

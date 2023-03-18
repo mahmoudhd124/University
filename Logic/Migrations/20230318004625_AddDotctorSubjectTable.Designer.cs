@@ -4,6 +4,7 @@ using Logic.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Logic.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20230318004625_AddDotctorSubjectTable")]
+    partial class AddDotctorSubjectTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +46,7 @@ namespace Logic.Migrations
                     b.HasIndex("SubjectId")
                         .IsUnique();
 
-                    b.ToTable("DoctorSubjects");
+                    b.ToTable("DoctorSubject");
                 });
 
             modelBuilder.Entity("Logic.Models.IdentityModels.Role", b =>
@@ -358,8 +361,7 @@ namespace Logic.Migrations
                 {
                     b.HasOne("Logic.Models.Doctor", "Doctor")
                         .WithMany("DoctorSubjects")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("Logic.Models.Subject", "Subject")
                         .WithOne("DoctorSubject")

@@ -7,4 +7,5 @@ public class Subject
     public int Code { get; set; }
     public string Name { get; set; }
     public int Hours { get; set; }
+    public DoctorSubject DoctorSubject { get; set; }
 }

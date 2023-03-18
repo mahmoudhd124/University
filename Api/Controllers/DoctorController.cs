@@ -1,4 +1,5 @@
 ﻿using Logic.Commands.DoctorCommands;
+using Logic.Commands.DoctorSubjectCommands;
 using Logic.Dtos.DoctorDto;
 using Logic.Queries.DoctorQueries;
 using Microsoft.AspNetCore.Authorization;
@@ -31,6 +32,12 @@ public class DoctorController : BaseController
     [Authorize(Roles = "Admin")]
     [Route("{id:guid}")]
     [HttpDelete]
-    public async Task<ActionResult> Delete(string id) => 
+    public async Task<ActionResult> Delete(string id) =>
         Return(await Mediator.Send(new DeleteDoctorCommand(id)));
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet]
+    [Route("AssignToSubject/{doctorId}/{subjectId:int}")]
+    public async Task<ActionResult> AssignToTask(string doctorId, int subjectId) =>
+        Return(await Mediator.Send(new AssignDoctorToSubjectCommand(doctorId, subjectId)));
 }
