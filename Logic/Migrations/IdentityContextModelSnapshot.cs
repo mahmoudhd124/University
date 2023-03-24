@@ -228,6 +228,37 @@ namespace Logic.Migrations
                     b.ToTable("Subjects");
                 });
 
+            modelBuilder.Entity("Logic.Models.SubjectMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Material")
+                        .IsRequired()
+                        .HasMaxLength(511)
+                        .HasColumnType("nvarchar(511)");
+
+                    b.Property<string>("StoredName")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("SubjectMaterials");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -382,6 +413,17 @@ namespace Logic.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Logic.Models.SubjectMaterial", b =>
+                {
+                    b.HasOne("Logic.Models.Subject", "Subject")
+                        .WithMany("SubjectMaterials")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Logic.Models.IdentityModels.Role", null)
@@ -436,6 +478,8 @@ namespace Logic.Migrations
             modelBuilder.Entity("Logic.Models.Subject", b =>
                 {
                     b.Navigation("DoctorSubject");
+
+                    b.Navigation("SubjectMaterials");
                 });
 
             modelBuilder.Entity("Logic.Models.Doctor", b =>

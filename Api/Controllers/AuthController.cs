@@ -1,14 +1,15 @@
 using AutoMapper;
-using Logic.Commands.AuthCommands;
 using Logic.Dtos.AuthDto;
 using Logic.Helpers;
-using Logic.Queries.AuthQueries;
+using Logic.MediatR.Commands.AuthCommands;
+using Logic.MediatR.Queries.AuthQueries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace Api.Controllers;
 
+[AllowAnonymous]
 public class AuthController : BaseController
 {
     private readonly IMapper _mapper;
@@ -23,7 +24,7 @@ public class AuthController : BaseController
     [Route("private")]
     [HttpGet]
     [Authorize]
-    public async Task<ActionResult> Get() => Ok(new { message = "Hallo World" });
+    public ActionResult Get() => Ok(new { message = "Hallo World" });
 
     [Route("Register")]
     [HttpPost]

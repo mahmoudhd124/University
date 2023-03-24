@@ -1,7 +1,7 @@
-﻿using Logic.Commands.DoctorCommands;
-using Logic.Commands.DoctorSubjectCommands;
-using Logic.Dtos.DoctorDto;
-using Logic.Queries.DoctorQueries;
+﻿using Logic.Dtos.DoctorDto;
+using Logic.MediatR.Commands.DoctorCommands;
+using Logic.MediatR.Commands.DoctorSubjectCommands;
+using Logic.MediatR.Queries.DoctorQueries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +26,7 @@ public class DoctorController : BaseController
         Return(await Mediator.Send(new AddDoctorCommand(addDoctorDto)));
 
     [HttpPut]
+    [Authorize(Roles = "Doctor")]
     public async Task<ActionResult> Edit([FromBody] EditDoctorDto editDoctorDto) =>
         Return(await Mediator.Send(new EditDoctorCommand(editDoctorDto, Id)));
 

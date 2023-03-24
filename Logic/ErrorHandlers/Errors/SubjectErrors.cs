@@ -22,4 +22,7 @@ public static class SubjectErrors
 
     public static readonly Error SubjectIsNotAssignedToDoctor = new("Subject.SubjectIsNotAssignedToDoctor",
         "The Subject Is Not Assigned To Doctor");
+
+    public static readonly Error UnAuthorizedGet = new("Subject.UnAuthorizedGet",
+        "You can not get details for a subject you are not assigned in");
 }

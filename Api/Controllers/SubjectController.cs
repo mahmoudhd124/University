@@ -1,6 +1,6 @@
-﻿using Logic.Commands.SubjectCommands;
-using Logic.Dtos.SubjectDto;
-using Logic.Queries.SubjectQueries;
+﻿using Logic.Dtos.SubjectDto;
+using Logic.MediatR.Commands.SubjectCommands;
+using Logic.MediatR.Queries.SubjectQueries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +18,7 @@ public class SubjectController : BaseController
     [HttpGet]
     [Route("{name}")]
     public async Task<ActionResult> Page(string name) =>
-        Return(await Mediator.Send(new GetSubjectByNameQuery(name)));
+        Return(await Mediator.Send(new GetSubjectByNameQuery(name, Roles,Id)));
 
     [Authorize(Roles = "Admin")]
     [HttpPut]

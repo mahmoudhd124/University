@@ -4,6 +4,7 @@ using Logic.Data;
 using Logic.Helpers;
 using Logic.Models.IdentityModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -41,10 +42,10 @@ public static class ProgramConfigurations
         }));
 
         //add helper classes configurations
-        services.Configure<JWT>(configuration.GetSection("Jwt"));
+        services.Configure<Jwt>(configuration.GetSection("Jwt"));
         services.Configure<Expiry>(configuration.GetSection("Expiry"));
 
-        // add token configuration
+        //add token configuration
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(opt =>
             {
@@ -59,5 +60,14 @@ public static class ProgramConfigurations
                     ClockSkew = TimeSpan.Zero
                 };
             });
+        
+        //require authenticated user
+        services.AddAuthorization(options =>
+        {
+            options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+        });
+
     }
 }

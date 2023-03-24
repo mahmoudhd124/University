@@ -15,14 +15,18 @@ public class BaseController : ControllerBase
 
     public string Username => User?.Claims?.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
     public string Id => User?.Claims?.FirstOrDefault(c => c.Type.Equals(ClaimTypes.Sid))?.Value;
-
     public string Useragent => HttpContext.Request.Headers.UserAgent;
+
+    public IEnumerable<string> Roles => User?.Claims?
+        .Where(c => c.Type.Equals(ClaimTypes.Role))
+        .Select(c => c.Value);
+
     public ActionResult Return<T>(Response<T> response) =>
-     response.IsSuccess ?
-        Ok(response.Data) :
-        BadRequest(new
-        {
-            code = response.Error.Code,
-            message = response.Error.Message
-        });
+        response.IsSuccess
+            ? Ok(response.Data)
+            : BadRequest(new
+            {
+                code = response.Error.Code,
+                message = response.Error.Message
+            });
 }

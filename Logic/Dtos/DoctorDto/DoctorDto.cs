@@ -1,4 +1,6 @@
-﻿namespace Logic.Dtos.DoctorDto;
+﻿using Logic.Dtos.SubjectDto;
+
+namespace Logic.Dtos.DoctorDto;
 
 public class DoctorDto
 {
@@ -9,4 +11,5 @@ public class DoctorDto
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
     public string NationalNumber { get; set; }
+    public IList<SubjectForPageDto> Subjects { get; set; }
 }

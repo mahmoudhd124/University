@@ -1,5 +1,5 @@
-﻿using Logic.Commands.RoleCommands;
-using Logic.Dtos.RoleDto;
+﻿using Logic.Dtos.RoleDto;
+using Logic.MediatR.Commands.RoleCommands;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
