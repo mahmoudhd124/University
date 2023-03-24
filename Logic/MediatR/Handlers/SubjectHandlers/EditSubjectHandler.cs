@@ -38,7 +38,7 @@ public class EditSubjectHandler : IRequestHandler<EditSubjectCommand, Response<b
         if (sameNameFound)
             return Response<bool>.Failure(SubjectErrors.NameAlreadyExists);
 
-        _mapper.Map(editSubjectDto,subject);
+        _mapper.Map(editSubjectDto, subject);
         _context.Subjects.Update(subject);
         await _context.SaveChangesAsync(cancellationToken);
         return true;

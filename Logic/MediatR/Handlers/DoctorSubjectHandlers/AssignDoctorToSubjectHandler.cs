@@ -32,9 +32,9 @@ public class AssignDoctorToSubjectHandler : IRequestHandler<AssignDoctorToSubjec
 
         var isAssignedSubject = await _context.DoctorSubjects
             .AnyAsync(x => x.SubjectId == subjectId, cancellationToken);
-        if(isAssignedSubject)
+        if (isAssignedSubject)
             return Response<bool>.Failure(SubjectErrors.SubjectIsAlreadyAssignedToDoctor);
-            
+
 
         _context.DoctorSubjects.Add(new DoctorSubject
         {

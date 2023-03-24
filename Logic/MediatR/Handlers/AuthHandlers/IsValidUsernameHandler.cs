@@ -19,7 +19,7 @@ public class IsValidUsernameHandler : IRequestHandler<IsValidUsernameQuery, bool
         var username = request.Username;
         if (string.IsNullOrWhiteSpace(username))
             return false;
-        
+
         var found = await _context.Users.AnyAsync(u => u.UserName.ToUpper().Equals(username.ToUpper()),
             cancellationToken);
 

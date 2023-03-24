@@ -18,7 +18,7 @@ public class EditDoctorHandler : IRequestHandler<EditDoctorCommand, Response<boo
     private readonly UserManager<User> _userManager;
     private readonly IdentityContext _context;
 
-    public EditDoctorHandler(IMapper mapper, IMediator mediator, UserManager<User> userManager,IdentityContext context)
+    public EditDoctorHandler(IMapper mapper, IMediator mediator, UserManager<User> userManager, IdentityContext context)
     {
         _mapper = mapper;
         _mediator = mediator;

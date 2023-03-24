@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Logic.MediatR.Commands.DoctorCommands;
 
-public record DeleteDoctorCommand(string Id):IRequest<Response<bool>>;
+public record DeleteDoctorCommand(string Id) : IRequest<Response<bool>>;

@@ -14,7 +14,7 @@ public class AddSubjectHandler : IRequestHandler<AddSubjectCommand, Response<boo
     private readonly IdentityContext _context;
     private readonly IMapper _mapper;
 
-    public AddSubjectHandler(IdentityContext context,IMapper mapper)
+    public AddSubjectHandler(IdentityContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
@@ -26,12 +26,12 @@ public class AddSubjectHandler : IRequestHandler<AddSubjectCommand, Response<boo
 
         var sameCodeFound = await _context.Subjects
             .AnyAsync(s => s.Code == addSubjectDto.Code, cancellationToken);
-        if(sameCodeFound)
+        if (sameCodeFound)
             return Response<bool>.Failure(SubjectErrors.CodeAlreadyExists);
 
         var sameNameFound = await _context.Subjects
             .AnyAsync(s => s.Name.ToUpper().Equals(addSubjectDto.Name.ToUpper()), cancellationToken);
-        if(sameNameFound)
+        if (sameNameFound)
             return Response<bool>.Failure(SubjectErrors.NameAlreadyExists);
 
         _context.Add(_mapper.Map<Subject>(addSubjectDto));

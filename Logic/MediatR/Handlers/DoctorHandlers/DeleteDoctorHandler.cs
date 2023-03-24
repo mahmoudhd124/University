@@ -22,8 +22,8 @@ public class DeleteDoctorHandler : IRequestHandler<DeleteDoctorCommand, Response
 
         var doctor = await _context.Doctors
             .FirstOrDefaultAsync(d => d.Id.Equals(id), cancellationToken);
-        
-        if(doctor ==null)
+
+        if (doctor == null)
             return Response<bool>.Failure(UserErrors.WrongId);
 
         _context.Doctors.Remove(doctor);

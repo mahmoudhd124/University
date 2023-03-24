@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Logic.EntityConfigurations;
 
-public class DoctorSubjectConfiguration:IEntityTypeConfiguration<DoctorSubject>
+public class DoctorSubjectConfiguration : IEntityTypeConfiguration<DoctorSubject>
 {
     public void Configure(EntityTypeBuilder<DoctorSubject> builder)
     {

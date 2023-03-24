@@ -2,4 +2,4 @@
 
 namespace Logic.MediatR.Queries.AuthQueries;
 
-public record IsValidUsernameQuery(string Username):IRequest<bool>;
+public record IsValidUsernameQuery(string Username) : IRequest<bool>;

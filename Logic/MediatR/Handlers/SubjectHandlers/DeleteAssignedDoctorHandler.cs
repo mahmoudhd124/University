@@ -21,9 +21,9 @@ public class DeleteAssignedDoctorHandler : IRequestHandler<DeleteAssignedDoctorC
         var id = request.SubjectId;
 
         var doctorSubject = await _context.DoctorSubjects
-            .FirstOrDefaultAsync(x => x.SubjectId == id,cancellationToken);
-        
-        if(doctorSubject == null)
+            .FirstOrDefaultAsync(x => x.SubjectId == id, cancellationToken);
+
+        if (doctorSubject == null)
             return Response<bool>.Failure(SubjectErrors.SubjectIsNotAssignedToDoctor);
 
         _context.DoctorSubjects.Remove(doctorSubject);

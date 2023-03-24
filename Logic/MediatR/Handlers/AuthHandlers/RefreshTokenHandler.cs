@@ -16,7 +16,7 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenCommand, Response
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
 
-    public RefreshTokenHandler(IdentityContext context, IMediator mediator,IMapper mapper)
+    public RefreshTokenHandler(IdentityContext context, IMediator mediator, IMapper mapper)
     {
         _context = context;
         _mediator = mediator;

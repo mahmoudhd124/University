@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Logic.MediatR.Commands.DoctorCommands;
 
-public record AddDoctorCommand(AddDoctorDto AddDoctorDto):IRequest<Response<bool>>;
+public record AddDoctorCommand(AddDoctorDto AddDoctorDto) : IRequest<Response<bool>>;

@@ -38,10 +38,10 @@ public class AutomapperProfile : Profile
             .ForMember(dest => dest.Materials, opt =>
                 opt.MapFrom(src =>
                     src.SubjectMaterials.Select(x => new SubjectMaterialDto
-                        { Name = x.Material, Id = x.Id, Date = x.Date })));
+                    { Name = x.Material, Id = x.Id, Date = x.Date })));
         CreateMap<EditSubjectDto, Subject>();
-        CreateMap<SubjectMaterial,SubjectMaterialDto>()
-            .ForMember(dest => dest.Name,opt =>
+        CreateMap<SubjectMaterial, SubjectMaterialDto>()
+            .ForMember(dest => dest.Name, opt =>
                 opt.MapFrom(src => src.Material));
     }
 }

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Logic.MediatR.Commands.DoctorCommands;
 
-public record EditDoctorCommand(EditDoctorDto EditDoctorDto,string DoctorId):IRequest<Response<bool>>;
+public record EditDoctorCommand(EditDoctorDto EditDoctorDto, string DoctorId) : IRequest<Response<bool>>;

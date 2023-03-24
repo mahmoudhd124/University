@@ -32,19 +32,19 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Response
         CancellationToken cancellationToken)
     {
         var registerUserDto = request.RegisterUserDto;
-        
+
         var isValidUsername = await _mediator.Send(new IsValidUsernameQuery(registerUserDto.Username), cancellationToken);
-        if(isValidUsername == false)
+        if (isValidUsername == false)
             return Response<bool>.Failure(UserErrors.UsernameAlreadyUsedError);
-        
+
         var isValidPassword = await _mediator.Send(new IsValidPasswordQuery(registerUserDto.Password), cancellationToken);
-        if(isValidPassword == false)
+        if (isValidPassword == false)
             return Response<bool>.Failure(UserErrors.WeakPasswordError);
-        
+
         var isValidEmail = await _mediator.Send(new IsValidEmailQuery(registerUserDto.Email), cancellationToken);
-        if(isValidEmail == false)
+        if (isValidEmail == false)
             return Response<bool>.Failure(UserErrors.EmailAlreadyUsedError);
-        
+
 
         var user = _mapper.Map<RegisterUserDto, User>(registerUserDto);
         var result = await _userManager.CreateAsync(user, registerUserDto.Password);

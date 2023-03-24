@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Logic.MediatR.Queries.DoctorQueries;
 
-public record GetDoctorQuery(string Id):IRequest<Response<DoctorDto>>;
+public record GetDoctorQuery(string Id) : IRequest<Response<DoctorDto>>;

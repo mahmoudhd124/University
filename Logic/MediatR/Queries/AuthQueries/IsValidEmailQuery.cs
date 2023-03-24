@@ -2,4 +2,4 @@
 
 namespace Logic.MediatR.Queries.AuthQueries;
 
-public record IsValidEmailQuery(string Email):IRequest<bool>;
+public record IsValidEmailQuery(string Email) : IRequest<bool>;

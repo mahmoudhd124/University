@@ -60,7 +60,7 @@ public static class ProgramConfigurations
                     ClockSkew = TimeSpan.Zero
                 };
             });
-        
+
         //require authenticated user
         services.AddAuthorization(options =>
         {

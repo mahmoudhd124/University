@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Logic.MediatR.Commands.SubjectCommands;
 
-public record AddSubjectCommand(AddSubjectDto AddSubjectDto):IRequest<Response<bool>>;
+public record AddSubjectCommand(AddSubjectDto AddSubjectDto) : IRequest<Response<bool>>;
