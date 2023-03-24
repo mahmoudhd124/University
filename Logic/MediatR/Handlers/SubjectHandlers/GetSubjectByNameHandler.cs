@@ -36,7 +36,8 @@ public class GetSubjectByNameHandler : IRequestHandler<GetSubjectByNameQuery, Re
         if (subjectDto == null)
             return Response<SubjectDto>.Failure(SubjectErrors.WrongName);
 
-        if (roles.Contains("Admin") == false && roles.Contains("Doctor"))
+        var enumerable = roles.ToList();
+        if (enumerable.Contains("Admin") == false && enumerable.Contains("Doctor"))
             if (await _context.DoctorSubjects.AnyAsync(x => x.SubjectId == subjectDto.Id && x.DoctorId.Equals(id),
                     cancellationToken) == false)
                 return Response<SubjectDto>.Failure(SubjectErrors.UnAuthorizedGet);
