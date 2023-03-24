@@ -21,11 +21,6 @@ public class AuthController : BaseController
         _expiry = expiry.Value;
     }
 
-    [Route("private")]
-    [HttpGet]
-    [Authorize]
-    public ActionResult Get() => Ok(new { message = "Hallo World" });
-
     [Route("Register")]
     [HttpPost]
     public async Task<ActionResult> Register([FromBody] RegisterUserDto registerUserDto) =>
