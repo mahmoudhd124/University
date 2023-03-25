@@ -11,6 +11,9 @@ import { logout, setCredentials } from './Feutures/Auth/authSlice';
 import TokenModel from './Models/Auth/TokenModel';
 import useAppDispatch from './Hookes/useAppDispatch';
 import { useEffect } from 'react';
+import AddDoctor from './Components/Doctor/AddDoctor'
+import DoctorsList from './Components/Doctor/DoctorsList';
+import DoctorPage from './Components/Doctor/DoctorPage';
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -38,17 +41,34 @@ const App = () => {
     return (
         <Routes>
             <Route path='/' element={<Layout />}>
-                <Route element={<RouteProtector allwedRoles={[]} />} >
+                <Route element={<RouteProtector allwedRoles={[]} />}>
                     <Route path={'profile'} element={<Profile />} />
                 </Route>
 
-
+                //auth routes
                 <Route path={'auth'} element={<AuthLayout />}>
                     <Route path={'login'} element={<Login />} />
                     <Route path={'reg'} element={<Signup />} />
                 </Route>
+
+                //doctor routes
+                //admin first
+                <Route path={'doctor'} element={<RouteProtector allwedRoles={['admin']} />}>
+                    <Route path={'Add'} element={<AddDoctor />} />
+                    <Route path={'List/:pageIndex'} element={<DoctorsList />} />
+                </Route>
+
+                //just authenticated uses
+                <Route path={'doctor'} element={<RouteProtector allwedRoles={[]} />}>
+                    <Route path={':id'} element={<DoctorPage />} />
+                </Route>
+
+
             </Route>
-        </Routes >
+
+            //all athore routes
+            <Route path='/*' element={<h1>NO PAGE</h1>} />
+        </Routes>
 
     )
 }

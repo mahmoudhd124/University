@@ -27,7 +27,7 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\..\logic\wwwroot"))
 });
 
-app.UseCors("allow5173");
+app.UseCors("allowLocalAtPort5173");
 
 app.UseAuthentication();
 app.UseAuthorization();

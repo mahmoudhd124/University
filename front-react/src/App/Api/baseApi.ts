@@ -1,6 +1,6 @@
-import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { setCredentials, logout } from '../../Feutures/Auth/authSlice'
-import { RootState } from '../store'
+import {BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import {setCredentials, logout} from '../../Feutures/Auth/authSlice'
+import {RootState} from '../store'
 import useRefreshToken from '../../Hookes/useRefreshToken'
 
 export interface AppError {
@@ -13,7 +13,7 @@ export const BASE_URL = 'https://localhost:7035/api/'
 export const sendDefualt = fetchBaseQuery({
     baseUrl: BASE_URL,
     credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers, {getState}) => {
         const token = (getState() as RootState).auth.token
         if (token != null)
             headers.append('authorization', `Bearer ${token}`)
@@ -44,6 +44,6 @@ const baseQuery: BaseQueryFn<
 export const baseApi = createApi({
     reducerPath: 'api',
     baseQuery,
-    tagTypes: ['user'],
+    tagTypes: ['user', 'doctor'],
     endpoints: builder => ({})
 })

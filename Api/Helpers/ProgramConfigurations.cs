@@ -31,7 +31,7 @@ public static class ProgramConfigurations
         services.AddMediatR(opt => { opt.RegisterServicesFromAssemblies(typeof(EntryPoint).Assembly); });
 
         //add cors
-        services.AddCors(opt => opt.AddPolicy("allow5173", builder =>
+        services.AddCors(opt => opt.AddPolicy("allowLocalAtPort5173", builder =>
         {
             builder
                 .WithOrigins("http://localhost:5173")

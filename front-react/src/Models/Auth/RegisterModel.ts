@@ -2,7 +2,7 @@ export default interface RegisterModel {
     firstName: string,
     lastName: string,
     username: string,
-    phone: string,
+    phoneNumber: string,
     email: string,
     password: string,
 }

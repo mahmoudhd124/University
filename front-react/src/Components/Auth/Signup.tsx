@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from 'yup'
 import RegisterModel from "../../Models/Auth/RegisterModel";
-import { useSignupMutation } from "../../Feutures/Auth/authApi";
+import { useSignupMutation } from "../../App/Api/authApi";
 import { useNavigate } from "react-router-dom";
 import useGetAppError from "../../Hookes/useGetAppError";
 import { useEffect } from "react";
@@ -15,7 +15,7 @@ const Signup = () => {
             firstName: '',
             lastName: '',
             username: '',
-            phone: '',
+            phoneNumber: '',
             email: '',
             password: '',
             confirmPassword: ''
