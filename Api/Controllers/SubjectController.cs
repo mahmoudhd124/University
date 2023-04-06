@@ -16,9 +16,9 @@ public class SubjectController : BaseController
 
     [Authorize(Roles = "Admin,Doctor")]
     [HttpGet]
-    [Route("{name}")]
-    public async Task<ActionResult> Page(string name) =>
-        Return(await Mediator.Send(new GetSubjectByNameQuery(name, Roles, Id)));
+    [Route("{code:int}")]
+    public async Task<ActionResult> Page(int code) =>
+        Return(await Mediator.Send(new GetSubjectByCodeQuery(code, Roles, Id)));
 
     [Authorize(Roles = "Admin")]
     [HttpPut]

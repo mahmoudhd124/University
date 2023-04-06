@@ -10,28 +10,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.MediatR.Handlers.SubjectHandlers;
 
-public class GetSubjectByNameHandler : IRequestHandler<GetSubjectByNameQuery, Response<SubjectDto>>
+public class GetSubjectByCodeHandler : IRequestHandler<GetSubjectByCodeQuery, Response<SubjectDto>>
 {
     private readonly IdentityContext _context;
     private readonly IMapper _mapper;
 
-    public GetSubjectByNameHandler(IdentityContext context, IMapper mapper)
+    public GetSubjectByCodeHandler(IdentityContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<Response<SubjectDto>> Handle(GetSubjectByNameQuery request, CancellationToken cancellationToken)
+    public async Task<Response<SubjectDto>> Handle(GetSubjectByCodeQuery request, CancellationToken cancellationToken)
     {
-        var (name, roles, id) = request;
+        var (code, roles, id) = request;
         var subjectDto = await _context.Subjects
             .Include(s => s.DoctorSubject)
             .ThenInclude(x => x.Doctor)
             .Include(s => s.SubjectMaterials)
             .AsSplitQuery()
             .ProjectTo<SubjectDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(
-                s => (s.Department.ToUpper() + s.Code.ToString()).Equals(name.ToUpper()), cancellationToken);
+            .FirstOrDefaultAsync( s => s.Code == code, cancellationToken);
 
         if (subjectDto == null)
             return Response<SubjectDto>.Failure(SubjectErrors.WrongName);

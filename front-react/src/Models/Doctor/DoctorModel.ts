@@ -8,5 +8,6 @@ export interface DoctorModel {
     email: string;
     phoneNumber: string;
     nationalNumber: string;
+    isOwner:boolean;
     subjects: SubjectForPageModel[];
 }

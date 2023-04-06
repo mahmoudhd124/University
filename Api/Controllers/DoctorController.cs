@@ -10,9 +10,9 @@ namespace Api.Controllers;
 public class DoctorController : BaseController
 {
     [HttpGet]
-    [Route("{id:guid}")]
+    [Route("{id?}")]
     public async Task<ActionResult> Get(string id) =>
-        Return(await Mediator.Send(new GetDoctorQuery(id)));
+        Return(await Mediator.Send(new GetDoctorQuery(id ?? Id, Id)));
 
     [HttpGet]
     [Authorize(Roles = "Admin")]
@@ -31,10 +31,16 @@ public class DoctorController : BaseController
         Return(await Mediator.Send(new EditDoctorCommand(editDoctorDto, Id)));
 
     [Authorize(Roles = "Admin")]
-    [Route("{id:guid}")]
+    [Route("{id}")]
     [HttpDelete]
     public async Task<ActionResult> Delete(string id) =>
         Return(await Mediator.Send(new DeleteDoctorCommand(id)));
+    
+    [Route("GetEditInfo/{id}")]
+    [HttpGet]
+    public async Task<ActionResult> GetEditInfo(string id) =>
+        Return(await Mediator.Send(new GetEditDoctorDataQuery(id)));
+    
 
     [Authorize(Roles = "Admin")]
     [HttpGet]

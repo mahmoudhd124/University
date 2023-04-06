@@ -23,7 +23,7 @@ public class GetDoctorHandler : IRequestHandler<GetDoctorQuery, Response<DoctorD
 
     public async Task<Response<DoctorDto>> Handle(GetDoctorQuery request, CancellationToken cancellationToken)
     {
-        var id = request.Id;
+        var (id, userRequestId) = request;
         var doctorDto = await _context.Doctors
             .Include(d => d.DoctorSubjects)
             .ThenInclude(ds => ds.Subject)
@@ -33,8 +33,8 @@ public class GetDoctorHandler : IRequestHandler<GetDoctorQuery, Response<DoctorD
 
         if (doctorDto == null)
             return Response<DoctorDto>.Failure(UserErrors.WrongId);
-
-
+        
+        doctorDto.IsOwner = id.Equals(userRequestId);
         return doctorDto;
     }
 }

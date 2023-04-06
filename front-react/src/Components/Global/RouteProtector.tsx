@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useAppSelector from "../../Hookes/useAppSelector";
 
-const RouteProtector = (props: { allwedRoles: string[] }) => {
+const RouteProtector = (props: { allowedRoles: string[] }) => {
     const { token, roles } = useAppSelector(s => s.auth)
     const loc = useLocation()
 
@@ -9,9 +9,9 @@ const RouteProtector = (props: { allwedRoles: string[] }) => {
         <>
             {token ? (
                 <>
-                    {props.allwedRoles.length > 0 ?
+                    {props.allowedRoles.length > 0 ?
                         roles?.some(r =>
-                            props.allwedRoles.some(ar =>
+                            props.allowedRoles.some(ar =>
                                 ar.trim().toLowerCase() === r.trim().toLowerCase())) ? <Outlet /> : <h1>Not Allowed</h1>
                         :
                         <>

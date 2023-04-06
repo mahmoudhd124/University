@@ -15,7 +15,7 @@ public class AutomapperProfile : Profile
         CreateMap<RegisterUserDto, User>();
         CreateMap<RefreshTokenDto, TokenDto>();
         CreateMap<AddDoctorDto, Doctor>();
-        CreateMap<EditDoctorDto, Doctor>();
+        CreateMap<EditDoctorDto, Doctor>().ReverseMap();
         CreateMap<Doctor, DoctorDto>()
             .ForMember(dest => dest.Subjects, opt =>
                 opt.MapFrom(src => src.DoctorSubjects.Select(ds => new SubjectForPageDto

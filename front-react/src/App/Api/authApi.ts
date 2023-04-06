@@ -1,4 +1,4 @@
-import { baseApi } from "../../App/Api/baseApi";
+import { baseApi } from "./baseApi";
 import LoginModel from "../../Models/Auth/LoginModel";
 import TokenModel from "../../Models/Auth/TokenModel";
 import RegisterModel from "../../Models/Auth/RegisterModel";

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Logic.MediatR.Queries.SubjectQueries;
 
-public record GetSubjectByNameQuery(string Name, IEnumerable<string> Roles, string UserId) : IRequest<Response<SubjectDto>>;
+public record GetSubjectByCodeQuery(int Code, IEnumerable<string> Roles, string UserId) : IRequest<Response<SubjectDto>>;

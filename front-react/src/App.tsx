@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import AddDoctor from './Components/Doctor/AddDoctor'
 import DoctorsList from './Components/Doctor/DoctorsList';
 import DoctorPage from './Components/Doctor/DoctorPage';
+import EditDoctor from "./Components/Doctor/EditDoctor";
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -41,7 +42,7 @@ const App = () => {
     return (
         <Routes>
             <Route path='/' element={<Layout />}>
-                <Route element={<RouteProtector allwedRoles={[]} />}>
+                <Route element={<RouteProtector allowedRoles={[]} />}>
                     <Route path={'profile'} element={<Profile />} />
                 </Route>
 
@@ -52,14 +53,17 @@ const App = () => {
                 </Route>
 
                 //doctor routes
-                //admin first
-                <Route path={'doctor'} element={<RouteProtector allwedRoles={['admin']} />}>
+                <Route path={'doctor'} element={<RouteProtector allowedRoles={['admin']} />}>
                     <Route path={'Add'} element={<AddDoctor />} />
                     <Route path={'List/:pageIndex'} element={<DoctorsList />} />
                 </Route>
 
-                //just authenticated uses
-                <Route path={'doctor'} element={<RouteProtector allwedRoles={[]} />}>
+                <Route path={'doctor'} element={<RouteProtector allowedRoles={['doctor']} />}>
+                    <Route path={'Edit/:id'} element={<EditDoctor />} />
+                </Route>
+
+                <Route path={'doctor'} element={<RouteProtector allowedRoles={[]} />}>
+                    <Route index element={<DoctorPage />} />
                     <Route path={':id'} element={<DoctorPage />} />
                 </Route>
 
