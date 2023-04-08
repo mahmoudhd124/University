@@ -129,10 +129,10 @@ const AddDoctor = () => {
                             className={`form-control ${(formik.touched.phone && formik.errors.phone) && 'border-1' +
                                 ' border-danger'}`}
                             id={'phone'}
-                            name={'phone'}
+                            name={'phoneNumber'}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.phone}
+                            value={formik.values.phoneNumber}
                         />
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import {AddDoctorModel} from "../../Models/Doctor/AddDoctorModel";
 import {DoctorForPageModel} from "../../Models/Doctor/DoctorForPageModel";
 import {DoctorModel} from "../../Models/Doctor/DoctorModel";
-import {baseApi} from "./baseApi";
+import {baseApi} from "./BaseApi";
 import {EditDoctorModel} from "../../Models/Doctor/EditDoctorModel";
 
 export const DoctorApi = baseApi.injectEndpoints({
@@ -18,14 +18,14 @@ export const DoctorApi = baseApi.injectEndpoints({
             query: args => ({
                 url: `doctor/${args.pageIndex}/${args.pageSize}/${args.usernamePrefix}`
             }),
-            providesTags: (result = [], error, args) => [
+            providesTags: (result = [] ) => [
                 'doctor',
                 ...result.map(({id}) => ({type: 'doctor' as const, id}))
             ]
         }),
         getDoctor: builder.query<DoctorModel, string>({
             query: arg => 'doctor/' + arg,
-            providesTags: (result, error, arg) => [{type: 'doctor', id: arg}]
+            providesTags: (result, error, arg) => [{type: 'doctor', id: arg == '' ? 'ME' : arg}]
         }),
         getDoctorEditInfo: builder.query<EditDoctorModel, string>({
             query: arg => 'doctor/geteditinfo/' + arg,
@@ -37,7 +37,10 @@ export const DoctorApi = baseApi.injectEndpoints({
                 method: 'put',
                 body: args
             }),
-            invalidatesTags: (result, error, arg, meta) => [{type: 'doctor', id: arg.id}]
+            invalidatesTags: (result, error, arg) => [
+                {type: 'doctor', id: arg.id},
+                {type: 'doctor', id: 'ME'}
+            ]
         }),
         deleteDoctor: builder.mutation<boolean, string>({
             query: arg => ({
@@ -45,6 +48,13 @@ export const DoctorApi = baseApi.injectEndpoints({
                 method: 'delete'
             }),
             invalidatesTags: (result, error, arg) => [{type: 'doctor', id: arg}]
+        }),
+        assignDoctorToSubject: builder.mutation<boolean, { did: string, sid: number }>({
+            query: args => '/doctor/AssignToSubject/' + args.did + '/' + args.sid,
+            invalidatesTags: (result, error, args) => [
+                {type: 'subject', id: args.sid},
+                {type: 'doctor', id: args.did}
+            ]
         })
     })
 })
@@ -54,5 +64,6 @@ export const {
     useGetDoctorQuery,
     useGetDoctorEditInfoQuery,
     useEditDoctorMutation,
-    useDeleteDoctorMutation
+    useDeleteDoctorMutation,
+    useAssignDoctorToSubjectMutation
 } = DoctorApi

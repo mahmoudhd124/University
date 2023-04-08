@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from 'yup'
 import RegisterModel from "../../Models/Auth/RegisterModel";
-import { useSignupMutation } from "../../App/Api/authApi";
+import { useSignupMutation } from "../../App/Api/AuthApi";
 import { useNavigate } from "react-router-dom";
 import useGetAppError from "../../Hookes/useGetAppError";
 import { useEffect } from "react";

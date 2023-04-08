@@ -30,16 +30,17 @@ public class GetSubjectByCodeHandler : IRequestHandler<GetSubjectByCodeQuery, Re
             .Include(s => s.SubjectMaterials)
             .AsSplitQuery()
             .ProjectTo<SubjectDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync( s => s.Code == code, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Code == code, cancellationToken);
 
         if (subjectDto == null)
             return Response<SubjectDto>.Failure(SubjectErrors.WrongName);
 
         var enumerable = roles.ToList();
         if (enumerable.Contains("Admin") == false && enumerable.Contains("Doctor"))
-            if (await _context.DoctorSubjects.AnyAsync(x => x.SubjectId == subjectDto.Id && x.DoctorId.Equals(id),
-                    cancellationToken) == false)
+            if (subjectDto.DoctorId.Equals(id) == false)
                 return Response<SubjectDto>.Failure(SubjectErrors.UnAuthorizedGet);
+
+        subjectDto.IsOwner = subjectDto.DoctorId?.Equals(id) ?? false;
 
         return subjectDto;
     }

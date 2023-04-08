@@ -1,9 +1,9 @@
 import {useFormik} from "formik";
 import * as Yup from 'yup'
-import {useLoginMutation} from "../../App/Api/authApi";
+import {useLoginMutation} from "../../App/Api/AuthApi";
 import LoginModel from "../../Models/Auth/LoginModel";
 import useAppDispatch from "../../Hookes/useAppDispatch";
-import {baseApi} from "../../App/Api/baseApi";
+import {baseApi} from "../../App/Api/BaseApi";
 import {setCredentials} from "../../Feutures/Auth/authSlice";
 import React, {useEffect, useRef, useState} from "react";
 import useGetAppError from "../../Hookes/useGetAppError";
@@ -54,7 +54,6 @@ const Login = () => {
               className={`border border-3 rounded rounded-3 shadow-lg d-flex flex-column justify-content-center p-5 align-self-center`}
               style={{height: 'fit-content'}}>
 
-            {/*todo handle error*/}
             <p className={'text-center h5 text-danger'}>{result.isError && useGetAppError(result.error)?.message}</p>
             <div>
                 <label

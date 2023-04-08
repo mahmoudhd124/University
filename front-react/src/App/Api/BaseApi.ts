@@ -38,12 +38,12 @@ const baseQuery: BaseQueryFn<
             }
         }
     }
-    return await sendDefualt(args, api, extraOptions)
+    return sendDefualt(args, api, extraOptions);
 }
 
 export const baseApi = createApi({
     reducerPath: 'api',
     baseQuery,
-    tagTypes: ['user', 'doctor'],
+    tagTypes: ['user', 'doctor', 'subject'],
     endpoints: builder => ({})
 })

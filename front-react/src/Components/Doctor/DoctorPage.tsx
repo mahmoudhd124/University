@@ -55,10 +55,12 @@ const DoctorPage = () => {
             </div>
 
             <div className="row justify-content-center justify-content-sm-around gap-3">
-                {data?.subjects?.length ?? 0 > 0 ? data?.subjects.map(s => <div key={s.id}
-                                                                                className="col-auto border border-3 rounded rounded-3 p-3 subject">
-                    {s.department}{s.code}{'   '}{s.name}
-                </div>) : (
+                {data?.subjects?.length ?? 0 > 0 ? data?.subjects.map(s =>
+                    <div key={s.id}
+                         className="col-auto border border-3 rounded rounded-3 p-3 subject"
+                         onClick={e => navigator('/subject/' + s.code, {state: {from: loc}})}
+                    > {s.department}{s.code}{'   '}{s.name}
+                    </div>) : (
                     <>
                         <h3 className='text-center mt-5 text-danger'>No Subjects Assigned!!</h3>
                         <p className='text-center text-danger'>

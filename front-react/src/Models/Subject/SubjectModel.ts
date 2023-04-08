@@ -1,4 +1,4 @@
-import { SubjectMaterialModel } from '../SubjectMaterial/SubjectMaterialModel'
+import {SubjectMaterialModel} from '../SubjectMaterial/SubjectMaterialModel'
 
 export interface SubjectModel {
     id: number;
@@ -9,5 +9,6 @@ export interface SubjectModel {
     hasADoctor: boolean;
     doctorId: string;
     doctorUsername: string;
+    isOwner: boolean;
     materials: SubjectMaterialModel[];
 }

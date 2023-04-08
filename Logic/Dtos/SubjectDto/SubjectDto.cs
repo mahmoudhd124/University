@@ -11,5 +11,6 @@ public class SubjectDto
     public bool HasADoctor { get; set; }
     public string DoctorId { get; set; }
     public string DoctorUsername { get; set; }
+    public bool IsOwner { get; set; }
     public IList<SubjectMaterialDto> Materials { get; set; }
 }
