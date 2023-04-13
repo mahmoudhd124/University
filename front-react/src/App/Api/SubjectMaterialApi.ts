@@ -2,17 +2,20 @@ import {baseApi} from "./BaseApi";
 
 export const subjectMaterialApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        addSubjectMaterial: builder.mutation<boolean, { subjectId: number, data:FormData }>({
+        addSubjectMaterial: builder.mutation<boolean, FormData>({
             query: arg => ({
-                url: 'subjectmaterial/'+arg.subjectId,
-                method: 'post',
-                data: arg.data
+                    url: 'subjectMaterial',
+                    method: 'post',
+                    data: arg,
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
             }),
-            invalidatesTags: (result, error, arg) => [{type: 'subject', id: arg.subjectId}]
+            invalidatesTags: (result, error, arg) => [{type: 'subject', id: +arg.get('subjectId')!}]
         }),
-        deleteSubjectMaterial: builder.mutation<boolean, {id:number,subjectId:number}>({
+        deleteSubjectMaterial: builder.mutation<boolean, { id: number, subjectId: number }>({
             query: arg => ({
-                url: 'subjectmaterial/' + arg.id,
+                url: 'subjectMaterial/' + arg.id,
                 method: 'delete'
             }),
             invalidatesTags: (result, error, arg) => [{type: 'subject', id: arg.subjectId}]

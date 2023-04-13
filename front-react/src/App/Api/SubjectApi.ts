@@ -2,6 +2,7 @@ import {baseApi} from "./BaseApi";
 import {SubjectModel} from "../../Models/Subject/SubjectModel";
 import {SubjectForPageModel} from "../../Models/Subject/SubjectForPageModel";
 import {AddSubjectModel} from "../../Models/Subject/AddSubjectModel";
+import {EditSubjectModel} from "../../Models/Subject/EditSubjectModel";
 
 export const subjectApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -31,12 +32,21 @@ export const subjectApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['subject']
         }),
+        editSubject: builder.mutation<boolean, EditSubjectModel>({
+            query: arg => ({
+                url: 'subject',
+                method: 'put',
+                body: arg
+            }),
+            invalidatesTags: (result, error, arg) => [{type: 'subject', id: arg.id}]
+
+        }),
         deleteSubject: builder.mutation<boolean, number>({
             query: arg => ({
                 url: 'subject/' + arg,
                 method: 'delete'
             }),
-            invalidatesTags: (result, error, arg ) => [{type: 'subject', id: arg}]
+            invalidatesTags: (result, error, arg) => [{type: 'subject', id: arg}]
         }),
         deleteAssignedDoctor: builder.mutation<boolean, number>({
             query: arg => ({
@@ -54,6 +64,7 @@ export const {
     useGetSubjectByCodeQuery,
     useGetSubjectPageQuery,
     useAddSubjectMutation,
+    useEditSubjectMutation,
     useDeleteSubjectMutation,
     useDeleteAssignedDoctorMutation
 } = subjectApi

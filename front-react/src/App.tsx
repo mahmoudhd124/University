@@ -18,6 +18,7 @@ import EditDoctor from "./Components/Doctor/EditDoctor";
 import SubjectPage from "./Components/Subject/SubjectPage";
 import SubjectList from "./Components/Subject/SubjectList";
 import AddSubject from "./Components/Subject/AddSubject";
+import EditSubject from "./Components/Subject/EditSubject";
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -74,6 +75,7 @@ const App = () => {
                 <Route path={'subject'} element={<RouteProtector allowedRoles={['admin']} />}>
                     <Route path={'Add'} element={<AddSubject />} />
                     <Route path={'List/:pageIndex'} element={<SubjectList />} />
+                    <Route path={'Edit/:code'} element={<EditSubject />} />
                 </Route>
 
                 <Route path={'subject'} element={<RouteProtector allowedRoles={[]} />}>

@@ -9,8 +9,7 @@ namespace Api.Controllers;
 public class SubjectMaterialController : BaseController
 {
     [HttpPost]
-    public async Task<ActionResult> Add(
-        [FromForm] int subjectId, [FromForm] IFormFile file) =>
+    public async Task<ActionResult> Add([FromForm]int subjectId, [FromForm] IFormFile file) =>
         Return(await Mediator.Send(new AddSubjectMaterialCommand(
             subjectId, file.OpenReadStream(), file.FileName, Id)));
 

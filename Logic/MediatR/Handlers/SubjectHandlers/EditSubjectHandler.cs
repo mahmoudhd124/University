@@ -28,15 +28,21 @@ public class EditSubjectHandler : IRequestHandler<EditSubjectCommand, Response<b
         if (subject == null)
             return Response<bool>.Failure(SubjectErrors.WrongId);
 
-        var sameCodeFound = await _context.Subjects
-            .AnyAsync(s => s.Code == editSubjectDto.Code, cancellationToken);
-        if (sameCodeFound)
-            return Response<bool>.Failure(SubjectErrors.CodeAlreadyExists);
+        if (editSubjectDto.Code != subject.Code)
+        {
+            var sameCodeFound = await _context.Subjects
+                .AnyAsync(s => s.Code == editSubjectDto.Code, cancellationToken);
+            if (sameCodeFound)
+                return Response<bool>.Failure(SubjectErrors.CodeAlreadyExists);
+        }
 
-        var sameNameFound = await _context.Subjects
-            .AnyAsync(s => s.Name.ToUpper().Equals(editSubjectDto.Name.ToUpper()), cancellationToken);
-        if (sameNameFound)
-            return Response<bool>.Failure(SubjectErrors.NameAlreadyExists);
+        if (editSubjectDto.Name.Equals(subject.Name) == false)
+        {
+            var sameNameFound = await _context.Subjects
+                .AnyAsync(s => s.Name.ToUpper().Equals(editSubjectDto.Name.ToUpper()), cancellationToken);
+            if (sameNameFound)
+                return Response<bool>.Failure(SubjectErrors.NameAlreadyExists);
+        }
 
         _mapper.Map(editSubjectDto, subject);
         _context.Subjects.Update(subject);

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     useDeleteAssignedDoctorMutation,
     useGetSubjectByCodeQuery
@@ -12,10 +12,15 @@ import {faDownload, faTrash} from '@fortawesome/free-solid-svg-icons'
 import {useAddSubjectMaterialMutation, useDeleteSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
 import useAppSelector from "../../Hookes/useAppSelector";
 import {useAssignDoctorToSubjectMutation, useGetDoctorPageQuery} from "../../App/Api/DoctorApi";
-import {BASE_URL} from "../../App/Api/BaseApi";
+import {BASE_URL, baseApi} from "../../App/Api/BaseApi";
+import useAppDispatch from "../../Hookes/useAppDispatch";
 
 const SubjectPage = () => {
     const {code} = useParams()
+    const p = useRef() as React.MutableRefObject<HTMLDivElement>
+    const dispatch = useAppDispatch()
+    const navigator = useNavigate()
+    const token = useAppSelector(s => s.auth.token)
     const {data: subject, isError, error, isFetching} = useGetSubjectByCodeQuery(Number(code))
     const [remove, removeResult] = useDeleteSubjectMaterialMutation()
     const [add, addResult] = useAddSubjectMaterialMutation()
@@ -31,6 +36,19 @@ const SubjectPage = () => {
             pageSize: 10,
             usernamePrefix: doctorUsername
         }) : null
+
+    useEffect(() => {
+        if(p.current == undefined)
+            return
+
+        if (isFetching) {
+            p.current.style.opacity = '.5'
+            p.current.onmousemove = e => e.preventDefault()
+        } else {
+            p.current.style.opacity = '1'
+            p.current.onmousemove = null
+        }
+    }, [isFetching])
 
     const deleteDoctorHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -65,21 +83,34 @@ const SubjectPage = () => {
     }
 
     //todo fix the add operation it is not working
-    const addHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const addMaterialHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
+        const f = file.current.files![0]
+        if (f == undefined)
+            return
         const data = new FormData()
-        data.append('file', file.current.files![0])
-        add({subjectId: subject?.id!, data})
+        data.append('subjectId', subject?.id.toString()!)
+        data.append('file', f)
+        //todo handle it with better way, may be with rtk query
+        const response = await fetch(BASE_URL + 'subjectmaterial', {
+            method: 'POST',
+            body: data,
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        });
+        dispatch(baseApi.util.invalidateTags([{type: 'subject', id: subject?.id!}]))
+        navigator('/subject/' + subject?.code!)
     }
 
     if (isError || subject == undefined)
         return <h2>{useGetAppError(error)?.message}</h2>
 
-    if (isFetching)
-        return <h2>Loading</h2>
-
     return (
-        <div className="container">
+        <div className="container" ref={p}>
+            {isAdmin && <div className={'row justify-content-center'}>
+                <button className={'col-8 col-md-6 btn btn-outline-dark my-3'} onClick={e => navigator('/subject/edit/'+subject?.code!)}>Edit</button>
+            </div>}
             {idToRemove && <div
                 className='border border-3 roudned rounded-3 mx-auto p-3'>
                 <h3 className='text-center'>Are You Sure You Want To
@@ -165,7 +196,7 @@ const SubjectPage = () => {
                                 <input type={'file'}
                                        ref={file}
                                        style={{display: 'none'}}
-                                       onChange={addHandler}
+                                       onChange={addMaterialHandler}
                                 />
                                 <button className="btn btn-primary"
                                         onClick={e => file.current.click()}>
