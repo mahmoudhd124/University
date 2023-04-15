@@ -12,7 +12,7 @@ import {faDownload, faTrash} from '@fortawesome/free-solid-svg-icons'
 import {useAddSubjectMaterialMutation, useDeleteSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
 import useAppSelector from "../../Hookes/useAppSelector";
 import {useAssignDoctorToSubjectMutation, useGetDoctorPageQuery} from "../../App/Api/DoctorApi";
-import {BASE_URL, baseApi} from "../../App/Api/BaseApi";
+import { BASE_URL } from "../../App/Api/BaseApi";
 import useAppDispatch from "../../Hookes/useAppDispatch";
 
 const SubjectPage = () => {
@@ -23,7 +23,7 @@ const SubjectPage = () => {
     const token = useAppSelector(s => s.auth.token)
     const {data: subject, isError, error, isFetching} = useGetSubjectByCodeQuery(Number(code))
     const [remove, removeResult] = useDeleteSubjectMaterialMutation()
-    const [add, addResult] = useAddSubjectMaterialMutation()
+    const add = useAddSubjectMaterialMutation(token!, dispatch)
     const file = useRef() as React.MutableRefObject<HTMLInputElement>
     const [idToRemove, setIdToRemove] = useState<number | null>(null)
     const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
@@ -38,7 +38,7 @@ const SubjectPage = () => {
         }) : null
 
     useEffect(() => {
-        if(p.current == undefined)
+        if (p.current == undefined)
             return
 
         if (isFetching) {
@@ -91,15 +91,7 @@ const SubjectPage = () => {
         const data = new FormData()
         data.append('subjectId', subject?.id.toString()!)
         data.append('file', f)
-        //todo handle it with better way, may be with rtk query
-        const response = await fetch(BASE_URL + 'subjectmaterial', {
-            method: 'POST',
-            body: data,
-            headers: {
-                'authorization': `Bearer ${token}`
-            }
-        });
-        dispatch(baseApi.util.invalidateTags([{type: 'subject', id: subject?.id!}]))
+        await add(data)
         navigator('/subject/' + subject?.code!)
     }
 
@@ -109,7 +101,9 @@ const SubjectPage = () => {
     return (
         <div className="container" ref={p}>
             {isAdmin && <div className={'row justify-content-center'}>
-                <button className={'col-8 col-md-6 btn btn-outline-dark my-3'} onClick={e => navigator('/subject/edit/'+subject?.code!)}>Edit</button>
+                <button className={'col-8 col-md-6 btn btn-outline-dark my-3'}
+                        onClick={e => navigator('/subject/edit/' + subject?.code!)}>Edit
+                </button>
             </div>}
             {idToRemove && <div
                 className='border border-3 roudned rounded-3 mx-auto p-3'>
