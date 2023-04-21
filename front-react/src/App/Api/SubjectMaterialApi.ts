@@ -27,14 +27,15 @@ export const subjectMaterialApi = baseApi.injectEndpoints({
 //todo handle it with better way, may be with rtk query with axios
 export const useAddSubjectMaterialMutation = (token: string, dispatch: AppDispatch) => {
     return async (data: FormData) => {
-        dispatch(baseApi.util.invalidateTags([{type: 'subject', id: +data.get('subjectId')!}]))
-        return await fetch(BASE_URL + 'subjectmaterial', {
+        const response = await fetch(BASE_URL + 'subjectmaterial', {
             method: 'POST',
             body: data,
             headers: {
                 'authorization': `Bearer ${token}`
             }
         });
+        dispatch(baseApi.util.invalidateTags([{type: 'subject', id: +data.get('subjectId')!}]))
+        return response
     }
 }
 export const {

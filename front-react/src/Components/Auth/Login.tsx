@@ -45,7 +45,7 @@ const Login = () => {
             if (result.data.roles?.some(r => r.toLowerCase() == 'doctor'))
                 navigator('/doctor/')
             else
-                navigator(state?.from ?? '/profile')
+                navigator(state?.from ?? '/doctor/list/0')
         }
     }, [result.isSuccess])
 

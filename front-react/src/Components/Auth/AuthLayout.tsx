@@ -5,7 +5,7 @@ const AuthLayout = () => {
 
     return (
         <div
-            className={`container d-flex justify-content-center mt-5`}>
+            className={`container d-flex justify-content-center`}>
             <div className="card"
                  style={{width:'fit-content'}}
             >

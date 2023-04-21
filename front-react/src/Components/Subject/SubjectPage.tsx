@@ -6,26 +6,15 @@ import {
 import {useNavigate, useParams} from "react-router-dom";
 import useGetAppError from "../../Hookes/useGetAppError";
 import './SubjectPage.css'
-import TimeAgo from "../Global/TimeAgo";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faDownload, faTrash} from '@fortawesome/free-solid-svg-icons'
-import {useAddSubjectMaterialMutation, useDeleteSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
 import useAppSelector from "../../Hookes/useAppSelector";
 import {useAssignDoctorToSubjectMutation, useGetDoctorPageQuery} from "../../App/Api/DoctorApi";
-import { BASE_URL } from "../../App/Api/BaseApi";
-import useAppDispatch from "../../Hookes/useAppDispatch";
+import SubjectMaterials from "./SubjectMaterials";
 
 const SubjectPage = () => {
     const {code} = useParams()
     const p = useRef() as React.MutableRefObject<HTMLDivElement>
-    const dispatch = useAppDispatch()
     const navigator = useNavigate()
-    const token = useAppSelector(s => s.auth.token)
     const {data: subject, isError, error, isFetching} = useGetSubjectByCodeQuery(Number(code))
-    const [remove, removeResult] = useDeleteSubjectMaterialMutation()
-    const add = useAddSubjectMaterialMutation(token!, dispatch)
-    const file = useRef() as React.MutableRefObject<HTMLInputElement>
-    const [idToRemove, setIdToRemove] = useState<number | null>(null)
     const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
     const [deleteDoctor, deleteDoctorResult] = useDeleteAssignedDoctorMutation()
     const [assignDoctor, assignDoctorResult] = useAssignDoctorToSubjectMutation()
@@ -64,36 +53,8 @@ const SubjectPage = () => {
     }
 
 
-    const removeHandlerOne = (id: number) => {
-        return (e: React.MouseEvent<SVGSVGElement>) => {
-            e.preventDefault()
-            setIdToRemove(id)
-        }
-    }
-
-    const removeHandlerTwo = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        remove({id: idToRemove!, subjectId: subject?.id!})
-        setIdToRemove(null)
-    }
-
-    const returnBack = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setIdToRemove(null)
-    }
 
     //todo fix the add operation it is not working
-    const addMaterialHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        const f = file.current.files![0]
-        if (f == undefined)
-            return
-        const data = new FormData()
-        data.append('subjectId', subject?.id.toString()!)
-        data.append('file', f)
-        await add(data)
-        navigator('/subject/' + subject?.code!)
-    }
 
     if (isError || subject == undefined)
         return <h2>{useGetAppError(error)?.message}</h2>
@@ -105,20 +66,7 @@ const SubjectPage = () => {
                         onClick={e => navigator('/subject/edit/' + subject?.code!)}>Edit
                 </button>
             </div>}
-            {idToRemove && <div
-                className='border border-3 roudned rounded-3 mx-auto p-3'>
-                <h3 className='text-center'>Are You Sure You Want To
-                    Delete {subject.materials?.filter(d => d.id == idToRemove)[0].name}</h3>
-                <div className="row justify-content-center gap-4">
-                    <div className="col-4">
-                        <button onClick={removeHandlerTwo} className='btn btn-outline-danger'>Remove Any Way</button>
-                    </div>
 
-                    <div className="col-4">
-                        <button onClick={returnBack} className='btn btn-outline-primary'>Return Back</button>
-                    </div>
-                </div>
-            </div>}
 
             <div className="card">
                 <div className="card-header">
@@ -147,11 +95,6 @@ const SubjectPage = () => {
                         <div className="col-md-6">
                             <p>
                                 <strong>Doctor:</strong> {subject.doctorUsername}
-                            </p>
-                        </div>
-                        <div className="col-md-6">
-                            <p>
-                                <strong>Doctor ID:</strong> {subject.doctorId}
                             </p>
                         </div>
                         {isAdmin && <div className={'col-md-6'}>
@@ -183,57 +126,11 @@ const SubjectPage = () => {
                             </div>
                         </div>
                     </div>)}
-
-                    {subject.isOwner &&
-                        <div className="row">
-                            <div className="col-md-12 text-center mt-3">
-                                <input type={'file'}
-                                       ref={file}
-                                       style={{display: 'none'}}
-                                       onChange={addMaterialHandler}
-                                />
-                                <button className="btn btn-primary"
-                                        onClick={e => file.current.click()}>
-                                    Add Material
-                                </button>
-                            </div>
-                        </div>
-                    }
                     <hr/>
-                    <h3>Materials:</h3>
-                    <table className="table table-striped table-hover text-center">
-                        <thead>
-                        <tr>
-                            <th scope={'col'}>#</th>
-                            <th scope={'col'}>Name</th>
-                            <th scope={'col'}>Date</th>
-                            <th scope={'col'}></th>
-                            {subject.isOwner && <th scope={'col'}></th>}
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {subject.materials.map((material, i) => (
-                            <tr key={material.id}>
-                                <th scope={'row'}>{i + 1}</th>
-                                <td>{material.name}</td>
-                                <td><TimeAgo timestamp={material.date}/></td>
-                                <td>
-                                    <a href={BASE_URL.slice(0, -4) + 'SubjectMaterials/' + material.storedName}>
-                                        <FontAwesomeIcon icon={faDownload} style={{cursor: 'pointer'}}/>
-
-                                    </a>
-                                </td>
-                                {subject.isOwner &&
-                                    <td className="text-right">
-                                        <FontAwesomeIcon icon={faTrash}
-                                                         className="text-danger"
-                                                         style={{cursor: 'pointer'}}
-                                                         onClick={removeHandlerOne(material.id)}/></td>
-                                }
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    <SubjectMaterials materials={subject?.materials}
+                                      isOwner={subject.isOwner}
+                                      id={subject?.id!}
+                                      code={subject?.code!}/>
                 </div>
             </div>
         </div>
