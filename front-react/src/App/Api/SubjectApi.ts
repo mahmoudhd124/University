@@ -8,7 +8,7 @@ export const subjectApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getSubjectByCode: builder.query<SubjectModel, number>({
             query: arg => 'subject/' + arg,
-            providesTags: (result) => [{type: 'subject', id: result!.id}]
+            providesTags: (result) => [{type: 'subject', id: result?.id}]
         }),
         getSubjectPage: builder.query<SubjectForPageModel[],
             { pageIndex: number, pageSize: number, department: string | undefined, year: number | undefined }>({

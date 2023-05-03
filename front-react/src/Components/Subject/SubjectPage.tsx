@@ -70,7 +70,7 @@ const SubjectPage = () => {
 
             <div className="card">
                 <div className="card-header">
-                    <h2>{subject.name}</h2>
+                    <h2 className={'text-center'}>{subject.name}</h2>
                 </div>
                 <div className="card-body">
                     <div className="row">

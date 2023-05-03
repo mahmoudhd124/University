@@ -1,12 +1,14 @@
 using System.Security.Claims;
 using Logic.ErrorHandlers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
 [ApiController]
 [Route("Api/[controller]")]
+[Authorize]
 public class BaseController : ControllerBase
 {
     private IMediator _mediator;

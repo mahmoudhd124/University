@@ -17,6 +17,8 @@ public static class SubjectErrors
     public static readonly Error WrongName = new("Subject.WrongName",
         "The name is wrong");
 
+    public static readonly Error WrongCode = new("Subject.WrongCode",
+        "The code is wrong");
     public static readonly Error SubjectIsAlreadyAssignedToDoctor = new("Subject.SubjectIsAlreadyAssignedToDoctor",
         "The Subject Is Already Assigned To Doctor");
 

@@ -34,7 +34,7 @@ public static class ProgramConfigurations
         services.AddCors(opt => opt.AddPolicy("allowLocalAtPort5173", builder =>
         {
             builder
-                .WithOrigins("http://localhost:5173")
+                .WithOrigins("http://localhost:5173", "http://localhost:5173/")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
@@ -61,13 +61,12 @@ public static class ProgramConfigurations
                 };
             });
 
-        //require authenticated user
-        services.AddAuthorization(options =>
-        {
-            options.FallbackPolicy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .Build();
-        });
-
+        // //require authenticated user
+        // services.AddAuthorization(options =>
+        // {
+        //     options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        //         .RequireAuthenticatedUser()
+        //         .Build();
+        // });
     }
 }

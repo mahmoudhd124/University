@@ -33,11 +33,11 @@ public class GetSubjectByCodeHandler : IRequestHandler<GetSubjectByCodeQuery, Re
             .FirstOrDefaultAsync(s => s.Code == code, cancellationToken);
 
         if (subjectDto == null)
-            return Response<SubjectDto>.Failure(SubjectErrors.WrongName);
+            return Response<SubjectDto>.Failure(SubjectErrors.WrongCode);
 
         var enumerable = roles.ToList();
         if (enumerable.Contains("Admin") == false && enumerable.Contains("Doctor"))
-            if (subjectDto.DoctorId.Equals(id) == false)
+            if ((subjectDto.DoctorId?.Equals(id) ?? false) == false)
                 return Response<SubjectDto>.Failure(SubjectErrors.UnAuthorizedGet);
 
         subjectDto.IsOwner = subjectDto.DoctorId?.Equals(id) ?? false;

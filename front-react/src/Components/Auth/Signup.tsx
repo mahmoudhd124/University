@@ -5,6 +5,7 @@ import { useSignupMutation } from "../../App/Api/AuthApi";
 import { useNavigate } from "react-router-dom";
 import useGetAppError from "../../Hookes/useGetAppError";
 import { useEffect } from "react";
+import {BASE_URL} from "../../App/Api/BaseApi";
 
 const Signup = () => {
     const [signup, result] = useSignupMutation()
@@ -49,7 +50,7 @@ const Signup = () => {
         if (formik.values.username.trim().length == 0)
             return
 
-        fetch('https://localhost:7108/api/auth/isvalidusername/' + formik.values.username)
+        fetch(`${BASE_URL}auth/isvalidusername/` + formik.values.username)
             .then(r => r.json())
             .then(r => {
                 if (r === false) {
