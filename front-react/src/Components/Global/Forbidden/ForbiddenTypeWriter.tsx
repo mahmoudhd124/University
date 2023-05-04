@@ -12,7 +12,6 @@ const ForbiddenTypeWriter = ({
         let currentIndex = 0;
         if (time) {
             speed = time * 1000 / text.length
-            console.log({time,speed})
         }
         const intervalId = setInterval(() => {
             setDisplayText(prevText => prevText + text[currentIndex]);

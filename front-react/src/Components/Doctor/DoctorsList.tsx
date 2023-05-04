@@ -5,6 +5,7 @@ import {Alert} from 'react-bootstrap'
 import useGetAppError from '../../Hookes/useGetAppError'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import Pagination from "../Pagination";
 
 const PAGE_SIZE = 10
 const DoctorsList = () => {
@@ -102,27 +103,12 @@ const DoctorsList = () => {
                 </tr>)}
                 </tbody>
             </table>
-            <nav className="row justify-content-center align-items-baseline"
-                 onMouseMove={e => e.preventDefault()}
-            >
-                <ul className="pagination col-10 col-sm-8 col-md-6 justify-content-center">
-                    <li className={`page-item ${page == 0 && 'disabled'}`}>
-                        <button className={'page-link'} onClick={e => setPage(p => p - 1)}>dec</button>
-                    </li>
-                    <li className="page-item">
-                        <button className="page-link">{page}</button>
-                    </li>
-                    <li className="page-item active" aria-current="page">
-                        <button className="page-link">{page + 1}</button>
-                    </li>
-                    <li className="page-item">
-                        <button className="page-link">{page + 2}</button>
-                    </li>
-                    <li className={`page-item ${((data?.length ?? 0) == 0 || (data?.length ?? 0) < PAGE_SIZE) && 'disabled'}`}>
-                        <button className={'page-link'} onClick={e => setPage(p => p + 1)}>inc</button>
-                    </li>
-                </ul>
-            </nav>
+
+            <Pagination page={page}
+                        setPage={setPage}
+                        hasNext={(data?.length ?? 0) == 0 || (data?.length ?? 0) < PAGE_SIZE}
+                        className={'my-3'}
+            />
 
         </div>
     )
