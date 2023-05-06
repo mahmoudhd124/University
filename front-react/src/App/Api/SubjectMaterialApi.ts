@@ -41,6 +41,8 @@ export const useAddSubjectMaterialMutation = (token: string, dispatch: AppDispat
         return response
     }
 }
+
+export const SubjectMaterialApi = 'https://localhost:7035/Api/SubjectMaterial/'
 export const {
     // useAddSubjectMaterialMutation,
     useDeleteSubjectMaterialMutation,

@@ -4,7 +4,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {BASE_URL} from "../../App/Api/BaseApi";
 import {SubjectMaterialModel} from "../../Models/SubjectMaterial/SubjectMaterialModel";
-import {useGetSubjectMaterialQuery, useLazyGetSubjectMaterialQuery} from "../../App/Api/SubjectMaterialApi";
+import {
+    SubjectMaterialApi,
+    useGetSubjectMaterialQuery,
+    useLazyGetSubjectMaterialQuery
+} from "../../App/Api/SubjectMaterialApi";
 
 interface Props {
     material: SubjectMaterialModel,
@@ -13,30 +17,17 @@ interface Props {
 }
 
 const SubjectMaterial = ({material: m, isOwner, removeHandler}: Props) => {
-    const [get, {data, isFetching, error, isSuccess}] = useLazyGetSubjectMaterialQuery()
-    const link = useRef() as React.MutableRefObject<HTMLAnchorElement>
+    // const [get, {data, isFetching, error, isSuccess}] = useLazyGetSubjectMaterialQuery()
+    // const link = useRef() as React.MutableRefObject<HTMLAnchorElement>
 
     // useEffect(() => {
-    //     if (isSuccess) {
-    //         console.log(data)
+    //     if (isSuccess && data ) {
+    //         console.log(data )
     //         link.current.href = URL.createObjectURL(data)
     //         link.current.click()
     //     }
-    // }, [isSuccess])
-
-
-    // if (data && isSuccess && error == undefined && data instanceof Blob) {
-    //     console.log('here')
-    //     const downloadUrl = URL.createObjectURL(data);
-    //     const link = document.createElement('a');
-    //     link.href = downloadUrl;
-    //     link.setAttribute('download', m.storedName);
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     document.body.removeChild(link);
-    //     URL.revokeObjectURL(downloadUrl);
-    // }
-
+    // }, [data,isSuccess])
+    //
     // const download = (e: React.MouseEvent) => {
     //     e.preventDefault()
     //     get(m.storedName)
@@ -57,7 +48,8 @@ const SubjectMaterial = ({material: m, isOwner, removeHandler}: Props) => {
                                              icon={faTrash}/>
                         </div>
                         <div className="col-6 text-center">
-                            <a href={BASE_URL.slice(0, -4) + 'SubjectMaterials/' + m.storedName}>
+                            {/*onClick={download}>*/}
+                            <a href={SubjectMaterialApi + m.storedName + '/' + m.name}>
                                 <FontAwesomeIcon className={'btn btn-outline-primary w-75'}
                                                  icon={faDownload}/>
                             </a>
@@ -65,7 +57,7 @@ const SubjectMaterial = ({material: m, isOwner, removeHandler}: Props) => {
                     </> :
                     <div className="col-12 btn btn-outline-primary w-100">
                         {/*onClick={download}>*/}
-                        <a href={BASE_URL.slice(0, -4) + 'SubjectMaterials/' + m.storedName}>
+                        <a href={SubjectMaterialApi + m.storedName + '/' + m.name}>
                             <FontAwesomeIcon className={'btn btn-outline-primary w-75'}
                                              icon={faDownload}/>
                         </a>
