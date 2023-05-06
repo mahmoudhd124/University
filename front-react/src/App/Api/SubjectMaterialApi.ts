@@ -1,8 +1,11 @@
-import { BASE_URL, baseApi} from "./BaseApi";
+import {BASE_URL, baseApi} from "./BaseApi";
 import {AppDispatch} from "../store";
 
 export const subjectMaterialApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
+        getSubjectMaterial: builder.query<Blob, string>({
+            query: arg => 'subjectMaterial/' + arg
+        }),
         addSubjectMaterial: builder.mutation<boolean, FormData>({
             query: arg => ({
                 url: 'subjectMaterial',
@@ -40,5 +43,7 @@ export const useAddSubjectMaterialMutation = (token: string, dispatch: AppDispat
 }
 export const {
     // useAddSubjectMaterialMutation,
-    useDeleteSubjectMaterialMutation
+    useDeleteSubjectMaterialMutation,
+    useGetSubjectMaterialQuery,
+    useLazyGetSubjectMaterialQuery
 } = subjectMaterialApi;

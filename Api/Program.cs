@@ -1,4 +1,5 @@
 using Api.Helpers;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,10 +23,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles(new StaticFileOptions
+app.UseFileServer(new FileServerOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\..\logic\wwwroot"))
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\..\logic\wwwroot")),
+    EnableDirectoryBrowsing = true
 });
+// app.UseStaticFiles(new StaticFileOptions
+// {
+//     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\..\logic\wwwroot")),
+//     ContentTypeProvider = new FileExtensionContentTypeProvider(new Dictionary<string, string>()
+//     {
+//         { "py", "text/x-python" }
+//     })
+// });
 
 app.UseCors("allowLocalAtPort5173");
 

@@ -9,6 +9,7 @@ export interface AppError {
 }
 
 export const BASE_URL = 'https://localhost:7035/api/'
+// export const BASE_URL = 'http://localhost:5016/api/'
 
 export const sendDefualt = fetchBaseQuery({
     baseUrl: BASE_URL,

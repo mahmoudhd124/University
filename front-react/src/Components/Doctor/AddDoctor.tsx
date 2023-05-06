@@ -123,7 +123,7 @@ const AddDoctor = () => {
                         />
                     </div>
                     <div className={'col-12 col-sm-6'}>
-                        {(formik.touched.phone && formik.errors.phone) ?
+                        {(formik.touched.phoneNumber && formik.errors.phoneNumber) ?
                             <label htmlFor="phone"
                                    className={'col-form-label text-danger'}>{formik.errors.phoneNumber}</label> :
                             <label htmlFor="phone" className={'col-form-label'}>Phone</label>}

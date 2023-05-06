@@ -60,6 +60,8 @@ public static class ProgramConfigurations
                     ClockSkew = TimeSpan.Zero
                 };
             });
+        
+        services.AddDirectoryBrowser();
 
         // //require authenticated user
         // services.AddAuthorization(options =>
