@@ -4,7 +4,7 @@ import {AppDispatch} from "../store";
 export const subjectMaterialApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getSubjectMaterial: builder.query<Blob, string>({
-            query: arg => 'subjectMaterial/' + arg
+            query: arg => ({url:'subjectMaterial/' + arg})
         }),
         addSubjectMaterial: builder.mutation<boolean, FormData>({
             query: arg => ({

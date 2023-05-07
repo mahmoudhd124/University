@@ -37,7 +37,7 @@ const EditSubject = () => {
 
     useEffect(() => {
         if (result.isSuccess)
-            navigator(loc.state?.from ?? '/subject/' + data?.code!)
+            navigator(loc.state?.from ?? '/subject/' + formik.values.code)
     }, [result])
 
     return (

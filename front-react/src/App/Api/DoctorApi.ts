@@ -18,13 +18,14 @@ export const DoctorApi = baseApi.injectEndpoints({
             query: args => ({
                 url: `doctor/${args.pageIndex}/${args.pageSize}/${args.usernamePrefix}`
             }),
-            providesTags: (result = [] ) => [
+            providesTags: (result = []) => [
                 'doctor',
                 ...result.map(({id}) => ({type: 'doctor' as const, id}))
             ]
         }),
         getDoctor: builder.query<DoctorModel, string>({
-            query: arg => 'doctor/' + arg,
+            // query: arg => 'doctor/' + arg,
+            query: arg => ({url: 'doctor/' + arg}),
             providesTags: (result, error, arg) => [{type: 'doctor', id: arg == '' ? 'ME' : arg}]
         }),
         getDoctorEditInfo: builder.query<EditDoctorModel, string>({

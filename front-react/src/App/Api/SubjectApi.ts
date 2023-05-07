@@ -7,7 +7,7 @@ import {EditSubjectModel} from "../../Models/Subject/EditSubjectModel";
 export const subjectApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getSubjectByCode: builder.query<SubjectModel, number>({
-            query: arg => 'subject/' + arg,
+            query: arg => ({url:'subject/' + arg}),
             providesTags: (result) => [{type: 'subject', id: result?.id}]
         }),
         getSubjectPage: builder.query<SubjectForPageModel[],
