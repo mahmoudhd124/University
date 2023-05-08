@@ -7,6 +7,7 @@ import useAppDispatch from "../../Hookes/useAppDispatch";
 const Navbar = () => {
     const token = useAppSelector(s => s.auth.token)
     const dispatch = useAppDispatch()
+    const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
 
     return (
         <nav className="navbar navbar-expand-lg bg-light">
@@ -30,7 +31,7 @@ const Navbar = () => {
                             </>) : (
                                 <>
                                     <li className="nav-item">
-                                        <Link to={'/doctor/'} className="nav-link">Profile</Link>
+                                        {!isAdmin && <Link to={'/profile'} className="nav-link">Profile</Link>}
                                     </li>
                                     <li className="nav-item text-danger nav-link" style={{ cursor: 'pointer' }}
                                         onClick={e => dispatch(logout())}>Logout</li>
@@ -43,10 +44,10 @@ const Navbar = () => {
                             <ul className="dropdown-menu">
                                 <li><Link to={'/doctor/list/0'} className="dropdown-item">Doctors</Link></li>
                                 <li><Link to={'/subject/list/0'} className="dropdown-item">Subject</Link></li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li><Link to={'/'} className="dropdown-item">Something else here</Link></li>
+                                {/*<li>*/}
+                                {/*    <hr className="dropdown-divider" />*/}
+                                {/*</li>*/}
+                                {/*<li><Link to={'/'} className="dropdown-item">Something else here</Link></li>*/}
                             </ul>
                         </li>
                     </ul>

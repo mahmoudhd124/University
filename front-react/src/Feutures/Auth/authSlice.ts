@@ -13,6 +13,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setCredentials: (state, action: PayloadAction<Omit<TokenModel, 'tokenExp'>>) => {
+            console.log(action.payload)
             state.roles = action.payload.roles
             state.token = action.payload.token
             state.tokenExp = (jwtDecode(action.payload.token!) as { exp: number })?.exp

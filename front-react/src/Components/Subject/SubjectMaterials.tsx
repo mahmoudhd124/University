@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import useAppDispatch from "../../Hookes/useAppDispatch";
 import useAppSelector from "../../Hookes/useAppSelector";
 import SubjectMaterial from "./SubjectMaterial";
+import useAxiosApi from "../../Hookes/useAxiosApi";
 
 const SubjectMaterials = ({
                               materials,
@@ -14,6 +15,7 @@ const SubjectMaterials = ({
                           }: { materials: SubjectMaterialModel[], isOwner: boolean, id: number, code: number }) => {
     const dispatch = useAppDispatch()
     const token = useAppSelector(s => s.auth.token)
+    const api = useAxiosApi()
     const navigator = useNavigate()
     const add = useAddSubjectMaterialMutation(token!, dispatch)
     const file = useRef() as React.MutableRefObject<HTMLInputElement>
@@ -88,7 +90,9 @@ const SubjectMaterials = ({
                     {materials.map(m => <SubjectMaterial key={m.id}
                                                          material={m}
                                                          isOwner={isOwner}
-                                                         removeHandler={removeHandlerOne(m.id)}/>)}
+                                                         removeHandler={removeHandlerOne(m.id)}
+                                                         api={api}
+                                                         token={token}/>)}
 
                 </div>
             </div>

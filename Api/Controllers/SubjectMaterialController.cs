@@ -10,7 +10,7 @@ namespace Api.Controllers;
 public class SubjectMaterialController : BaseController
 {
     [HttpGet]
-    [AllowAnonymous]
+    // [AllowAnonymous]
     [Route("{name}/{returnName?}")]
     public async Task<ActionResult> Get(string name, string? returnName)
     {

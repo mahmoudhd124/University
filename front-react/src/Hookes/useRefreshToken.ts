@@ -1,13 +1,17 @@
-import { BASE_URL } from "../App/Api/BaseApi"
+import {BASE_URL} from "../App/Api/BaseApi"
+import TokenModel from "../Models/Auth/TokenModel";
+import axios from "axios";
 
 const useRefreshToken = () => {
     const refresh = async () => {
-        const refreshToken = await fetch(`${BASE_URL}auth/RefreshToken`,
-            {
-                method: 'GET',
-                credentials: 'include'
+        try {
+            const refreshToken = await axios.get<TokenModel>(`${BASE_URL}auth/RefreshToken`,{
+                withCredentials:true
             })
-        return await refreshToken.json()
+            return refreshToken.data;
+        } catch (e) {
+            throw e
+        }
     }
     return refresh
 }

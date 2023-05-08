@@ -30,8 +30,8 @@ const baseQuery: BaseQueryFn<
     if (tokenExp != null) {
         const now = +new Date().getTime().toString().slice(0, -3)
         if (now >= tokenExp) {
-            const refrshToken = useRefreshToken()
-            const data = await refrshToken()
+            const refreshToken = useRefreshToken()
+            const data = await refreshToken()
             if (data) {
                 api.dispatch(setCredentials(data))
             } else {
@@ -46,5 +46,6 @@ export const baseApi = createApi({
     reducerPath: 'api',
     baseQuery,
     tagTypes: ['user', 'doctor', 'subject'],
-    endpoints: builder => ({})
+    endpoints: builder => ({}),
+    keepUnusedDataFor:0
 })
