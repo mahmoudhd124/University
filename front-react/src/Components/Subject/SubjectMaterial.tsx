@@ -12,22 +12,16 @@ interface Props {
     isOwner: boolean,
     removeHandler: (e: React.MouseEvent) => void,
     api: ReturnType<typeof useAxiosApi>, // Receive the api instance
-    token: string|null, // Receive the token
+    token: string | null, // Receive the token
 
 }
 
-const SubjectMaterial = ({material: m, isOwner, removeHandler,api,token}: Props) => {
+const SubjectMaterial = ({material: m, isOwner, removeHandler, api, token}: Props) => {
     // const api = useAxiosApi()
     // const token = useAppSelector(s => s.auth.token)
 
     const handleDownload = () => {
-        api<Blob>({
-            url: SubjectMaterialApi + `${m.storedName}`,
-            method: 'GET',
-            // headers: {
-            //     'Authorization': 'Bearer ' + token
-            // }
-        })
+        api<Blob>(SubjectMaterialApi + `${m.storedName}`)
             .then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');

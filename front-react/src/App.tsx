@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Layout from './Components/Global/Layout'
 import './app.css'
-import Profile from "./Components/Profile/Profile";
 import Login from "./Components/Auth/Login";
 import Signup from "./Components/Auth/Signup";
 import AuthLayout from "./Components/Auth/AuthLayout";
@@ -19,6 +18,7 @@ import SubjectPage from "./Components/Subject/SubjectPage";
 import SubjectList from "./Components/Subject/SubjectList";
 import AddSubject from "./Components/Subject/AddSubject";
 import EditSubject from "./Components/Subject/EditSubject";
+import Home from "./Components/Home/Home";
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -46,8 +46,10 @@ const App = () => {
     return (
         <Routes>
             <Route path='/' element={<Layout />}>
+                <Route index element={<Home/>}/> 
+                
                 <Route element={<RouteProtector allowedRoles={[]} />}>
-                    <Route path={'profile'} element={<Profile />} />
+                    <Route path={'profile'} element={<DoctorPage />} />
                 </Route>
 
                 //auth routes

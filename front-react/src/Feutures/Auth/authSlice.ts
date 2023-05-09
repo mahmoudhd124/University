@@ -22,6 +22,7 @@ const authSlice = createSlice({
             localStorage.removeItem('staylogin')
             state.roles = null
             state.token = null
+            state.tokenExp = null
         }
     }
 })

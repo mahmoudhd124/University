@@ -9,6 +9,7 @@ import './SubjectPage.css'
 import useAppSelector from "../../Hookes/useAppSelector";
 import {useAssignDoctorToSubjectMutation, useGetDoctorPageQuery} from "../../App/Api/DoctorApi";
 import SubjectMaterials from "./SubjectMaterials";
+import Forbidden403 from "../Global/Forbidden/Forbidden403";
 
 const SubjectPage = () => {
     const {code} = useParams()
@@ -53,11 +54,19 @@ const SubjectPage = () => {
     }
 
 
+    if (isError || subject == undefined) {
+        const msg = useGetAppError(error)?.message ?? "You Can Not Get Here"
+        const code = useGetAppError(error)?.code ?? "NO-CODE"
 
-    //todo fix the add operation it is not working
-
-    if (isError || subject == undefined)
-        return <h2>{useGetAppError(error)?.message}</h2>
+        if (code == 'Subject.WrongCode')
+            return <Forbidden403 errors={[{title: 'WRONG CODE', text: msg}]}/>
+        else if (code == 'Subject.UnAuthorizedGet')
+            return <Forbidden403 errors={[{title: 'FORBIDDEN', text: msg}]}/>
+        else if (isFetching == false)
+            return <Forbidden403 errors={[{title: 'Error', text: msg + ' Try To Login Again!'}]}/>
+        else
+            return <h3>Loading</h3>
+    }
 
     return (
         <div className="container" ref={p}>
