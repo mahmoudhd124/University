@@ -11,8 +11,9 @@ public class SubjectController : BaseController
     [Authorize(Roles = "Admin")]
     [HttpGet]
     [Route("{pageIndex:int}/{pageSize:int}")]
-    public async Task<ActionResult> Page(int pageIndex, int pageSize, string department, int? year) =>
-        Return(await Mediator.Send(new GetSubjectForPageQuery(pageIndex, pageSize, department, year)));
+    public async Task<ActionResult> Page(int pageIndex, int pageSize, string department, int? year,
+        string namePrefix) =>
+        Return(await Mediator.Send(new GetSubjectForPageQuery(pageIndex, pageSize, department, year, namePrefix)));
 
     [Authorize(Roles = "Admin,Doctor")]
     [HttpGet]
