@@ -27,7 +27,7 @@ public class GetSubjectByCodeHandler : IRequestHandler<GetSubjectByCodeQuery, Re
         var subjectDto = await _context.Subjects
             .Include(s => s.DoctorSubject)
             .ThenInclude(x => x.Doctor)
-            .Include(s => s.SubjectMaterials)
+            .Include(s => s.SubjectFiles)
             .AsSplitQuery()
             .ProjectTo<SubjectDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(s => s.Code == code, cancellationToken);

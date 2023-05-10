@@ -136,7 +136,7 @@ const SubjectPage = () => {
                         </div>
                     </div>)}
                     <hr/>
-                    <SubjectMaterials materials={subject?.materials}
+                    <SubjectMaterials materials={subject?.files}
                                       isOwner={subject.isOwner}
                                       id={subject?.id!}
                                       code={subject?.code!}/>

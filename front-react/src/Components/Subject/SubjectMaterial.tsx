@@ -5,7 +5,7 @@ import {faDownload, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {SubjectMaterialModel} from "../../Models/SubjectMaterial/SubjectMaterialModel";
 import {SubjectMaterialApi,} from "../../App/Api/SubjectMaterialApi";
 import useAxiosApi from "../../Hookes/useAxiosApi";
-import useAppSelector from "../../Hookes/useAppSelector";
+import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 
 interface Props {
     material: SubjectMaterialModel,
@@ -16,10 +16,7 @@ interface Props {
 
 }
 
-const SubjectMaterial = ({material: m, isOwner, removeHandler, api, token}: Props) => {
-    // const api = useAxiosApi()
-    // const token = useAppSelector(s => s.auth.token)
-
+const SubjectMaterial = ({material: m, isOwner, removeHandler, api}: Props) => {
     const handleDownload = () => {
         api<Blob>(SubjectMaterialApi + `${m.storedName}`)
             .then((response) => {
@@ -42,6 +39,7 @@ const SubjectMaterial = ({material: m, isOwner, removeHandler, api, token}: Prop
             align-items-center mx-1 my-1 card">
             <h5 className={'my-1 card-title'}>{m.name}</h5>
             <p className={'mt-auto'}><TimeAgo timestamp={m.date}/></p>
+            <p className={'mt-auto'}>{SubjectFileTypes[m.type]}</p>
             <div className="row my-1 card-footer w-100 justify-content-center">
                 {isOwner ? <>
                         <div className="col-6 text-center">

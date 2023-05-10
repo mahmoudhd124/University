@@ -6,7 +6,7 @@
 
 .main {
   position: relative;
-  height: 90vh;
+  min-height: 88vh;
 }
 
 .bg {
@@ -32,8 +32,11 @@
 
 .main > .container > h3 {
   margin-bottom: 30px;
-  color: rgba(202, 112, 127, 255);
+  margin-top: 60px;
+  color: rgb(56, 108, 238);
+  font-size: 3em;
 }
+
 
 .main > .container > button {
   display: block;
@@ -41,7 +44,7 @@
   min-height: 50px;
   padding: 13px 24px;
   font-family: 'Lucida Grande', 'Helvetica', sans-serif;
-  font-size: 16px;
+  font-size: 1.3em;
   line-height: 20px;
   font-weight: bold;
   text-transform: uppercase;
@@ -65,46 +68,45 @@
   background-size: 400%;
   background-position: 0% 0%;
 
-  & ::before {
-    content: '';
-    position: absolute;
-    left: -2px;
-    top: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 26px;
-    background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
-    background-size: 500%;
-    background-position: 0% 0%;
-    filter: blur(10px);
-    opacity: 0;
-    z-index: -1;
-    transition: opacity 0.2s;
-  }
 
-  & :hover {
-    animation: gradientRotate 2s infinite;
-
-    & ::before {
-      opacity: 1;
-      animation: gradientRotate 2s infinite;
-    }
-
-  }
-
-  & :active {
-    color: #c3c4d5;
-  }
-
-  & :focus {
-
-    & ::before {
-      opacity: 1;
-    }
-
-  }
 }
 
+.button2::before {
+
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 26px;
+  background-image: linear-gradient(90deg, #0065ff, #6942ef, #6554c0, #008cff, #0065ff, #6942ef);
+  background-size: 500%;
+  background-position: 0% 0%;
+  filter: blur(10px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.2s;
+}
+
+
+.button2:hover {
+  animation: gradientRotate 2s infinite;
+
+  .button2::before {
+    opacity: 1;
+    animation: gradientRotate 2s infinite;
+  }
+
+}
+
+.button2:active {
+  color: #c3c4d5;
+}
+
+.button2:focus::before {
+  opacity: 1;
+}
 
 .bg-img {
   opacity: 0.6;
@@ -126,9 +128,9 @@
 
 .site-logo {
   position: absolute;
-  top: 20%;
-  left: 63%;
-  translate: -50% 0;
+  top: 0;
+  right: 0;
+  translate: -5px 5px;
   width: 270px;
   object-fit: contain;
   border-radius: 20px;

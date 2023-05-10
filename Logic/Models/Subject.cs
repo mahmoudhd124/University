@@ -8,5 +8,5 @@ public class Subject
     public string Name { get; set; }
     public int Hours { get; set; }
     public DoctorSubject DoctorSubject { get; set; }
-    public IList<SubjectMaterial> SubjectMaterials { get; set; } = new List<SubjectMaterial>();
+    public IList<SubjectFiles> SubjectFiles { get; set; } = new List<SubjectFiles>();
 }

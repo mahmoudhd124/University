@@ -7,16 +7,17 @@ import {EditSubjectModel} from "../../Models/Subject/EditSubjectModel";
 export const subjectApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getSubjectByCode: builder.query<SubjectModel, number>({
-            query: arg => ({url:'subject/' + arg}),
+            query: arg => ({url: 'subject/' + arg}),
             providesTags: (result) => [{type: 'subject', id: result?.id}]
         }),
         getSubjectPage: builder.query<SubjectForPageModel[],
-            { pageIndex: number, pageSize: number, department: string | undefined, year: number | undefined }>({
+            { pageIndex: number, pageSize: number, department: string | undefined, year: number | undefined, namePrefix: string | undefined }>({
             query: args => ({
                 url: `subject/${args.pageIndex}/${args.pageSize}`,
                 params: {
                     'department': args.department,
-                    'year': args.year
+                    'year': args.year,
+                    'namePrefix':args.namePrefix
                 }
             }),
             providesTags: (result = []) => [

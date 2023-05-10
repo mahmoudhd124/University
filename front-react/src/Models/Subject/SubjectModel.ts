@@ -10,5 +10,6 @@ export interface SubjectModel {
     doctorId: string;
     doctorUsername: string;
     isOwner: boolean;
-    materials: SubjectMaterialModel[];
+    files: SubjectMaterialModel[];
+    totalNumberOfFilesRequired:number
 }

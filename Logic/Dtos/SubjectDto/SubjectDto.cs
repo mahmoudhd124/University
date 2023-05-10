@@ -1,4 +1,6 @@
-﻿namespace Logic.Dtos.SubjectDto;
+﻿using Logic.Models;
+
+namespace Logic.Dtos.SubjectDto;
 using SubjectMaterialDto;
 
 public class SubjectDto
@@ -12,5 +14,6 @@ public class SubjectDto
     public string DoctorId { get; set; }
     public string DoctorUsername { get; set; }
     public bool IsOwner { get; set; }
-    public IList<SubjectMaterialDto> Materials { get; set; }
+    public IList<SubjectFileDto> Files { get; set; }
+    public int TotalNumberOfFilesRequired { get; set; } = Enum.GetValues(typeof(SubjectFileTypes)).Length;
 }

@@ -69,6 +69,7 @@ const DoctorPage = () => {
                         <h3>{s.name}</h3>
                         <h3 className={'mt-1'}>{s.department}</h3>
                         <p>{s.code}</p>
+                        <h5 className={'mt-1'}><b>{s.numberOfFiles}</b> File Uploaded</h5>
                     </div>
                 ) : (
                     <>

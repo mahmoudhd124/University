@@ -12,13 +12,15 @@ const SubjectList = () => {
     const [page, setPage] = useState(Number(pageIndex ?? '0'))
     const [department, setDepartment] = useState<string>()
     const [year, setYear] = useState<number>()
+    const [namePrefix, setNamePrefix] = useState<string>()
     const departmentFilter = useRef() as React.MutableRefObject<HTMLInputElement>
     const yearFilter = useRef() as React.MutableRefObject<HTMLInputElement>
+    const nameFilter = useRef() as React.MutableRefObject<HTMLInputElement>
     const navigator = useNavigate()
     const loc = useLocation()
 
     const {data, isError, error} =
-        useGetSubjectPageQuery({pageIndex: page, pageSize: PAGE_SIZE, department, year})
+        useGetSubjectPageQuery({pageIndex: page, pageSize: PAGE_SIZE, department, year,namePrefix})
 
     const [remove, removeResult] = useDeleteSubjectMutation()
     const [idToRemove, setIdToRemove] = useState<number | null>(null)
@@ -73,6 +75,13 @@ const SubjectList = () => {
                 <h3>Subjects!</h3>
 
                 <div className="input-group flex-nowrap my-3">
+                    <span className="input-group-text" id="addon-wrapping">Name Prefix</span>
+                    <input type="text" className="form-control" placeholder="xxyyzz....." aria-label="Username"
+                           aria-describedby="addon-wrapping"
+                           ref={nameFilter}/>
+                </div>
+
+                <div className="input-group flex-nowrap my-3">
                     <span className="input-group-text" id="addon-wrapping">Department</span>
                     <input type="text" className="form-control" placeholder="cs,is,mm,it,..." aria-label="Username"
                            aria-describedby="addon-wrapping"
@@ -90,6 +99,7 @@ const SubjectList = () => {
                             onClick={e => {
                                 setDepartment(departmentFilter.current.value)
                                 setYear(+yearFilter.current.value == 0 ? undefined : +yearFilter.current.value)
+                                setNamePrefix(nameFilter.current.value)
                                 setPage(0)
                             }}
                     >Search

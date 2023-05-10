@@ -15,9 +15,9 @@ const AuthLayout = () => {
                             <Link to={'/auth/login'} className={`nav-link ${page == 'login' ? 'active' : ''}`}
                                   aria-current="true">Login</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to={'/auth/reg'} className={`nav-link ${page == 'reg' ? 'active' : ''}`}>Signup</Link>
-                        </li>
+                        {/*<li className="nav-item">*/}
+                        {/*    <Link to={'/auth/reg'} className={`nav-link ${page == 'reg' ? 'active' : ''}`}>Signup</Link>*/}
+                        {/*</li>*/}
                     </ul>
                 </div>
 

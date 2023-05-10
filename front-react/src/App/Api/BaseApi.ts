@@ -8,8 +8,8 @@ export interface AppError {
     message: string
 }
 
-export const BASE_URL = 'https://localhost:7035/api/'
-// export const BASE_URL = 'http://localhost:5016/api/'
+// export const BASE_URL = 'https://localhost:7035/api/'
+export const BASE_URL = 'http://localhost:5016/api/'
 
 export const sendDefualt = fetchBaseQuery({
     baseUrl: BASE_URL,
@@ -46,6 +46,6 @@ export const baseApi = createApi({
     reducerPath: 'api',
     baseQuery,
     tagTypes: ['user', 'doctor', 'subject'],
-    endpoints: builder => ({}),
+    endpoints: () => ({}),
     keepUnusedDataFor:0
 })

@@ -23,7 +23,8 @@ public class AutomapperProfile : Profile
                     Id = ds.SubjectId,
                     Department = ds.Subject.Department,
                     Code = ds.Subject.Code,
-                    Name = ds.Subject.Name
+                    Name = ds.Subject.Name,
+                    NumberOfFiles = ds.Subject.SubjectFiles.Count
                 })));
         CreateMap<Doctor, DoctorForPageDto>();
         CreateMap<Subject, SubjectForPageDto>();
@@ -35,13 +36,20 @@ public class AutomapperProfile : Profile
                 opt.MapFrom(src => src.DoctorSubject.DoctorId))
             .ForMember(dest => dest.DoctorUsername, opt =>
                 opt.MapFrom(src => src.DoctorSubject.Doctor.UserName))
-            .ForMember(dest => dest.Materials, opt =>
+            .ForMember(dest => dest.Files, opt =>
                 opt.MapFrom(src =>
-                    src.SubjectMaterials.Select(x => new SubjectMaterialDto
-                        { Name = x.Material, Id = x.Id, Date = x.Date, StoredName = x.StoredName })));
+                    src.SubjectFiles.Select(x => new SubjectFileDto
+                    {
+                        Name = x.FileName,
+                        Id = x.Id,
+                        Date = x.Date,
+                        StoredName = x.StoredName,
+                        Type = x.Type,
+                        SubjectId = x.SubjectId
+                    })));
         CreateMap<EditSubjectDto, Subject>();
-        CreateMap<SubjectMaterial, SubjectMaterialDto>()
+        CreateMap<SubjectFiles, SubjectFileDto>()
             .ForMember(dest => dest.Name, opt =>
-                opt.MapFrom(src => src.Material));
+                opt.MapFrom(src => src.FileName));
     }
 }

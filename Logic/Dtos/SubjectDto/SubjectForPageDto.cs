@@ -6,4 +6,5 @@ public class SubjectForPageDto
     public string Department { get; set; }
     public int Code { get; set; }
     public string Name { get; set; }
+    public int NumberOfFiles { get; set; }
 }

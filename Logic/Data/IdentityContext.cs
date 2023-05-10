@@ -11,7 +11,7 @@ public class IdentityContext : IdentityDbContext<User, Role, string>
     public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<Subject> Subjects { get; set; }
-    public DbSet<SubjectMaterial> SubjectMaterials { get; set; }
+    public DbSet<SubjectFiles> SubjectMaterials { get; set; }
     public DbSet<DoctorSubject> DoctorSubjects { get; set; }
 
     public IdentityContext(DbContextOptions options) : base(options)
@@ -26,7 +26,7 @@ public class IdentityContext : IdentityDbContext<User, Role, string>
         builder.ApplyConfiguration(new DoctorConfiguration());
         builder.ApplyConfiguration(new SubjectConfiguration());
         builder.ApplyConfiguration(new DoctorSubjectConfiguration());
-        builder.ApplyConfiguration(new SubjectMaterialConfiguration());
+        builder.ApplyConfiguration(new SubjectFileConfiguration());
         base.OnModelCreating(builder);
     }
 }

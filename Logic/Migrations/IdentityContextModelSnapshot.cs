@@ -228,7 +228,7 @@ namespace Logic.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("Logic.Models.SubjectMaterial", b =>
+            modelBuilder.Entity("Logic.Models.SubjectFiles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,7 +239,7 @@ namespace Logic.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Material")
+                    b.Property<string>("FileName")
                         .IsRequired()
                         .HasMaxLength(511)
                         .HasColumnType("nvarchar(511)");
@@ -250,6 +250,9 @@ namespace Logic.Migrations
                         .HasColumnType("nvarchar(254)");
 
                     b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -413,10 +416,10 @@ namespace Logic.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Logic.Models.SubjectMaterial", b =>
+            modelBuilder.Entity("Logic.Models.SubjectFiles", b =>
                 {
                     b.HasOne("Logic.Models.Subject", "Subject")
-                        .WithMany("SubjectMaterials")
+                        .WithMany("SubjectFiles")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -479,7 +482,7 @@ namespace Logic.Migrations
                 {
                     b.Navigation("DoctorSubject");
 
-                    b.Navigation("SubjectMaterials");
+                    b.Navigation("SubjectFiles");
                 });
 
             modelBuilder.Entity("Logic.Models.Doctor", b =>

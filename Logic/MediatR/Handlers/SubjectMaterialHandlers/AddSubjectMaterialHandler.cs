@@ -22,24 +22,31 @@ public class AddSubjectMaterialHandler : IRequestHandler<AddSubjectMaterialComma
 
     public async Task<Response<bool>> Handle(AddSubjectMaterialCommand request, CancellationToken cancellationToken)
     {
-        var (subjectId, fileStream, fileName, userId) = request;
+        var (addSubjectMaterialDto, fileStream, fileName, userId) = request;
 
         var subject = await _context.Subjects
-            .FirstOrDefaultAsync(s => s.Id == subjectId, cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == addSubjectMaterialDto.SubjectId, cancellationToken);
         if (subject == null)
             return Response<bool>.Failure(SubjectErrors.WrongId);
 
         var isAssigned = await _context.DoctorSubjects
-            .AnyAsync(x => x.DoctorId.Equals(userId) && x.SubjectId == subjectId,
+            .AnyAsync(x => x.DoctorId.Equals(userId) && x.SubjectId == addSubjectMaterialDto.SubjectId,
                 cancellationToken);
         if (isAssigned == false)
             return Response<bool>.Failure(SubjectMaterialErrors.UnAuthorizedAdd);
 
+        var isTypeFound = await _context.SubjectMaterials
+            .AnyAsync(s => s.SubjectId == addSubjectMaterialDto.SubjectId && s.Type == addSubjectMaterialDto.Type,
+                cancellationToken);
+        if (isTypeFound)
+            return Response<bool>.Failure(SubjectMaterialErrors.RepeatedFileOnTheSameType);
+
         var newFileName = $"{Guid.NewGuid()}-{userId}-{fileName}";
-        subject.SubjectMaterials.Add(new SubjectMaterial
+        subject.SubjectFiles.Add(new SubjectFiles
         {
-            Material = fileName,
-            StoredName = newFileName
+            FileName = fileName,
+            StoredName = newFileName,
+            Type = addSubjectMaterialDto.Type
         });
         await _context.SaveChangesAsync(cancellationToken);
 

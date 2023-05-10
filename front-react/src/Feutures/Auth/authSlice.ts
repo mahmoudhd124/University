@@ -19,7 +19,7 @@ const authSlice = createSlice({
             state.tokenExp = (jwtDecode(action.payload.token!) as { exp: number })?.exp
         },
         logout: (state) => {
-            localStorage.removeItem('staylogin')
+            localStorage.removeItem('stayLogin')
             state.roles = null
             state.token = null
             state.tokenExp = null

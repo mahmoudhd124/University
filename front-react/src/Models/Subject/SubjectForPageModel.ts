@@ -3,4 +3,5 @@ export interface SubjectForPageModel {
     department: string;
     code: number;
     name: string;
+    numberOfFiles:number
 }

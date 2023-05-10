@@ -5,5 +5,4 @@ using MediatR;
 namespace Logic.MediatR.Commands.SubjectMaterialCommands;
 
 public record AddSubjectMaterialCommand
-(int SubjectId, Stream FileStream, string FileName,
-    string UserId) : IRequest<Response<bool>>;
+(AddSubjectMaterialDto AddSubjectMaterialDto, Stream FileStream, string FileName, string UserId) : IRequest<Response<bool>>;

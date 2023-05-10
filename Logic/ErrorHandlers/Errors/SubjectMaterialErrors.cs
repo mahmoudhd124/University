@@ -10,4 +10,7 @@ public static class SubjectMaterialErrors
 
     public static readonly Error WrongId = new("SubjectMaterialErrors.WrongId",
         "The id is wrong");
+
+    public static readonly Error RepeatedFileOnTheSameType = new("SubjectMaterialErrors.RepeatedFileOnTheSameType",
+        "The file type you want to add is already has a file,remove he file first before assign another file to the same type");
 }
