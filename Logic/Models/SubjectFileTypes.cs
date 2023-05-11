@@ -3,5 +3,8 @@
 public enum SubjectFileTypes
 {
     MidtermExam,
-    FinalExam
+    FinalExam,
+    TypeThree,
+    TypeFour,
+    TypeFive
 }

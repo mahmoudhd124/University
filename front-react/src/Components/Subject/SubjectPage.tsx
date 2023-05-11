@@ -10,6 +10,8 @@ import useAppSelector from "../../Hookes/useAppSelector";
 import {useAssignDoctorToSubjectMutation, useGetDoctorPageQuery} from "../../App/Api/DoctorApi";
 import SubjectMaterials from "./SubjectMaterials";
 import Forbidden403 from "../Global/Forbidden/Forbidden403";
+import ProgressLine from "./ProgressBar/ProgressLine";
+import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 
 const SubjectPage = () => {
     const {code} = useParams()
@@ -67,6 +69,18 @@ const SubjectPage = () => {
         else
             return <h3>Loading</h3>
     }
+
+    const line = <ProgressLine label="Files Uploaded"
+                               text={`${subject.files
+                                   .map(f => f.type.valueOf())
+                                   .reduce((prev, curr ) => prev.some(e => e == curr) ? prev : [...prev,curr], [] as number[])
+                                   .length}/${Object.keys(SubjectFileTypes).length / 2}`}
+                               visualParts={[{
+                                   percentage: `${subject.files.length / Object.keys(SubjectFileTypes).length * 200}%`,
+                                   color: 'blue'
+                               }]}
+                               backgroundColor={'lightblue'}
+    />
 
     return (
         <div className="container" ref={p}>
@@ -135,7 +149,11 @@ const SubjectPage = () => {
                             </div>
                         </div>
                     </div>)}
-                    <hr/>
+
+                    <div className="my-2">
+                        {line}
+                    </div>
+
                     <SubjectMaterials materials={subject?.files}
                                       isOwner={subject.isOwner}
                                       id={subject?.id!}

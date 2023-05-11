@@ -1,6 +1,9 @@
 enum SubjectFileTypes {
-    MidtermExam = 0,
-    FinalExam = 1
+    MidtermExam,
+    FinalExam,
+    TypeThree,
+    TypeFour,
+    TypeFive
 }
 
 export default SubjectFileTypes
