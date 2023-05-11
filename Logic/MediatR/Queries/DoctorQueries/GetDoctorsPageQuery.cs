@@ -5,4 +5,4 @@ using MediatR;
 namespace Logic.MediatR.Queries.DoctorQueries;
 
 public record GetDoctorsPageQuery
-    (int PageSize, int PageIndex, string UsernamePrefix) : IRequest<Response<IEnumerable<DoctorForPageDto>>>;
+    (int PageSize, int PageIndex, string UsernamePrefix,bool? HasSubject) : IRequest<Response<IEnumerable<DoctorForPageDto>>>;

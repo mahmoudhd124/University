@@ -70,13 +70,15 @@ const SubjectPage = () => {
             return <h3>Loading</h3>
     }
 
+    const numberOfFileTypes = subject.files
+        .map(f => f.type.valueOf())
+        .reduce((prev, curr ) => prev.some(e => e == curr) ? prev : [...prev,curr], [] as number[])
+        .length
+    
     const line = <ProgressLine label="Files Uploaded"
-                               text={`${subject.files
-                                   .map(f => f.type.valueOf())
-                                   .reduce((prev, curr ) => prev.some(e => e == curr) ? prev : [...prev,curr], [] as number[])
-                                   .length}/${Object.keys(SubjectFileTypes).length / 2}`}
+                               text={`${numberOfFileTypes}/${Object.keys(SubjectFileTypes).length / 2}`}
                                visualParts={[{
-                                   percentage: `${subject.files.length / Object.keys(SubjectFileTypes).length * 200}%`,
+                                   percentage: `${numberOfFileTypes / Object.keys(SubjectFileTypes).length * 200}%`,
                                    color: 'blue'
                                }]}
                                backgroundColor={'lightblue'}

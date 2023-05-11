@@ -4,6 +4,7 @@ import {Alert} from 'react-bootstrap'
 import useGetAppError from "../../Hookes/useGetAppError"
 import './DoctorPage.css'
 import DoctorField from "./DoctorField";
+import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 
 const DoctorPage = () => {
     const {id} = useParams()
@@ -16,7 +17,7 @@ const DoctorPage = () => {
         for (let i = 0; i < 4; i++) {
             s.push(
                 <div key={i}
-                    className={`col-11 col-sm-8 col-md-5 col-lg-3 d-flex flex-column align-items-center
+                     className={`col-11 col-sm-8 col-md-5 col-lg-3 d-flex flex-column align-items-center
                      border border-3 rounded-3 p-3 text-center`}>
                     <h3 className={'field__looding'}></h3>
                     <h3 className={'mt-1 field__looding'}></h3>
@@ -42,6 +43,11 @@ const DoctorPage = () => {
         </div>
     }
 
+    const per = (data?.subjects
+        .map(s => s.numberOfFilesTypes)
+        .filter(n => n == (Object.keys(SubjectFileTypes).length / 2))
+        .length ?? 1) / (data?.subjects.length ?? 1) * 100
+
     return (
         <div className="container">
             {isError && <Alert variant="danger" className={'text-center'}>{useGetAppError(error)?.message}</Alert>}
@@ -61,6 +67,11 @@ const DoctorPage = () => {
                 <DoctorField title={'National Number:'} data={data?.nationalNumber!}/>
             </div>
 
+            <div className="text-primary">Has Done</div>
+            <div className="progress">
+                <div className="progress-bar" style={{width: `${per}%`}}>{per}%</div>
+            </div>
+
             <div className="row justify-content-center justify-content-sm-around gap-3">
                 {data?.subjects?.length ?? 0 > 0 ? data?.subjects.map(s =>
                     <div key={s.id}
@@ -69,7 +80,7 @@ const DoctorPage = () => {
                         <h3>{s.name}</h3>
                         <h3 className={'mt-1'}>{s.department}</h3>
                         <p>{s.code}</p>
-                        <h5 className={'mt-1'}><b>{s.numberOfFiles}</b> File Uploaded</h5>
+                        <h5 className={'mt-1'}><b>{s.numberOfFilesTypes}</b> File Type Uploaded</h5>
                     </div>
                 ) : (
                     <>

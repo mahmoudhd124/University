@@ -1,16 +1,16 @@
 ﻿using Logic.Dtos.SubjectMaterialDto;
 using Logic.MediatR.Commands.SubjectMaterialCommands;
 using Logic.MediatR.Queries.SubjectMaterialsQueries;
+using Logic.Models.IdentityModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
-[Authorize(Roles = "Doctor")]
+[Authorize(Roles = "Admin,Doctor")]
 public class SubjectFileController : BaseController
 {
     [HttpGet]
-    // [AllowAnonymous]
     [Route("{name}/{returnName?}")]
     public async Task<ActionResult> Get(string name, string? returnName)
     {
@@ -22,12 +22,14 @@ public class SubjectFileController : BaseController
     }
 
     [HttpPost]
-    public async Task<ActionResult> Add( [FromForm] IFormFile file,
+    [Authorize(Roles = "Doctor")]
+    public async Task<ActionResult> Add([FromForm] IFormFile file,
         [FromForm] AddSubjectMaterialDto addSubjectMaterialDto) =>
         Return(await Mediator.Send(new AddSubjectMaterialCommand(
             addSubjectMaterialDto, file.OpenReadStream(), file.FileName, Id)));
 
     [HttpDelete]
+    [Authorize(Roles = "Doctor")]
     [Route("{id:int}")]
     public async Task<ActionResult> Delete(int id) =>
         Return(await Mediator.Send(new DeleteSubjectMaterialCommand(id, Id)));

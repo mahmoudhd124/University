@@ -40,8 +40,13 @@ export const useAddSubjectMaterialMutation = (dispatch: AppDispatch,api:AxiosIns
         return response
     }
 }
+export const useDownloadSubjectMaterialMutation = (api:AxiosInstance) => {
+    return async (name:string) => {
+        return await api.get<Blob>(BASE_URL + 'subjectFile/'+name,)
+    }
+}
 
-export const SubjectMaterialApi = 'https://localhost:7035/Api/SubjectFile/'
+// export const SubjectMaterialApi = 'https://localhost:7035/Api/SubjectFile/'
 export const {
     // useAddSubjectMaterialMutation,
     useDeleteSubjectMaterialMutation,

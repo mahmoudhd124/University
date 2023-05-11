@@ -2,7 +2,8 @@ import React from 'react';
 import './SubjectForList.css'
 import {SubjectForPageModel} from "../../Models/Subject/SubjectForPageModel";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faTrash,faX,faCheck} from "@fortawesome/free-solid-svg-icons";
+import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 
 interface Props {
     subject: SubjectForPageModel,
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const SubjectForList = ({subject: s, onClickHandler, onDelete}: Props) => {
+    const isComplete = s.numberOfFilesTypes == Object.keys(SubjectFileTypes).length / 2
     return (
         <div
             className={'col-11 col-sm-8 col-md-5 col-lg-3 d-flex flex-column align-items-center border text-center border-3 rounded-3 subject'}
@@ -19,7 +21,9 @@ const SubjectForList = ({subject: s, onClickHandler, onDelete}: Props) => {
             <h3>{s.name}</h3>
             <h3 className={'mt-1'}>{s.department}</h3>
             <p>{s.code}</p>
-            <h5 className={'mt-1'}><b>{s.numberOfFiles}</b> File Upload</h5>
+            <h5 className={'mt-1'}><b>{s.numberOfFilesTypes}</b> File Type Upload</h5>
+            {isComplete && <h5 className={'text-primary'}><FontAwesomeIcon icon={faCheck}/> Completed</h5>}
+            {!isComplete && <h5 className={'text-danger'}><FontAwesomeIcon icon={faX}/> Not Completed</h5>}
             <div className={'remove-subject'}
                  onClick={onDelete}
             >

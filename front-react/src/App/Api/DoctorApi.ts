@@ -14,9 +14,12 @@ export const DoctorApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['doctor']
         }),
-        getDoctorPage: builder.query<DoctorForPageModel[], { pageIndex: number, pageSize: number, usernamePrefix: string }>({
+        getDoctorPage: builder.query<DoctorForPageModel[], { pageIndex: number, pageSize: number, usernamePrefix: string, hasSubject?: boolean | null }>({
             query: args => ({
-                url: `doctor/${args.pageIndex}/${args.pageSize}/${args.usernamePrefix}`
+                url: `doctor/${args.pageIndex}/${args.pageSize}/${args.usernamePrefix}`,
+                params: {
+                    hasSubject: args.hasSubject ?? ''
+                }
             }),
             providesTags: (result = []) => [
                 'doctor',

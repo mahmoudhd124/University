@@ -3,9 +3,9 @@ import TimeAgo from "../Global/TimeAgo";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {SubjectMaterialModel} from "../../Models/SubjectMaterial/SubjectMaterialModel";
-import {SubjectMaterialApi,} from "../../App/Api/SubjectMaterialApi";
 import useAxiosApi from "../../Hookes/useAxiosApi";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
+import {useDownloadSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
 
 interface Props {
     material: SubjectMaterialModel,
@@ -17,8 +17,9 @@ interface Props {
 }
 
 const SubjectMaterial = ({material: m, isOwner, removeHandler, api}: Props) => {
+    const download = useDownloadSubjectMaterialMutation(api)
     const handleDownload = () => {
-        api<Blob>(SubjectMaterialApi + `${m.storedName}`)
+        download(m.storedName)
             .then((response) => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
