@@ -2,6 +2,7 @@
 using Logic.ErrorHandlers;
 using Logic.ErrorHandlers.Errors;
 using Logic.MediatR.Commands.DoctorCommands;
+using Logic.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,8 @@ public class DeleteDoctorHandler : IRequestHandler<DeleteDoctorCommand, Response
         if (doctor == null)
             return Response<bool>.Failure(UserErrors.WrongId);
 
+        var messages = _context.Messages.Where(m => m.SenderId.Equals(id));
+        _context.Messages.RemoveRange(messages);
         _context.Doctors.Remove(doctor);
         await _context.SaveChangesAsync(cancellationToken);
 

@@ -1,7 +1,6 @@
 ﻿using Logic.Dtos.SubjectMaterialDto;
 using Logic.MediatR.Commands.SubjectMaterialCommands;
 using Logic.MediatR.Queries.SubjectMaterialsQueries;
-using Logic.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

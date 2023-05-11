@@ -34,7 +34,7 @@ public static class ProgramConfigurations
         services.AddCors(opt => opt.AddPolicy("allowLocalAtPort5173", builder =>
         {
             builder
-                .WithOrigins("http://localhost:5174", "http://localhost:5173/")
+                .WithOrigins("http://localhost:5173", "http://localhost:5174")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()

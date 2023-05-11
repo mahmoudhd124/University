@@ -13,6 +13,7 @@ public class IdentityContext : IdentityDbContext<User, Role, string>
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<SubjectFiles> SubjectMaterials { get; set; }
     public DbSet<DoctorSubject> DoctorSubjects { get; set; }
+    public DbSet<Message> Messages { get; set; }
 
     public IdentityContext(DbContextOptions options) : base(options)
     {
@@ -27,6 +28,7 @@ public class IdentityContext : IdentityDbContext<User, Role, string>
         builder.ApplyConfiguration(new SubjectConfiguration());
         builder.ApplyConfiguration(new DoctorSubjectConfiguration());
         builder.ApplyConfiguration(new SubjectFileConfiguration());
+        builder.ApplyConfiguration(new MessageConfiguration());
         base.OnModelCreating(builder);
     }
 }
