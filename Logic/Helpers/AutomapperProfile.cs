@@ -1,6 +1,7 @@
 using AutoMapper;
 using Logic.Dtos.AuthDto;
 using Logic.Dtos.DoctorDto;
+using Logic.Dtos.MessageDto;
 using Logic.Dtos.SubjectDto;
 using Logic.Dtos.SubjectMaterialDto;
 using Logic.Models;
@@ -76,5 +77,9 @@ public class AutomapperProfile : Profile
         CreateMap<SubjectFiles, SubjectFileDto>()
             .ForMember(dest => dest.Name, opt =>
                 opt.MapFrom(src => src.FileName));
+
+        CreateMap<Message, MessageDto>();
+        CreateMap<Message, MessageForReceivedListDto>();
+        CreateMap<Message, MessageForSendListDto>();
     }
 }
