@@ -13,4 +13,5 @@ public class DoctorDto
     public string NationalNumber { get; set; }
     public bool IsOwner { get; set; }
     public IList<SubjectForPageDto> Subjects { get; set; }
+    public bool IsComplete { get; set; }
 }

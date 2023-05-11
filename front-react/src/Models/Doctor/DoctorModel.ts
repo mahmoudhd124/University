@@ -10,4 +10,5 @@ export interface DoctorModel {
     nationalNumber: string;
     isOwner:boolean;
     subjects: SubjectForPageModel[];
+    isComplete:boolean
 }

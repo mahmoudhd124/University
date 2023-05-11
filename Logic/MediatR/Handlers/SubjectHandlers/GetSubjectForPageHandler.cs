@@ -30,7 +30,9 @@ public class
         if (year is < 1 or > 9)
             return Response<IEnumerable<SubjectForPageDto>>.Failure(SubjectErrors.InvalidYear);
 
-        var subjectDtos = _context.Subjects.AsQueryable();
+        var subjectDtos = _context.Subjects
+            .Include(s => s.SubjectFiles)
+            .AsQueryable();
 
         if (string.IsNullOrWhiteSpace(department) == false)
             subjectDtos = subjectDtos
