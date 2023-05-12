@@ -18,8 +18,70 @@
     animation: 1s shine linear infinite;
 }
 
-.button__looding{
+.button__looding {}
 
+.container .doctor {
+    margin-top: 10px;
+    border: 2px solid #cccccc74;
+    padding: 20px;
+    border-radius: 5px;
+
+}
+
+.container .profile-tab-nav {
+    margin: 10px;
+
+}
+
+.container .doctor h3 {
+    font-family: Roboto;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    white-space: pre;
+    margin-right: 100px;
+}
+
+.container .info {
+    font-family: Roboto;
+    font-size: large;
+    margin-top: 10px;
+
+}
+
+.container .info p {
+    font-family: Roboto;
+    text-decoration: none;
+    border: 1px solid #cccccc74;
+    padding: 2px 0px;
+    white-space: pre;
+
+}
+
+.container .profile-tab-nav .row .btn-alarm {
+    border: none;
+    color: red;
+    white-space: pre;
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+.container .profile-tab-nav .row .btn-alarm:hover {
+    font-size: 20px;
+
+}
+
+.img-circle img {
+    height: 200px;
+    width: 200px;
+    border-radius: 100%;
+    border: 5px solid #fff;
+}
+
+.shadow {
+    box-shadow: 0 2px 10px lightblue !important;
 }
 
 @keyframes shine {
@@ -27,4 +89,3 @@
         background-position-x: -200%;
     }
 }
-
