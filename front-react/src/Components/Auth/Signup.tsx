@@ -5,7 +5,7 @@ import { useSignupMutation } from "../../App/Api/AuthApi";
 import { useNavigate } from "react-router-dom";
 import useGetAppError from "../../Hookes/useGetAppError";
 import { useEffect } from "react";
-import {BASE_URL} from "../../App/Api/BaseApi";
+import { BASE_URL } from "../../App/Api/BaseApi";
 
 const Signup = () => {
     const [signup, result] = useSignupMutation()
@@ -68,17 +68,17 @@ const Signup = () => {
 
     return (
         <form onSubmit={formik.handleSubmit}
-              className={'d-flex flex-column p-3 mx-auto border border-3 rounded rounded-3' +
-                  ' shadow' +
-                  ' gap-2'}
-              style={{ height: 'fit-content' }}>
+            className={'d-flex flex-column p-3 mx-auto border border-3 rounded rounded-3' +
+                ' shadow' +
+                ' gap-2'}
+            style={{ height: 'fit-content' }}>
             <p className={'text-center h5 text-danger'}>{result.isError && useGetAppError(result.error)?.message}</p>
             <p className={'text-center h5 text-primary'}>{result.isSuccess && 'Registration Complete Successfully'}</p>
             <div className={'row d-flex justify-content-between align-items-end'}>
                 <div className={'col-12 col-sm-6'}>
                     {(formik.touched.firstName && formik.errors.firstName) ?
                         <label htmlFor="fname"
-                               className={'col-form-label text-danger'}>{formik.errors.firstName}</label> :
+                            className={'col-form-label text-danger'}>{formik.errors.firstName}</label> :
                         <label htmlFor="fname" className={'col-form-label'}>First Name</label>}
                     <input
                         type="text"
@@ -93,12 +93,12 @@ const Signup = () => {
                 <div className={'col-12 col-sm-6'}>
                     {(formik.touched.lastName && formik.errors.lastName) ?
                         <label htmlFor="lname"
-                               className={'col-form-label text-danger'}>{formik.errors.lastName}</label> :
+                            className={'col-form-label text-danger'}>{formik.errors.lastName}</label> :
                         <label htmlFor="lname" className={'col-form-label'}>Last Name</label>}
                     <input
                         type="text"
                         className={`form-control ${(formik.touched.lastName && formik.errors.lastName) && 'border-1' +
-                        ' border-danger'}`}
+                            ' border-danger'}`}
                         id={'lname'}
                         name={'lastName'}
                         onChange={formik.handleChange}
@@ -112,12 +112,12 @@ const Signup = () => {
                 <div className={'col-12 col-sm-6'}>
                     {(formik.touched.username && formik.errors.username) ?
                         <label htmlFor="uname"
-                               className={'col-form-label text-danger'}>{formik.errors.username}</label> :
+                            className={'col-form-label text-danger'}>{formik.errors.username}</label> :
                         <label htmlFor="uname" className={'col-form-label'}>Username</label>}
                     <input
                         type="text"
                         className={`form-control ${(formik.touched.username && formik.errors.username) && 'border-1' +
-                        ' border-danger'}`}
+                            ' border-danger'}`}
                         id={'uname'}
                         name={'username'}
                         onChange={formik.handleChange}
@@ -128,12 +128,12 @@ const Signup = () => {
                 <div className={'col-12 col-sm-6'}>
                     {(formik.touched.phone && formik.errors.phone) ?
                         <label htmlFor="phone"
-                               className={'col-form-label text-danger'}>{formik.errors.phone}</label> :
+                            className={'col-form-label text-danger'}>{formik.errors.phone}</label> :
                         <label htmlFor="phone" className={'col-form-label'}>Phone</label>}
                     <input
                         type="text"
                         className={`form-control ${(formik.touched.phone && formik.errors.phone) && 'border-1' +
-                        ' border-danger'}`}
+                            ' border-danger'}`}
                         id={'phone'}
                         name={'phone'}
                         onChange={formik.handleChange}
@@ -146,12 +146,12 @@ const Signup = () => {
             <div>
                 {(formik.touched.email && formik.errors.email) ?
                     <label htmlFor="email"
-                           className={'col-form-label text-danger'}>{formik.errors.email}</label> :
+                        className={'col-form-label text-danger'}>{formik.errors.email}</label> :
                     <label htmlFor="email" className={'col-form-label'}>Email</label>}
                 <input
                     type="email"
                     className={`form-control ${(formik.touched.email && formik.errors.email) && 'border-1' +
-                    ' border-danger'}`}
+                        ' border-danger'}`}
                     id={'email'}
                     name={'email'}
                     onChange={formik.handleChange}
@@ -164,12 +164,12 @@ const Signup = () => {
                 <div className={'col-12 col-sm-6'}>
                     {(formik.touched.password && formik.errors.password) ?
                         <label htmlFor="password"
-                               className={'col-form-label text-danger'}>{formik.errors.password}</label> :
+                            className={'col-form-label text-danger'}>{formik.errors.password}</label> :
                         <label htmlFor="password" className={'col-form-label'}>Password</label>}
                     <input
                         type="password"
                         className={`form-control ${(formik.touched.password && formik.errors.password) && 'border-1' +
-                        ' border-danger'}`}
+                            ' border-danger'}`}
                         id={'pass'}
                         name={'password'}
                         onChange={formik.handleChange}
@@ -180,12 +180,12 @@ const Signup = () => {
                 <div className={'col-12 col-sm-6'}>
                     {(formik.touched.confirmPassword && formik.errors.confirmPassword) ?
                         <label htmlFor="con-pass"
-                               className={'col-form-label text-danger'}>{formik.errors.confirmPassword}</label> :
+                            className={'col-form-label text-danger'}>{formik.errors.confirmPassword}</label> :
                         <label htmlFor="con-pass" className={'col-form-label'}>Confirm Password</label>}
                     <input
                         type="password"
                         className={`form-control ${(formik.touched.confirmPassword && formik.errors.confirmPassword) && 'border-1' +
-                        ' border-danger'}`}
+                            ' border-danger'}`}
                         id={'con-pass'}
                         name={'confirmPassword'}
                         onChange={formik.handleChange}
