@@ -75,7 +75,8 @@ const DoctorPage = () => {
                             <div className=" col-lg-3">
                                 <button className={'btn-alarm w-100'}
                                     onClick={e => navigator(`/message/send/${data?.id}/${data?.username}`)}
-                                ><img src="../../../public/Images/alarm.png" style={{ width: '30px', backgroundColor: "#fff", height: "30px", marginRight: "10px" }}></img>Send Alarm</button>
+                                ><img src="../../../public/Images/alarm.png" style={{ width: '30px', backgroundColor: "#fff", height: "30px", marginRight: "10px" }}></img>Send Alarm
+                                </button>
                             </div>
                         </div>}
                     </div>
@@ -97,6 +98,14 @@ const DoctorPage = () => {
                         </div>
                     </div>
 
+                    {isAdmin && <div className="row justify-content-center">
+                        <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 btn btn-primary my-3"
+                            onClick={e => navigator(`/doctor/report/${data?.id}`, { state: { from: loc } })}
+                        >
+                            Generate Report
+                        </div>
+                    </div>}
+
                     <div className="row justify-content-center justify-content-sm-around gap-3">
                         {data?.subjects?.length ?? 0 > 0 ? data?.subjects.map(s =>
                             <div key={s.id}
@@ -116,12 +125,31 @@ const DoctorPage = () => {
                         )}
                     </div>
                 </div>
-
+                <div className="row justify-content-center justify-content-sm-around gap-3">
+                    {data?.subjects?.length ?? 0 > 0 ? data?.subjects.map(s =>
+                        <div key={s.id}
+                            className={'col-11 col-sm-8 col-md-5 col-lg-3 d-flex flex-column align-items-center border text-center border-3 rounded-3 subject'}
+                            onClick={e => navigator('/subject/' + s.code, { state: { from: loc } })}>
+                            <h3>{s.name}</h3>
+                            <h3 className={'mt-1'}>{s.department}</h3>
+                            <p>{s.code}</p>
+                            <h5 className={'mt-1'}><b>{s.numberOfFilesTypes}</b> File Type Uploaded</h5>
+                        </div>
+                    ) : (
+                        <>
+                            <h3 className='text-center mt-5 text-danger'>No Subjects Assigned!!</h3>
+                            <p className='text-center text-danger'>
+                                if you think that is wrong please contact the admin</p>
+                        </>
+                    )}
+                </div>
             </div>
 
-
-
         </div>
+
+
+
+        </div >
     )
 }
 

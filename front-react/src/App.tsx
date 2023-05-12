@@ -23,6 +23,9 @@ import SendMessage from "./Components/Message/SendMessage";
 import SentMessages from "./Components/Message/SentMessages";
 import MessageLayout from "./Components/Message/MessageLayout";
 import InboxMessages from "./Components/Message/InboxMessages";
+import Message from "./Components/Message/Message";
+import SubjectReport from "./Components/Subject/SubjectReport";
+import DoctorReport from "./Components/Doctor/DoctorReport";
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -66,6 +69,7 @@ const App = () => {
                 <Route path={'doctor'} element={<RouteProtector allowedRoles={['admin']}/>}>
                     <Route path={'Add'} element={<AddDoctor/>}/>
                     <Route path={'List/:pageIndex'} element={<DoctorsList/>}/>
+                    <Route path={'Report/:id'} element={<DoctorReport/>}/>
                 </Route>
 
                 <Route path={'doctor'} element={<RouteProtector allowedRoles={['doctor']}/>}>
@@ -82,6 +86,7 @@ const App = () => {
                     <Route path={'Add'} element={<AddSubject/>}/>
                     <Route path={'List/:pageIndex'} element={<SubjectList/>}/>
                     <Route path={'Edit/:code'} element={<EditSubject/>}/>
+                    <Route path={'Report/:id'} element={<SubjectReport/>}/>
                 </Route>
 
                 <Route path={'subject'} element={<RouteProtector allowedRoles={[]}/>}>
@@ -93,6 +98,7 @@ const App = () => {
                     <Route element={<MessageLayout/>}>
                         <Route path={'sent'} element={<SentMessages/>}/>
                         <Route path={'inbox'} element={<InboxMessages/>}/>
+                        <Route path={':id'} element={<Message/>}/>
                     </Route>
                 </Route>
 
