@@ -39,6 +39,7 @@ const Navbar = () => {
                             <ul className="dropdown-menu">
                                 <li><Link to={'/doctor/list/0'} className="dropdown-item" ><img src="../../../public/Images/doctor.png" style={styleImg} />Doctors</Link></li>
                                 <li><Link to={'/subject/list/0'} className="dropdown-item" > <img src="../../../public/Images/material.png" style={styleImg} />Courses</Link></li>
+                                <li><Link to={'/message/inbox'} className="dropdown-item" > <img src="../../../public/Images/mail.png" style={styleImg} />Mails</Link></li>
                             </ul>
                         </li>}
                         {token == null ?

@@ -1,7 +1,7 @@
 ﻿import {useGetSendMessageQuery} from "../../App/Api/MessageApi";
 import {useState} from "react";
 import Pagination from "../Pagination";
-import {Link} from "react-router-dom";
+import TimeAgo from "../Global/TimeAgo";
 
 const SentMessages = () => {
     const pageSize = 10
@@ -14,37 +14,24 @@ const SentMessages = () => {
     return (
         <>
             <table className="table table-hover">
-                <tbody>
+                <thead>
                 <tr>
-                    <td className="mail-select">
-                        <label className="cr-styled">
-                            <input type="checkbox"/><i className="fa"></i>
-                        </label>
-                    </td>
-                    <td className="mail-rateing">
-                        <i className="fa fa-star"></i>
-                    </td>
-                    <td>
-                        <a href="##email-read.html">Google Inc</a>
-                    </td>
-                    <td>
-                        <a href="##email-read.html"><i
-                            className="fa fa-circle text-info m-r-15"></i>Lorem ipsum dolor sit
-                            amet, consectetuer adipiscing elit</a>
-                    </td>
-                    <td>
-                        <i className="fa fa-paperclip"></i>
-                    </td>
-                    <td className="text-right">
-                        07:23 AM
-                    </td>
+                    <th>To</th>
+                    <th>Titel</th>
+                    <th>#</th>
                 </tr>
+                </thead>
+                <tbody>
+                {data?.map(m => <tr key={m.id}>
+                    <td>{m.receiverUsername}</td>
+                    <td>{m.title}</td>
+                    <td><TimeAgo timestamp={m.date}/></td>
+                </tr>)}
                 </tbody>
             </table>
             <Pagination page={page} setPage={setPage} hasNext={(data?.length ?? -1) < pageSize - 1}/>
         </>
-    )
-        ;
+    );
 };
 
 export default SentMessages;

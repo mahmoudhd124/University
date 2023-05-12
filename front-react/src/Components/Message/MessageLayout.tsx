@@ -5,7 +5,7 @@ const MessageLayout = () => {
     const pathNames = useLocation().pathname.split('/')
     const lastPath = pathNames[pathNames.length - 1]
     return (
-        <main>
+        <main className={'my-3'}>
             <div className="container">
                 <div className="row justify-content-between">
                     <div className="col-md-3">
