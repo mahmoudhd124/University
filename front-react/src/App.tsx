@@ -23,6 +23,7 @@ import SendMessage from "./Components/Message/SendMessage";
 import SentMessages from "./Components/Message/SentMessages";
 import MessageLayout from "./Components/Message/MessageLayout";
 import InboxMessages from "./Components/Message/InboxMessages";
+import Message from "./Components/Message/Message";
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -93,6 +94,7 @@ const App = () => {
                     <Route element={<MessageLayout/>}>
                         <Route path={'sent'} element={<SentMessages/>}/>
                         <Route path={'inbox'} element={<InboxMessages/>}/>
+                        <Route path={':id'} element={<Message/>}/>
                     </Route>
                 </Route>
 

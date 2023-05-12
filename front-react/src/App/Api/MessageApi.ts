@@ -6,9 +6,9 @@ import {MessageForReceivedListModel} from "../../Models/Message/MessageForReceiv
 
 const MessageApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        getMessageById: builder.query<MessageModel, number>({
+        getMessageById: builder.mutation<MessageModel, number>({
             query: arg => 'message/' + arg,
-            providesTags: (result, error, arg) => [{type: 'message', id: arg}]
+            invalidatesTags: (result, error, arg) => ['message', {type: 'message', id: arg}],
         }),
         getSendMessage: builder.query<MessageForSendListModel[], { pageIndex: number, pageSize: number }>({
             query: arg => ({
@@ -37,7 +37,7 @@ const MessageApi = baseApi.injectEndpoints({
             ]
         }),
         getIsHasUnReadMessages: builder.query<boolean, void>({
-            query: () => 'message/checkUnReadMessage',
+            query: () => 'message/checkUnReadMessages',
             providesTags: ['message']
         }),
         addMessage: builder.mutation<boolean, AddMessageModel>({
@@ -53,16 +53,17 @@ const MessageApi = baseApi.injectEndpoints({
                 url: 'message/' + arg,
                 method: 'delete'
             }),
-            invalidatesTags: (result, error, arg) => [{type: 'message', id: arg}]
+            invalidatesTags: (result, error, arg) => ['message', {type: 'message', id: arg}]
         })
     })
 })
 
 export const {
-    useGetMessageByIdQuery,
+    useGetMessageByIdMutation,
     useGetSendMessageQuery,
     useGetReceivedMessageQuery,
     useGetIsHasUnReadMessagesQuery,
+    useLazyGetIsHasUnReadMessagesQuery,
     useAddMessageMutation,
     useDeleteMessageMutation
 } = MessageApi

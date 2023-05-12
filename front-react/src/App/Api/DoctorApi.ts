@@ -3,7 +3,7 @@ import {DoctorForPageModel} from "../../Models/Doctor/DoctorForPageModel";
 import {DoctorModel} from "../../Models/Doctor/DoctorModel";
 import {baseApi} from "./BaseApi";
 import {EditDoctorModel} from "../../Models/Doctor/EditDoctorModel";
-import { DoctorReportModel} from "../../Models/Doctor/DoctorReportModel";
+import {DoctorReportModel} from "../../Models/Doctor/DoctorReportModel";
 
 export const DoctorApi = baseApi.injectEndpoints({
     endpoints: builder => ({
@@ -68,7 +68,7 @@ export const DoctorApi = baseApi.injectEndpoints({
                 {type: 'doctor', id: args.did}
             ]
         })
-    })
+    }),
 })
 export const {
     useAddDoctorMutation,
