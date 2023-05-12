@@ -149,8 +149,9 @@ const DoctorPage = () => {
 
 
 
-        </div >
+
     )
+
 }
 
 export default DoctorPage
