@@ -1,74 +1,75 @@
 import './Home.scss'
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigator = useNavigate()
     return (
         <section className={'main'}>
             <div className="container">
-                <div className="row my-5 gap-5">
-                    <div className='col-12 col-md-3'>
-                        <div className="text-center">
-                            <img src="../../../public/Images/logo.jpg" className={'logo'} draggable={false} alt=""/>
-                            <h3>Quality Management System</h3>
-                            <button className={'button2'}
-                                    onClick={e => navigator('/auth/login')}
-                            >Get Started
-                            </button>
-                        </div>
-                    </div>
 
-                    <div className='col-12 col-md-8'>
-                        <p className={'text-center'}>
-                            <h4>
-                                :تم انشاء هذا النظام برعايه
-                            </h4>
-                            <p className={'mb-0'}>
-                                الاستاذ الدكتور / منصور حسن - رئيس الجامعة
-                            </p>
-                            الاستاذ الدكتور / محمد قايد - عميد الكليه
-                            <p className={'mb-0'}>
-                                الاستاذ الدكتور / أحمد النجار - رئيس قسم علوم الحاسب
-                            </p>
-                            <p className={'mb-0'}>
-                                البشمهندسة / هبه محمد - المعيد او المدرس المساعد بقسم علوم الحاسب
-                            </p>
-                            <p className={'mb-0'}>
-                                الاستاذ / هشام محمد - مدير الكليه
-                            </p>
-                            <hr/>
-                            <h5>
-                                :وعمل كل من طلاب الفرقه الثالثه قسم علوم الحاسب للعام الدراسى 2022- 2023
-                            </h5>
-                            <p className={'mb-0'}>
-                                محمود احمد ناصر محمود معوض
-                            </p>
-                            <p className={'mb-0'}>
-                                مصطفى محمود عماره عبد الفتاح
-                            </p>
-                            <p className={'mb-0'}>
-                                ريهام محمد أحمد عبدالله
-                            </p>
-                            <p className={'mb-0'}>
-                                روضه احمد صلاح
-                            </p>
-                            <p className={'mb-0'}>
-                                زهور ضياءالدين طلعت وزيرى
-                            </p>
-                            <p className={'mb-0'}>
-                                سما عبد العظيم ادهم مبروك
-                            </p>
-
-                        </p>
+                <div className='split left'>
+                    <div className="centered">
+                        <img src="../../../public/Images/logo.jpg" className={'logo'} draggable={false} alt="" />
+                        <h3>Quality Management System</h3>
+                        <button className={'button2'}
+                            onClick={e => navigator('/auth/login')}
+                        >Get Started
+                        </button>
                     </div>
                 </div>
+                <div className='split right' >
+                    <div className="centered">
 
-                <img src="../../../public/Images/background.jpg" className={'bg-img'} alt=""/>
+                        <p>
+                            :تم انشاء هذا النظام برعايه
+                            <br />
+                            الاستاذ الدكتور / منصور حسن - رئيس الجامعة
+                            <br />
+                            الاستاذ الدكتور / محمد قايد - عميد الكليه
+                            <br />
+                            الاستاذ الدكتور / أحمد النجار - رئيس قسم علوم الحاسب
+                            <br />
+                            البشمهندسة / هبه محمد - المعيد او المدرس المساعد بقسم علوم الحاسب
+                            <br />
+                            الاستاذ / هشام محمد - مدير الكليه
+                            <br />
+                            <br />
+                            :وعمل كل من طلاب الفرقه الثالثه قسم علوم الحاسب للعام الدراسى 2022- 2023
+                            <br />
+                            روضه أحمد صلاح عبدالسلام
+                            <br />
+                            ريهام محمد أحمد عبدالله
+                            <br />
+                            زهور ضياءالدين طلعت وزيري
+                            <br />
+                            زياد احمد عبيد بدوي
+                            <br />
+                            سما عبد العظيم ادهم مبروك
+                            <br />
+                            محمد احمد زكى عطيه
+                            <br />
+                            محمد ايمن عبد الظاهر محمد
+                            <br />
+                            محمود احمد ناصر محمود معوض
+                            <br />
+                            مصطفى محمود عماره عبد الفتاح
+
+                        </p>
+
+
+
+                    </div>
+
+                </div>
+
+                <img src="../../../public/Images/background.jpg" className={'bg-img'} alt="" />
                 {/*<img src="../../../public/Images/colleg-logo.jpg" className={'logo'} draggable={false} alt=""/>*/}
                 {/*<img src="../../../public/Images/logo.jpeg" className={'site-logo'} draggable={false} alt=""/>*/}
                 <div className="bg"></div>
+
+
             </div>
-        </section>
+        </section >
     );
 };
 
