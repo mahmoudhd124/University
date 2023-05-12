@@ -1,4 +1,4 @@
-import {SubjectMaterialModel} from '../SubjectMaterial/SubjectMaterialModel'
+import {SubjectFileModel} from '../SubjectMaterial/SubjectFileModel'
 
 export interface SubjectModel {
     id: number;
@@ -10,6 +10,6 @@ export interface SubjectModel {
     doctorId: string;
     doctorUsername: string;
     isOwner: boolean;
-    files: SubjectMaterialModel[];
+    files: SubjectFileModel[];
     totalNumberOfFilesRequired:number
 }

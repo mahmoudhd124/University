@@ -3,6 +3,7 @@ import {SubjectModel} from "../../Models/Subject/SubjectModel";
 import {SubjectForPageModel} from "../../Models/Subject/SubjectForPageModel";
 import {AddSubjectModel} from "../../Models/Subject/AddSubjectModel";
 import {EditSubjectModel} from "../../Models/Subject/EditSubjectModel";
+import {SubjectReportModel} from "../../Models/Subject/SubjectReportModel";
 
 export const subjectApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -17,12 +18,19 @@ export const subjectApi = baseApi.injectEndpoints({
                 params: {
                     'department': args.department,
                     'year': args.year,
-                    'namePrefix':args.namePrefix
+                    'namePrefix': args.namePrefix
                 }
             }),
             providesTags: (result = []) => [
                 'subject',
                 ...result.map(({id}) => ({type: 'subject' as const, id}))
+            ]
+        }),
+        getSubjectReport: builder.query<SubjectReportModel, number>({
+            query: arg => `subject/report/${arg}`,
+            providesTags: (result, error, arg) => [
+                {type: 'subject', id: arg},
+                {type: 'doctor', id: result?.doctor.id}
             ]
         }),
         addSubject: builder.mutation<boolean, AddSubjectModel>({
@@ -64,6 +72,7 @@ export const subjectApi = baseApi.injectEndpoints({
 export const {
     useGetSubjectByCodeQuery,
     useGetSubjectPageQuery,
+    useGetSubjectReportQuery,
     useAddSubjectMutation,
     useEditSubjectMutation,
     useDeleteSubjectMutation,

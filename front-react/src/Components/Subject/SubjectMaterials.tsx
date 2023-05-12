@@ -1,4 +1,4 @@
-import {SubjectMaterialModel} from "../../Models/SubjectMaterial/SubjectMaterialModel";
+import {SubjectFileModel} from "../../Models/SubjectMaterial/SubjectFileModel";
 import React, {useRef, useState} from "react";
 import {useAddSubjectMaterialMutation, useDeleteSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
 import {useNavigate} from "react-router-dom";
@@ -15,7 +15,7 @@ const SubjectMaterials = ({
                               isOwner,
                               id,
                               code
-                          }: { materials: SubjectMaterialModel[], isOwner: boolean, id: number, code: number }) => {
+                          }: { materials: SubjectFileModel[], isOwner: boolean, id: number, code: number }) => {
     const dispatch = useAppDispatch()
     const token = useAppSelector(s => s.auth.token)
     const api = useAxiosApi()

@@ -1,11 +1,13 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {PayloadAction, createSlice} from "@reduxjs/toolkit";
 import TokenModel from '../../Models/Auth/TokenModel'
 import jwtDecode from "jwt-decode";
 
 const initialState: TokenModel = {
     roles: null,
     token: null,
-    tokenExp: null
+    tokenExp: null,
+    username: null,
+    id: null
 }
 
 const authSlice = createSlice({
@@ -13,10 +15,16 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setCredentials: (state, action: PayloadAction<Omit<TokenModel, 'tokenExp'>>) => {
-            console.log(action.payload)
             state.roles = action.payload.roles
             state.token = action.payload.token
-            state.tokenExp = (jwtDecode(action.payload.token!) as { exp: number })?.exp
+            const token = (jwtDecode(action.payload.token!) as {
+                exp: number,
+                nameid: string,
+                'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid': string
+            })
+            state.tokenExp = token?.exp
+            state.id = token?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"]
+            state.username = token?.nameid
         },
         logout: (state) => {
             localStorage.removeItem('stayLogin')
@@ -28,4 +36,4 @@ const authSlice = createSlice({
 })
 
 export default authSlice.reducer
-export const { logout, setCredentials } = authSlice.actions
+export const {logout, setCredentials} = authSlice.actions

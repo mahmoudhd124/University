@@ -1,6 +1,6 @@
 import SubjectFileTypes from "../Subject/SubjectFileTypes";
 
-export interface SubjectMaterialModel {
+export interface SubjectFileModel {
     id: number;
     name: string;
     storedName: string;

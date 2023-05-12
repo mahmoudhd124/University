@@ -3,11 +3,15 @@ import {
     useDeleteAssignedDoctorMutation,
     useGetSubjectByCodeQuery
 } from "../../App/Api/SubjectApi";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import useGetAppError from "../../Hookes/useGetAppError";
 import './SubjectPage.css'
 import useAppSelector from "../../Hookes/useAppSelector";
-import {useAssignDoctorToSubjectMutation, useGetDoctorPageQuery} from "../../App/Api/DoctorApi";
+import {
+    useAssignDoctorToSubjectMutation,
+    useGetDoctorPageQuery,
+    useLazyGetDoctorPageQuery
+} from "../../App/Api/DoctorApi";
 import SubjectMaterials from "./SubjectMaterials";
 import Forbidden403 from "../Global/Forbidden/Forbidden403";
 import ProgressLine from "./ProgressBar/ProgressLine";
@@ -22,12 +26,8 @@ const SubjectPage = () => {
     const [deleteDoctor, deleteDoctorResult] = useDeleteAssignedDoctorMutation()
     const [assignDoctor, assignDoctorResult] = useAssignDoctorToSubjectMutation()
     const [doctorUsername, setDoctorUsername] = useState('')
-    const doctorListResult = isAdmin ?
-        useGetDoctorPageQuery({
-            pageIndex: 0,
-            pageSize: 10,
-            usernamePrefix: doctorUsername
-        }) : null
+    const [send, doctorListResult] = useLazyGetDoctorPageQuery()
+    const loc = useLocation()
 
     useEffect(() => {
         if (p.current == undefined)
@@ -41,6 +41,21 @@ const SubjectPage = () => {
             p.current.onmousemove = null
         }
     }, [isFetching])
+
+    useEffect(() => {
+        if(!doctorUsername)
+            return
+        send({
+            pageIndex: 0,
+            pageSize: 10,
+            usernamePrefix: doctorUsername
+        })
+    }, [doctorUsername])
+
+
+    useEffect(() => {
+
+    }, [doctorUsername])
 
     const deleteDoctorHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -72,9 +87,9 @@ const SubjectPage = () => {
 
     const numberOfFileTypes = subject.files
         .map(f => f.type.valueOf())
-        .reduce((prev, curr ) => prev.some(e => e == curr) ? prev : [...prev,curr], [] as number[])
+        .reduce((prev, curr) => prev.some(e => e == curr) ? prev : [...prev, curr], [] as number[])
         .length
-    
+
     const line = <ProgressLine label="Files Uploaded"
                                text={`${numberOfFileTypes}/${Object.keys(SubjectFileTypes).length / 2}`}
                                visualParts={[{
@@ -119,7 +134,9 @@ const SubjectPage = () => {
                     {subject.hasADoctor ? <div className="row">
                         <div className="col-md-6">
                             <p>
-                                <strong>Doctor:</strong> {subject.doctorUsername}
+                                <strong>Doctor:</strong> <Link to={`/doctor/${subject.doctorId}`}
+                                                               state={{from:loc}}
+                            >{subject.doctorUsername}</Link>
                             </p>
                         </div>
                         {isAdmin && <div className={'col-md-6'}>

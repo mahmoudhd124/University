@@ -3,6 +3,7 @@ import {DoctorForPageModel} from "../../Models/Doctor/DoctorForPageModel";
 import {DoctorModel} from "../../Models/Doctor/DoctorModel";
 import {baseApi} from "./BaseApi";
 import {EditDoctorModel} from "../../Models/Doctor/EditDoctorModel";
+import { DoctorReportModel} from "../../Models/Doctor/DoctorReportModel";
 
 export const DoctorApi = baseApi.injectEndpoints({
     endpoints: builder => ({
@@ -35,6 +36,13 @@ export const DoctorApi = baseApi.injectEndpoints({
             query: arg => 'doctor/geteditinfo/' + arg,
             providesTags: (result, error, arg) => [{type: 'doctor', id: arg}]
         }),
+        getDoctorReport: builder.query<DoctorReportModel, number>({
+            query: arg => `doctor/report/${arg}`,
+            providesTags: (result, error, arg) => [
+                {type: 'doctor', id: arg},
+                ...result?.subjects.map(({id}) => ({type: 'subject' as const, id}))!
+            ]
+        }),
         editDoctor: builder.mutation<boolean, EditDoctorModel>({
             query: args => ({
                 url: 'doctor',
@@ -65,8 +73,10 @@ export const DoctorApi = baseApi.injectEndpoints({
 export const {
     useAddDoctorMutation,
     useGetDoctorPageQuery,
+    useLazyGetDoctorPageQuery,
     useGetDoctorQuery,
     useGetDoctorEditInfoQuery,
+    useGetDoctorReportQuery,
     useEditDoctorMutation,
     useDeleteDoctorMutation,
     useAssignDoctorToSubjectMutation

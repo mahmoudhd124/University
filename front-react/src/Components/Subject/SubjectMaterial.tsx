@@ -2,13 +2,13 @@
 import TimeAgo from "../Global/TimeAgo";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {SubjectMaterialModel} from "../../Models/SubjectMaterial/SubjectMaterialModel";
+import {SubjectFileModel} from "../../Models/SubjectMaterial/SubjectFileModel";
 import useAxiosApi from "../../Hookes/useAxiosApi";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 import {useDownloadSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
 
 interface Props {
-    material: SubjectMaterialModel,
+    material: SubjectFileModel,
     isOwner: boolean,
     removeHandler: (e: React.MouseEvent) => void,
     api: ReturnType<typeof useAxiosApi>, // Receive the api instance

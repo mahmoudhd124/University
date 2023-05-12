@@ -5,11 +5,13 @@ import useGetAppError from "../../Hookes/useGetAppError"
 import './DoctorPage.css'
 import DoctorField from "./DoctorField";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
+import useAppSelector from "../../Hookes/useAppSelector";
 
 const DoctorPage = () => {
     const {id} = useParams()
     const {data, isError, error, isFetching} = useGetDoctorQuery(id ?? '')
     const loc = useLocation()
+    const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
     const navigator = useNavigate()
 
     if (isFetching) {
@@ -55,6 +57,14 @@ const DoctorPage = () => {
                 <div className="btn btn-outline-dark w-50"
                      onClick={e => navigator('/doctor/edit/' + data.id, {state: {from: loc}})}
                 > Edit
+                </div>
+            </div>}
+
+            {isAdmin && <div className="row justify-content-center my-2 mb-5">
+                <div className="col-12 col-md-8 col-lg-3">
+                    <button className={'btn btn-danger w-100'}
+                            onClick={e => navigator(`/message/send/${data?.id}/${data?.username}`)}
+                    >Send Alarm</button>
                 </div>
             </div>}
 
