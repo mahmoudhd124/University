@@ -6,21 +6,64 @@ const Home = () => {
     return (
         <section className={'main'}>
             <div className="container">
+
+                <div className='split left'>
+                    <div className="centered">
+                        <img src="../../../public/Images/logo.jpg" className={'logo'} draggable={false} alt="" />
+                        <h3>Quality Management System</h3>
+                        <button className={'button2'}
+                            onClick={e => navigator('/auth/login')}
+                        >Get Started
+                        </button>
+                    </div>
+                </div>
+                <div className='split right' >
+                    <div className="centered">
+
+                        <p>
+                            :تم انشاء هذا النظام برعايه
+                            <br />
+                            الاستاذ الدكتور / منصور حسن - رئيس الجامعة
+                            <br />
+                            الاستاذ الدكتور / محمد قايد - عميد الكليه
+                            <br />
+                            الاستاذ الدكتور / أحمد النجار - رئيس قسم علوم الحاسب
+                            <br />
+                            البشمهندسة / هبه محمد - المعيد او المدرس المساعد بقسم علوم الحاسب
+                            <br />
+                            الاستاذ / هشام محمد - مدير الكليه
+                            <br />
+                            <br />
+                            :وعمل كل من طلاب الفرقه الثالثه قسم علوم الحاسب للعام الدراسى 2022- 2023
+                            <br />
+                            محمود احمد ناصر محمود معوض
+                            <br />
+                            مصطفى محمود عماره عبد الفتاح
+                            <br />
+                            ريهام محمد أحمد عبدالله
+                            <br />
+                            روضه احمد صلاح
+                            <br />
+                            زهور ضياءالدين طلعت وزيرى
+                            <br />
+                            سما عبد العظيم ادهم مبروك
+
+                        </p>
+
+
+
+                    </div>
+
+                </div>
+
                 <img src="../../../public/Images/background.jpg" className={'bg-img'} alt="" />
-                <img src="../../../public/Images/logo.jpg" className={'logo'} draggable={false} alt="" />
                 {/*<img src="../../../public/Images/colleg-logo.jpg" className={'logo'} draggable={false} alt=""/>*/}
                 {/*<img src="../../../public/Images/logo.jpeg" className={'site-logo'} draggable={false} alt=""/>*/}
                 <div className="bg"></div>
-                <h3>Quality Management System</h3>
-                <h5 className={'w-75'}>Welcome to our site for managing doctors at the university. Our platform allows the director to
-                    easily manage and organize doctors, while ensuring easy access. We strive to provide you with a
-                    smooth and efficient experience.</h5>
-                <button className={'button2'}
-                    onClick={e => navigator('/auth/login')}
-                >Get Started
-                </button>
+
+
             </div>
-        </section>
+        </section >
     );
 };
 
