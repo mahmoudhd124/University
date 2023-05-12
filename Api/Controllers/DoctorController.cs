@@ -19,6 +19,12 @@ public class DoctorController : BaseController
     [Route("{pageIndex:int}/{pageSize:int}/{usernamePrefix?}")]
     public async Task<ActionResult> Page(int pageIndex, int pageSize,bool? hasSubject = null, string usernamePrefix = "") =>
         Return(await Mediator.Send(new GetDoctorsPageQuery(pageSize, pageIndex, usernamePrefix,hasSubject)));
+    
+    [HttpGet]
+    [Authorize(Roles = "Admin")]
+    [Route("Report/{id}")]
+    public async Task<ActionResult> GetReport(string id) =>
+        Return(await Mediator.Send(new GetDoctorReportQuery(id)));
 
     [Authorize(Roles = "Admin")]
     [HttpPost]

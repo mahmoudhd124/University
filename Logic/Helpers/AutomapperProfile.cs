@@ -36,7 +36,7 @@ public class AutomapperProfile : Profile
                         .Select(t => t.Distinct().Count() == Enum.GetNames(typeof(SubjectFileTypes)).Length)
                         .Any(r => r == false) == false
                 ));
-        
+
         CreateMap<Doctor, DoctorForPageDto>()
             .ForMember(dest => dest.IsComplete, opt =>
                 opt.MapFrom(src => src.DoctorSubjects
@@ -45,6 +45,19 @@ public class AutomapperProfile : Profile
                         .Any(r => r == false) == false
                 ));
 
+        CreateMap<Doctor, DoctorReportDto>()
+            .ForMember(dest => dest.Subjects, opt =>
+                opt.MapFrom(src => src.DoctorSubjects
+                    .Select(ds => ds.Subject)
+                    .Select(s => new SubjectForDoctorReportDto()
+                    {
+                        Id = s.Id,
+                        Code = s.Code,
+                        Name = s.Name,
+                        Department = s.Department,
+                        CompletedTypes = s.SubjectFiles.Select(f => f.Type).Distinct().ToList()
+                    })));
+
         CreateMap<Subject, SubjectForPageDto>()
             .ForMember(dest => dest.NumberOfFilesTypes, opt =>
                 opt.MapFrom(src => src.SubjectFiles
@@ -52,7 +65,7 @@ public class AutomapperProfile : Profile
                     .Distinct()
                     .Count()
                 ));
-        
+
         CreateMap<AddSubjectDto, Subject>();
         CreateMap<Subject, SubjectDto>()
             .ForMember(dest => dest.HasADoctor, opt =>
@@ -72,7 +85,30 @@ public class AutomapperProfile : Profile
                         Type = x.Type,
                         SubjectId = x.SubjectId
                     })));
-        
+
+        CreateMap<Subject, SubjectReportDto>()
+            .ForMember(dest => dest.Doctor, opt =>
+                opt.MapFrom(src => new DoctorForSubjectReportDto()
+                {
+                    Id = src.DoctorSubject.DoctorId,
+                    Firstname = src.DoctorSubject.Doctor.FirstName,
+                    Lastname = src.DoctorSubject.Doctor.LastName,
+                    Username = src.DoctorSubject.Doctor.UserName,
+                    Email = src.DoctorSubject.Doctor.Email,
+                    PhoneNumber = src.DoctorSubject.Doctor.PhoneNumber,
+                    NationalNumber = src.DoctorSubject.Doctor.NationalNumber
+                }))
+            .ForMember(dest =>dest.Files,opt => 
+                opt.MapFrom(src => src.SubjectFiles.Select(f => new SubjectFileDto()
+                {
+                    Id = f.Id,
+                    Date = f.Date,
+                    StoredName = f.StoredName,
+                    Type = f.Type,
+                    Name = f.FileName,
+                    SubjectId = src.Id
+                })));
+
         CreateMap<EditSubjectDto, Subject>();
         CreateMap<SubjectFiles, SubjectFileDto>()
             .ForMember(dest => dest.Name, opt =>

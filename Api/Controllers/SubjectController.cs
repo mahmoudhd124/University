@@ -22,6 +22,12 @@ public class SubjectController : BaseController
         Return(await Mediator.Send(new GetSubjectByCodeQuery(code, Roles, Id)));
 
     [Authorize(Roles = "Admin")]
+    [HttpGet]
+    [Route("Report/{id:int}")]
+    public async Task<ActionResult> GetReport(int id) =>
+        Return(await Mediator.Send(new GetSubjectReportQuery(id)));
+
+    [Authorize(Roles = "Admin")]
     [HttpPut]
     public async Task<ActionResult> Edit([FromBody] EditSubjectDto editSubjectDto) =>
         Return(await Mediator.Send(new EditSubjectCommand(editSubjectDto)));
