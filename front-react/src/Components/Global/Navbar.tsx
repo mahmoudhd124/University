@@ -6,7 +6,7 @@ import useAppDispatch from "../../Hookes/useAppDispatch";
 import './Navbar.scss'
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useGetIsHasUnReadMessagesQuery, useLazyGetIsHasUnReadMessagesQuery} from "../../App/Api/MessageApi";
+import { useLazyGetIsHasUnReadMessagesQuery} from "../../App/Api/MessageApi";
 
 const Navbar = () => {
     const token = useAppSelector(s => s.auth.token)
@@ -49,11 +49,10 @@ const Navbar = () => {
                 <h5 className={'text'}>Quality Management System
                     <p className={'text display-4'}>CS department</p>
                 </h5>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button className="navbar-toggler border border-3 border-white" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-
+                    <FontAwesomeIcon icon={faBars} className={'text-white'}/>
                     {hasUnReadMessages && redNotification}
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
