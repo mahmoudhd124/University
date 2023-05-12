@@ -173,6 +173,14 @@ const SubjectPage = () => {
                         {line}
                     </div>
 
+                    {isAdmin && <div className="row justify-content-center">
+                        <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 btn btn-primary my-3"
+                             onClick={e => navigator(`/subject/report/${subject?.id}`, {state: {from: loc}})}
+                        >
+                            Generate Report
+                        </div>
+                    </div>}
+
                     <SubjectMaterials materials={subject?.files}
                                       isOwner={subject.isOwner}
                                       id={subject?.id!}

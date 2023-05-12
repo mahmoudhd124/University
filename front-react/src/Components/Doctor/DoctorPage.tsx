@@ -64,7 +64,8 @@ const DoctorPage = () => {
                 <div className="col-12 col-md-8 col-lg-3">
                     <button className={'btn btn-danger w-100'}
                             onClick={e => navigator(`/message/send/${data?.id}/${data?.username}`)}
-                    >Send Alarm</button>
+                    >Send Alarm
+                    </button>
                 </div>
             </div>}
 
@@ -81,6 +82,14 @@ const DoctorPage = () => {
             <div className="progress">
                 <div className="progress-bar" style={{width: `${per}%`}}>{per}%</div>
             </div>
+
+            {isAdmin && <div className="row justify-content-center">
+                <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 btn btn-primary my-3"
+                     onClick={e => navigator(`/doctor/report/${data?.id}`, {state: {from: loc}})}
+                >
+                    Generate Report
+                </div>
+            </div>}
 
             <div className="row justify-content-center justify-content-sm-around gap-3">
                 {data?.subjects?.length ?? 0 > 0 ? data?.subjects.map(s =>
