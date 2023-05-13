@@ -13,6 +13,24 @@ const DoctorReport = () => {
         <div className={'bg-gradient'} style={{
             backgroundColor: "rgb(235,238,238)"
         }}>
+            <div className="row mb-3 justify-content-center no-print">
+                <div className="col-10 col-md-6 col-lg-4 col-xl-3">
+                    <button className={'btn w-100'}
+                            style={{
+                                backgroundImage: 'linear-gradient(90deg, #000082, #6942ef, #6554c0, #008cff, #000082, #6942ef)',
+                                color: 'white',
+                                fontFamily: 'cursive',
+                                borderRadius: '30px',
+                                border: 'none',
+                                backgroundSize: '400%',
+                                backgroundPosition: '0% 0%',
+
+                            }}
+                            onClick={e => window.print()}
+                    >Print
+                    </button>
+                </div>
+            </div>
             <div className="container">
                 <div className="row justify-content-center gap-3">
                     <DoctorReportField title={'First Name'} value={data?.firstname ?? 'unknown'}/>

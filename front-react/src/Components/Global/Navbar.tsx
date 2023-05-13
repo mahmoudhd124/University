@@ -42,7 +42,7 @@ const Navbar = () => {
     ></div>
 
     return (
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg no-print">
             <div className="container-fluid">
                 <Link to={'/'} className="navbar-brand">
                     <img src="../../../public/Images/logo.png" alt="logo" style={{ marginLeft: "20px" }} width={120}
