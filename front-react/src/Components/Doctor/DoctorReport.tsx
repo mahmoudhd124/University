@@ -24,13 +24,13 @@ const DoctorReport = () => {
                                 border: 'none',
                                 backgroundSize: '400%',
                                 backgroundPosition: '0% 0%',
-
                             }}
                             onClick={e => window.print()}
                     >Print
                     </button>
                 </div>
             </div>
+            
             <div className="container">
                 <div className="row justify-content-center gap-3">
                     <DoctorReportField title={'First Name'} value={data?.firstname ?? 'unknown'}/>
