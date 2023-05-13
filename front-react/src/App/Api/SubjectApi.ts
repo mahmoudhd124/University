@@ -55,7 +55,10 @@ export const subjectApi = baseApi.injectEndpoints({
                 url: 'subject/' + arg,
                 method: 'delete'
             }),
-            invalidatesTags: (result, error, arg) => [{type: 'subject', id: arg}]
+            invalidatesTags: (result, error, arg) => [
+                'doctor',
+                {type: 'subject', id: arg}
+            ]
         }),
         deleteAssignedDoctor: builder.mutation<boolean, number>({
             query: arg => ({

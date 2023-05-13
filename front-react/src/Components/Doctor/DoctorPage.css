@@ -18,7 +18,8 @@
     animation: 1s shine linear infinite;
 }
 
-.button__looding {}
+.button__looding {
+}
 
 .container .doctor {
     margin-top: 10px;
@@ -38,7 +39,9 @@
     letter-spacing: 1px;
     line-height: 1.5;
     white-space: pre;
-    margin-right: 100px;
+    /*margin-right: 100px;*/
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .container .info {
@@ -48,13 +51,13 @@
 
 }
 
-.container .info p {
+.container .info > div {
     font-family: Roboto;
     text-decoration: none;
     border: 1px solid #cccccc74;
-    padding: 2px 0px;
+    padding: 2px 0;
+    margin: 5px 0;
     white-space: pre;
-
 }
 
 .container .profile-tab-nav .row .btn-alarm {

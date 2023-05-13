@@ -5,7 +5,7 @@ import {AxiosInstance} from "axios";
 export const subjectMaterialApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getSubjectMaterial: builder.query<Blob, string>({
-            query: arg => ({url:'subjectFile/' + arg})
+            query: arg => ({url: 'subjectFile/' + arg})
         }),
         addSubjectMaterial: builder.mutation<boolean, FormData>({
             query: arg => ({
@@ -16,33 +16,36 @@ export const subjectMaterialApi = baseApi.injectEndpoints({
                     'Content-Type': 'multipart/form-data'
                 }
             }),
-            invalidatesTags: (result, error, arg) => [{type: 'subject', id: +arg.get('subjectId')!}]
+            invalidatesTags: (result, error, arg) => ['doctor', {type: 'subject', id: +arg.get('subjectId')!}]
         }),
         deleteSubjectMaterial: builder.mutation<boolean, { id: number, subjectId: number }>({
             query: arg => ({
                 url: 'subjectFile/' + arg.id,
                 method: 'delete'
             }),
-            invalidatesTags: (result, error, arg) => [{type: 'subject', id: arg.subjectId}]
+            invalidatesTags: (result, error, arg) => ['doctor', {type: 'subject', id: arg.subjectId}]
         })
     })
 })
 
 //todo handle it with better way, may be with rtk query with axios
-export const useAddSubjectMaterialMutation = (dispatch: AppDispatch,api:AxiosInstance) => {
+export const useAddSubjectMaterialMutation = (dispatch: AppDispatch, api: AxiosInstance) => {
     return async (data: FormData) => {
-        const response = await api.post<boolean>(BASE_URL + 'subjectFile',data,{
-            headers:{
+        const response = await api.post<boolean>(BASE_URL + 'subjectFile', data, {
+            headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        dispatch(baseApi.util.invalidateTags([{type: 'subject', id: +data.get('subjectId')!}]))
+        dispatch(baseApi.util.invalidateTags([
+            'doctor',
+            {type: 'subject', id: +data.get('subjectId')!}
+        ]))
         return response
     }
 }
-export const useDownloadSubjectMaterialMutation = (api:AxiosInstance) => {
-    return async (name:string) => {
-        return await api.get<Blob>(BASE_URL + 'subjectFile/'+name,)
+export const useDownloadSubjectMaterialMutation = (api: AxiosInstance) => {
+    return async (name: string) => {
+        return await api.get<Blob>(BASE_URL + 'subjectFile/' + name,)
     }
 }
 
