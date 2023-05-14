@@ -18,7 +18,8 @@
     animation: 1s shine linear infinite;
 }
 
-.button__looding {}
+.button__looding {
+}
 
 .container .doctor {
     margin-top: 10px;
@@ -50,13 +51,14 @@
 
 }
 
-.container .info>div {
+.container .info > div {
     font-family: Roboto;
     text-decoration: none;
     border: 1px solid #cccccc74;
     padding: 3px 10px;
-    margin: 5px 100px;
+    margin: 5px 0;
     white-space: pre;
+    width: 100%;
 }
 
 .container .btn {

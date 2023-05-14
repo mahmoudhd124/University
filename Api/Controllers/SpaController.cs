@@ -9,6 +9,7 @@ public class SpaController : BaseController
     [AllowAnonymous]
     public ActionResult Index()
     {
-        return PhysicalFile($"{Environment.CurrentDirectory}/wwwroot/index.html","text/html");
+        var wwwroot = Path.Combine(Environment.CurrentDirectory, "wwwroot");
+        return PhysicalFile($"{Path.Combine(wwwroot, "index.html")}", "text/html");
     }
 }

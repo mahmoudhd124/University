@@ -48,7 +48,7 @@ const Navbar = () => {
                     <img src="/images/logo.png" alt="logo" style={{ marginLeft: "20px" }} width={120}
                         height={100} />
                 </Link>
-                <h5 className={'text'}>Quality Management System
+                <h5 className={'text d-none d-sm-block'}>Quality Management System
                     <p className={'text display-4'}>CS department</p>
                 </h5>
                 <button className="navbar-toggler border-white" type="button" data-bs-toggle="collapse"
