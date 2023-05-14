@@ -67,7 +67,7 @@ const SubjectList = () => {
                 </div>}
 
                 <h3 className='txt'>
-                    <img src='./public/images/material.png'
+                    <img src='/images/material.png'
                          style={{width: '60px', height: '60px', borderRadius: '50%', margin: '15px'}}></img>Courses</h3>
 
 
@@ -82,7 +82,7 @@ const SubjectList = () => {
                             setNamePrefix(nameFilter.current.value)
                             setPage(0)
                         }}>
-                            <img src='./public/images/search.png'
+                            <img src='/images/search.png'
                                  style={{width: '30px', height: '30px', borderRadius: '50%'}}></img>
                         </button>
                     </span>
@@ -99,7 +99,7 @@ const SubjectList = () => {
                             setDepartment(departmentFilter.current.value)
                             setPage(0)
                         }}>
-                            <img src='./public/images/search.png'
+                            <img src='/images/search.png'
                                  style={{width: '30px', height: '30px', borderRadius: '50%'}}></img>
                         </button>
                     </span>
@@ -115,7 +115,7 @@ const SubjectList = () => {
                             setYear(+yearFilter.current.value == 0 ? undefined : +yearFilter.current.value)
                             setPage(0)
                         }}>
-                            <img src='./public/images/search.png'
+                            <img src='/images/search.png'
                                  style={{width: '30px', height: '30px', borderRadius: '50%'}}></img>
                         </button>
                     </span>
@@ -126,7 +126,7 @@ const SubjectList = () => {
                 <div className='row justify-content-center'>
                     <div className='col-8 col-md-2'>
                         <Link className='btn my-3' to={'/subject/add'} state={{from: loc}}>
-                            <img src='./public/images/add.png' style={{
+                            <img src='/images/add.png' style={{
                                 width: '30px',
                                 height: '30px',
                                 borderRadius: '50%',

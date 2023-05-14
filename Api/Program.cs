@@ -28,14 +28,6 @@ app.UseFileServer(new FileServerOptions
     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\wwwroot")),
     EnableDirectoryBrowsing = true
 });
-// app.UseStaticFiles(new StaticFileOptions
-// {
-//     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\..\logic\wwwroot")),
-//     ContentTypeProvider = new FileExtensionContentTypeProvider(new Dictionary<string, string>()
-//     {
-//         { "py", "text/x-python" }
-//     })
-// });
 
 app.UseCors("allowLocalAtPort5173");
 
@@ -44,5 +36,6 @@ app.UseAuthorization();
 
 
 app.MapControllers();
+app.MapFallbackToController("Index","Spa");
 
 app.Run();

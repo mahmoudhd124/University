@@ -65,7 +65,7 @@ const DoctorPage = () => {
                 <div className="profile-tab-nav border-right">
                     <div className="p-4">
                         <div className="img-circle text-center mb-3 ">
-                            <img src="./public/images/doctor.png" alt="Image" className="shadow"></img>
+                            <img src="/images/doctor.png" alt="Image" className="shadow"></img>
                         </div>
                         <h3 className="text-center text-wrap">
                             {data?.firstname! + " " + data?.lastname!}
@@ -74,7 +74,7 @@ const DoctorPage = () => {
                             <div className=" col-lg-3">
                                 <button className={'btn-alarm w-100'}
                                     onClick={e => navigator(`/message/send/${data?.id}/${data?.username}`)}
-                                ><img src="./public/images/alarm.png" style={{
+                                ><img src="/images/alarm.png" style={{
                                     width: '30px',
                                     backgroundColor: "#fff",
                                     height: "30px",

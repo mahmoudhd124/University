@@ -1,5 +1,5 @@
 .subject {
-    background-image: url("./public/images/card.jpg");
+    background-image: url("/images/card.jpg");
     margin-top: 30px !important;
     box-shadow: 1px 1px 30px #bdb7b7;
     background-repeat: no-repeat;
