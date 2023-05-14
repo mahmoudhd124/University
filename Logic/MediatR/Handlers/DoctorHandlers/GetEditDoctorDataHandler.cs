@@ -10,17 +10,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.MediatR.Handlers.DoctorHandlers;
 
-public class GetEditDoctorDataHandler:IRequestHandler<GetEditDoctorDataQuery,Response<EditDoctorDto>>
+public class GetEditDoctorDataHandler : IRequestHandler<GetEditDoctorDataQuery, Response<EditDoctorDto>>
 {
     private readonly IdentityContext _context;
     private readonly IMapper _mapper;
 
-    public GetEditDoctorDataHandler(IdentityContext context,IMapper mapper)
+    public GetEditDoctorDataHandler(IdentityContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
-    public async Task<Response<EditDoctorDto>> Handle(GetEditDoctorDataQuery request, CancellationToken cancellationToken)
+
+    public async Task<Response<EditDoctorDto>> Handle(GetEditDoctorDataQuery request,
+        CancellationToken cancellationToken)
     {
         var id = request.Id;
         var dto = await _context.Doctors

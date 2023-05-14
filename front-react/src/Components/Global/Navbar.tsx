@@ -45,7 +45,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg no-print">
             <div className="container-fluid">
                 <Link to={'/'} className="navbar-brand">
-                    <img src="../../../public/Images/logo.png" alt="logo" style={{ marginLeft: "20px" }} width={120}
+                    <img src="./public/images/logo.png" alt="logo" style={{ marginLeft: "20px" }} width={120}
                         height={100} />
                 </Link>
                 <h5 className={'text'}>Quality Management System
@@ -65,9 +65,9 @@ const Navbar = () => {
                         {/*        Admin Area*/}
                         {/*    </Link>*/}
                         {/*    <ul className="dropdown-menu">*/}
-                        {/*        <li><Link to={'/doctor/list/0'} className="dropdown-item" ><img src="../../../public/Images/doctor.png" style={styleImg} />Doctors</Link></li>*/}
-                        {/*        <li><Link to={'/subject/list/0'} className="dropdown-item" > <img src="../../../public/Images/material.png" style={styleImg} />Courses</Link></li>*/}
-                        {/*        <li><Link to={'/message/inbox'} className="dropdown-item" > <img src="../../../public/Images/gmail.png" style={{*/}
+                        {/*        <li><Link to={'/doctor/list/0'} className="dropdown-item" ><img src="./public/images/doctor.png" style={styleImg} />Doctors</Link></li>*/}
+                        {/*        <li><Link to={'/subject/list/0'} className="dropdown-item" > <img src="./public/images/material.png" style={styleImg} />Courses</Link></li>*/}
+                        {/*        <li><Link to={'/message/inbox'} className="dropdown-item" > <img src="./public/images/gmail.png" style={{*/}
                         {/*            width: "38px",*/}
                         {/*            height: '38px',*/}
                         {/*            display: 'inline',*/}
@@ -80,7 +80,7 @@ const Navbar = () => {
                                 <li className="nav-item btn"
                                     onClick={e => dispatch(logout())}>
                                     <Link to={'/auth/login'} state={{ from: loc }} className="btn m-4">Login <img
-                                        src="../../../public/Images/login.png"
+                                        src="./public/images/login.png"
                                         style={{
                                             width: '35px',
                                             height: '35px',
@@ -101,14 +101,14 @@ const Navbar = () => {
                                             </div>
                                             <ul className="dropdown-menu">
                                                 <li><Link to={'/doctor/list/0'} className="dropdown-item"><img
-                                                    src="../../../public/Images/doctor.png"
+                                                    src="./public/images/doctor.png"
                                                     style={styleImg} />Doctors</Link></li>
                                                 <li><Link to={'/subject/list/0'} className="dropdown-item"> <img
-                                                    src="../../../public/Images/material.png" style={styleImg} />Courses</Link>
+                                                    src="./public/images/material.png" style={styleImg} />Courses</Link>
                                                 </li>
                                                 <li><Link to={'/message/inbox'}
                                                     className="dropdown-item position-relative"> <img
-                                                        src="../../../public/Images/mail.png"
+                                                        src="./public/images/mail.png"
                                                         style={{
                                                             width: "40px",
                                                             height: '40px',
@@ -122,7 +122,7 @@ const Navbar = () => {
                                                     <div className="dropdown-item"
                                                         style={{ cursor: 'pointer' }}
                                                         onClick={e => dispatch(logout())}>
-                                                        <img src="../../../public/Images/logout.png"
+                                                        <img src="./public/images/logout.png"
                                                             style={{
                                                                 width: "40px",
                                                                 height: '40px',
@@ -146,11 +146,11 @@ const Navbar = () => {
                                             </div>
                                             <ul className="dropdown-menu">
                                                 <li><Link to={'/profile'} className="dropdown-item">
-                                                    <img src="../../../public/Images/profile.png"
+                                                    <img src="./public/images/profile.png"
                                                         style={styleImg} /> Profile</Link></li>
                                                 <li><Link to={'/message/inbox'}
                                                     className="dropdown-item position-relative"> <img
-                                                        src="../../../public/Images/mail.png" style={styleImg} />
+                                                        src="./public/images/mail.png" style={styleImg} />
                                                     Mails {hasUnReadMessages && redNotification}
                                                 </Link>
                                                 </li>
@@ -158,7 +158,7 @@ const Navbar = () => {
                                                     <div className="dropdown-item"
                                                         style={{ cursor: 'pointer' }}
                                                         onClick={e => dispatch(logout())}>
-                                                        <img src="../../../public/Images/logout.png"
+                                                        <img src="./public/images/logout.png"
                                                             style={styleImg}
                                                         />Logout
                                                     </div>
@@ -168,7 +168,7 @@ const Navbar = () => {
                                     }
                                 </>)}
                         <div>
-                            <img src="../../../public/Images/colleg-logo.jpg"
+                            <img src="./public/images/colleg-logo.jpg"
                                 style={{ marginLeft: "25px", borderRadius: '50%', padding: '5px' }} width={80}
                                 height={80} />
                             <h5 className={'text'}>FCAI BSU</h5>

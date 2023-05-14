@@ -29,4 +29,41 @@
       <ProjectReference Include="..\Logic\Logic.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\SubjectMaterials\0a3cb224-89ec-4e4d-88f7-49915b20c479-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\198810b5-50fb-41ed-b002-191d442a79dd-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\1bae3ad8-cd46-4b7d-a693-e31ce67f8664-71d85630-1ba5-451d-820f-2eb55a5af69c-popper.min.js" />
+      <None Include="wwwroot\SubjectMaterials\1bfb535e-cb33-45c1-a4fc-8232d2a6b43f-71d85630-1ba5-451d-820f-2eb55a5af69c-jquery-3.6.4.min.js" />
+      <None Include="wwwroot\SubjectMaterials\21149f7f-f024-4d65-8599-3391ea9f8b73-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\23ac8222-5614-4d80-a644-e0c4106a4f20-71d85630-1ba5-451d-820f-2eb55a5af69c-popper.min.js" />
+      <None Include="wwwroot\SubjectMaterials\2484615f-ad86-46bb-b2d5-028c11db7851-71d85630-1ba5-451d-820f-2eb55a5af69c-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\28862857-777f-4e14-ba19-e438fd615138-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\2ed6733e-261a-4a6e-81ed-af70a5edeb8f-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.bundle.min.js" />
+      <None Include="wwwroot\SubjectMaterials\31a005a5-6c02-418a-a0d1-41b29398bf01-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.min.js.map" />
+      <None Include="wwwroot\SubjectMaterials\35e0caaf-af31-4c14-bf9d-a3f8e2df0de3-71d85630-1ba5-451d-820f-2eb55a5af69c-1_63_313_313_0_62_0.png" />
+      <None Include="wwwroot\SubjectMaterials\37b83f64-af55-4b8c-888d-6326ae6de791-71d85630-1ba5-451d-820f-2eb55a5af69c-jquery-3.6.4.min.js" />
+      <None Include="wwwroot\SubjectMaterials\3e051ad8-2dc6-4867-b04b-5d1b0e60fe4a-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\406fbb52-a96c-4174-89cb-9cf736999b6f-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.min.js.map" />
+      <None Include="wwwroot\SubjectMaterials\4c40ed51-7150-4afd-acd7-b8c2dedf580a-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\59343735-be41-4fba-a9dc-e0d434ca3654-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\63d2f11c-f239-4146-9994-510cabfbb810-71d85630-1ba5-451d-820f-2eb55a5af69c-jquery-3.6.4.min.js" />
+      <None Include="wwwroot\SubjectMaterials\6cba1548-66b2-4ffe-83e5-d8c739c5f55a-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.bundle.js" />
+      <None Include="wwwroot\SubjectMaterials\76e6ad11-6214-4320-8931-f127ad309668-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\798d170e-f4b9-4495-be8b-69146e5141ca-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.bundle.js.map" />
+      <None Include="wwwroot\SubjectMaterials\8300c7d3-ce3c-4b81-ac24-13e4ed4230ee-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\a678deed-f1d3-4317-a6f7-a28e43836497-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\ba041f97-32d1-46dc-a5f5-c7c6000ca33e-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\bae1912c-2ed6-4418-acc6-beb4bdefa812-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.bundle.js" />
+      <None Include="wwwroot\SubjectMaterials\cbb2c7e2-0e82-4be8-b52f-fbe5e6fc878f-71d85630-1ba5-451d-820f-2eb55a5af69c-popper.min.js" />
+      <None Include="wwwroot\SubjectMaterials\d189c2a7-659b-47c1-95e8-2870acba6a34-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\d6c5f83e-c699-4439-a9f8-0e67651dbf8b-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.bundle.min.js" />
+      <None Include="wwwroot\SubjectMaterials\d9e17fca-7306-4560-9911-f7820679841e-71d85630-1ba5-451d-820f-2eb55a5af69c-popper.min.js" />
+      <None Include="wwwroot\SubjectMaterials\d9f5cdb8-a5b8-4dd4-aa49-6bec957c73ab-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.min.js" />
+      <None Include="wwwroot\SubjectMaterials\e0941985-e0ec-46ac-8eac-51756137f607-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\ec67246b-c440-4759-8f8f-8a8d104e5bac-618fcf63-fde9-4231-9c7a-9b0e50dff47f-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\f53db306-fb8c-4b2e-b90f-207cc0aba0a5-71d85630-1ba5-451d-820f-2eb55a5af69c-bootstrap.js.map" />
+      <None Include="wwwroot\SubjectMaterials\f7e91f68-88c9-474d-9b3a-a36d37285971-71d85630-1ba5-451d-820f-2eb55a5af69c-001.mp3" />
+      <None Include="wwwroot\SubjectMaterials\fd59409d-a8eb-4dde-9766-b385db6b7883-71d85630-1ba5-451d-820f-2eb55a5af69c-pages with data.pdf" />
+    </ItemGroup>
+
 </Project>

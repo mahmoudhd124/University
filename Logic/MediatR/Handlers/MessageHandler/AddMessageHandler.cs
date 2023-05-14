@@ -25,7 +25,7 @@ public class AddMessageHandler : IRequestHandler<AddMessageCommand, Response<boo
 
         var receiverFound =
             await _context.Users.AnyAsync(u => u.Id.Equals(addMessageDto.ReceiverId), cancellationToken);
-        if(receiverFound == false)
+        if (receiverFound == false)
             return Response<bool>.Failure(UserErrors.WrongId);
 
         var message = new Message()

@@ -30,7 +30,7 @@ public static class UserErrors
         "The Id is wrong");
 
     public static readonly Error NotValidEmailError = new("User.NotValidEmail",
-    "The email is not valid, try another");
+        "The email is not valid, try another");
 
     public static readonly Error WrongRefreshToken = new("User.WrongRefreshTokenError",
         "The Refresh Token Is Wrong, Sign In Again");

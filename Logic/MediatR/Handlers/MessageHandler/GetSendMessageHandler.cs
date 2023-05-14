@@ -23,7 +23,7 @@ public class GetSendMessageHandler : IRequestHandler<GetSendMessagesQuery, Respo
     public async Task<Response<IEnumerable<MessageForSendListDto>>> Handle(GetSendMessagesQuery request,
         CancellationToken cancellationToken)
     {
-        var (userId,userName,pageIndex,pageSize) = request;
+        var (userId, userName, pageIndex, pageSize) = request;
 
         var messagesDto = await _context.Messages
             .Where(m => m.SenderId.Equals(userId))

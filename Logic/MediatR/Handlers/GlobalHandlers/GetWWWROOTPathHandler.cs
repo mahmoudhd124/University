@@ -11,6 +11,8 @@ public class GetWwwrootPathHandler : IRequestHandler<GetWwwrootPathQuery, string
                       Environment.CurrentDirectory.Split("\\").SkipLast(1)) + "\\" +
                   typeof(EntryPoint).Assembly.FullName?.Split(",").First() + "\\wwwroot";
 
-        return Task.FromResult(dir);
+        var s = Environment.CurrentDirectory;
+
+        return Task.FromResult(s + "\\wwwroot");
     }
 }

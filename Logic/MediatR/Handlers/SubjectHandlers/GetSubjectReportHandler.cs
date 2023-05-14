@@ -20,7 +20,8 @@ public class GetSubjectReportHandler : IRequestHandler<GetSubjectReportQuery, Re
         _mapper = mapper;
     }
 
-    public async Task<Response<SubjectReportDto>> Handle(GetSubjectReportQuery request, CancellationToken cancellationToken)
+    public async Task<Response<SubjectReportDto>> Handle(GetSubjectReportQuery request,
+        CancellationToken cancellationToken)
     {
         var id = request.SubjectId;
 
@@ -29,7 +30,7 @@ public class GetSubjectReportHandler : IRequestHandler<GetSubjectReportQuery, Re
             .ThenInclude(ds => ds.Doctor)
             .Include(s => s.SubjectFiles)
             .ProjectTo<SubjectReportDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(s => s.Id == id,cancellationToken);
+            .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
 
         return subjectDto;
     }

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Logic.MediatR.Queries.SubjectMaterialsQueries;
 
-public record GetSubjectMaterialPathAndContentQuery(string Name):IRequest<Response<GetSubjectMaterialPathAndTypeDto>>;
+public record GetSubjectMaterialPathAndContentQuery(string Name) : IRequest<Response<GetSubjectMaterialPathAndTypeDto>>;

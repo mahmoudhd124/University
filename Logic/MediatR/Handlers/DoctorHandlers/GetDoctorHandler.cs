@@ -34,7 +34,7 @@ public class GetDoctorHandler : IRequestHandler<GetDoctorQuery, Response<DoctorD
 
         if (doctorDto == null)
             return Response<DoctorDto>.Failure(UserErrors.WrongId);
-        
+
         doctorDto.IsOwner = id.Equals(userRequestId);
         return doctorDto;
     }

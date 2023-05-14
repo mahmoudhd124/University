@@ -21,6 +21,5 @@ public class DoctorSubjectConfiguration : IEntityTypeConfiguration<DoctorSubject
             .WithOne(s => s.DoctorSubject)
             .HasForeignKey<DoctorSubject>(x => x.SubjectId)
             .OnDelete(DeleteBehavior.Cascade);
-
     }
 }

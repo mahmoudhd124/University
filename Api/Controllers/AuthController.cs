@@ -73,7 +73,7 @@ public class AuthController : BaseController
         var cookiesOption = new CookieOptions
         {
             HttpOnly = true,
-            SameSite = SameSiteMode.None,
+            SameSite = SameSiteMode.Strict,
             Expires = DateTime.Now.AddDays(_expiry.RefreshTokenExpiryInDays).ToLocalTime(),
             // Expires = DateTime.Now.AddSeconds(15).ToLocalTime(),
             Secure = true,

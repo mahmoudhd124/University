@@ -17,6 +17,7 @@ public class IsValidEmailHandler : IRequestHandler<IsValidEmailQuery, bool>
     public async Task<bool> Handle(IsValidEmailQuery request, CancellationToken cancellationToken)
     {
         var email = request.Email;
-        return await _context.Users.AnyAsync(u => u.Email.ToUpper().Equals(email.ToUpper()), cancellationToken) == false;
+        return await _context.Users.AnyAsync(u => u.Email.ToUpper().Equals(email.ToUpper()), cancellationToken) ==
+               false;
     }
 }

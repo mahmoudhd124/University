@@ -25,7 +25,7 @@ app.UseHttpsRedirection();
 
 app.UseFileServer(new FileServerOptions
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\..\logic\wwwroot")),
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath + @".\wwwroot")),
     EnableDirectoryBrowsing = true
 });
 // app.UseStaticFiles(new StaticFileOptions

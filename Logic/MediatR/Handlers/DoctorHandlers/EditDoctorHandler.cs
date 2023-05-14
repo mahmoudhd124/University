@@ -45,7 +45,7 @@ public class EditDoctorHandler : IRequestHandler<EditDoctorCommand, Response<boo
 
         _mapper.Map(editDoctorDto, doctor);
         var result = await _userManager.UpdateAsync(doctor);
-        
+
         if (result.Succeeded)
             return true;
         return Response<bool>.Failure(new Error("User.UnknownError",

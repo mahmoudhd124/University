@@ -9,7 +9,7 @@ const Home = () => {
 
                 <div className="row justify-content-between mt-5">
                     <div className='col-12 col-md-4 text-center mb-3 mb-md-0'>
-                        <img src="../../../public/Images/logo.jpg" className={'logo'} draggable={false} alt=""/>
+                        <img src={'./public/images/logo.jpg'} className={'logo'} draggable={false} alt=""/>
                         <h3>Quality Management System</h3>
                         <button className={'button2'}
                                 onClick={e => navigator('/auth/login')}
@@ -56,9 +56,9 @@ const Home = () => {
                         </p>
                     </div>
                 </div>
-                <img src="../../../public/Images/background.jpg" className={'bg-img'} alt=""/>
-                {/*<img src="../../../public/Images/colleg-logo.jpg" className={'logo'} draggable={false} alt=""/>*/}
-                {/*<img src="../../../public/Images/logo.jpeg" className={'site-logo'} draggable={false} alt=""/>*/}
+                <img src="./public/images/background.jpg" className={'bg-img'} alt=""/>
+                {/*<img src="./public/images/colleg-logo.jpg" className={'logo'} draggable={false} alt=""/>*/}
+                {/*<img src="./public/images/logo.jpeg" className={'site-logo'} draggable={false} alt=""/>*/}
                 <div className="bg"></div>
 
 

@@ -83,7 +83,7 @@ const DoctorsList = () => {
                 </div>
             </div>}
             <h3 className='txt'>
-                <img src='../../../public/Images/doctor.png' style={{ width: '60px', height: '60px', borderRadius: '50%', margin: '15px' }}></img>Doctors</h3>
+                <img src='./public/images/doctor.png' style={{ width: '60px', height: '60px', borderRadius: '50%', margin: '15px' }}></img>Doctors</h3>
 
 
 
@@ -97,7 +97,7 @@ const DoctorsList = () => {
                     setUsernamePrefix(name.current.value)
                     setPage(0)
                 }}>
-                    <img src='../../../public/Images/search.png' style={{ width: '30px', height: '30px', borderRadius: '50%' }}></img>
+                    <img src='./public/images/search.png' style={{ width: '30px', height: '30px', borderRadius: '50%' }}></img>
                 </button>
                 <div className="row justify-content-center">
                     {selectHasSubjectOrNot('col-12 col-sm-8 col-md-6 col-lg-6')}
@@ -107,7 +107,7 @@ const DoctorsList = () => {
             <div className='row justify-content-center'>
                 <div className='col-8 col-md-2'>
                     <Link className='btn btn-outline-dark w-100 my-3' to={'/doctor/add'} state={{ from: loc }}>
-                        <img src='../../../public/Images/add.png' style={{ width: '30px', height: '30px', borderRadius: '50%', marginRight: '10px' }}></img> Add Doctor
+                        <img src='./public/images/add.png' style={{ width: '30px', height: '30px', borderRadius: '50%', marginRight: '10px' }}></img> Add Doctor
 
                     </Link>
                 </div>

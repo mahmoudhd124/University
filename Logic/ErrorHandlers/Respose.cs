@@ -23,10 +23,10 @@ public class Response<TResult>
     }
 
     public static Response<TResult> Success(TResult result) =>
-         new(true, result, DomainErrors.None);
+        new(true, result, DomainErrors.None);
 
     public static Response<TResult> Failure(Error error) =>
-         new(false, default, error);
+        new(false, default, error);
 
 
     public static implicit operator Response<TResult>(TResult value) => new(true, value, DomainErrors.None);

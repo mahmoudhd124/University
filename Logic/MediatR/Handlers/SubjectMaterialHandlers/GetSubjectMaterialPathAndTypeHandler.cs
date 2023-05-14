@@ -20,12 +20,12 @@ public class GetSubjectMaterialPathAndTypeHandler : IRequestHandler<GetSubjectMa
         CancellationToken cancellationToken)
     {
         var name = request.Name;
-        var wwwroot = await _mediator.Send(new GetWwwrootPathQuery(),cancellationToken);
+        var wwwroot = await _mediator.Send(new GetWwwrootPathQuery(), cancellationToken);
         var path = $"{wwwroot}\\SubjectMaterials\\{name}";
         return new GetSubjectMaterialPathAndTypeDto()
         {
             Path = path,
-            Bytes = await File.ReadAllBytesAsync(path,cancellationToken)
+            Bytes = await File.ReadAllBytesAsync(path, cancellationToken)
         };
     }
 }

@@ -25,7 +25,7 @@ public class
     public async Task<Response<IEnumerable<SubjectForPageDto>>> Handle(GetSubjectForPageQuery request,
         CancellationToken cancellationToken)
     {
-        var (pageIndex, pageSize, department, year,namePrefix) = request;
+        var (pageIndex, pageSize, department, year, namePrefix) = request;
 
         if (year is < 1 or > 9)
             return Response<IEnumerable<SubjectForPageDto>>.Failure(SubjectErrors.InvalidYear);
@@ -37,7 +37,7 @@ public class
         if (string.IsNullOrWhiteSpace(department) == false)
             subjectDtos = subjectDtos
                 .Where(s => s.Department.ToUpper().Equals(department.ToUpper()));
-        
+
         if (string.IsNullOrWhiteSpace(namePrefix) == false)
             subjectDtos = subjectDtos
                 .Where(s => s.Name.ToUpper().StartsWith(namePrefix.ToUpper()));

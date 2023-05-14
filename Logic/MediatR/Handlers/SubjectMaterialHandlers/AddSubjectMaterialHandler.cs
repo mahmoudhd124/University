@@ -42,6 +42,12 @@ public class AddSubjectMaterialHandler : IRequestHandler<AddSubjectMaterialComma
         //     return Response<bool>.Failure(SubjectMaterialErrors.RepeatedFileOnTheSameType);
 
         var newFileName = $"{Guid.NewGuid()}-{userId}-{fileName}";
+
+        var wwwroot = await _mediator.Send(new GetWwwrootPathQuery(), cancellationToken);
+        await using var rootFileStream =
+            new FileStream($@"{wwwroot}\SubjectMaterials\{newFileName}", FileMode.Create);
+        await fileStream.CopyToAsync(rootFileStream, cancellationToken);
+
         subject.SubjectFiles.Add(new SubjectFiles
         {
             FileName = fileName,
@@ -49,11 +55,6 @@ public class AddSubjectMaterialHandler : IRequestHandler<AddSubjectMaterialComma
             Type = addSubjectMaterialDto.Type
         });
         await _context.SaveChangesAsync(cancellationToken);
-
-        var wwwroot = await _mediator.Send(new GetWwwrootPathQuery(), cancellationToken);
-        await using var rootFileStream =
-            new FileStream($@"{wwwroot}\SubjectMaterials\{newFileName}", FileMode.Create);
-        await fileStream.CopyToAsync(rootFileStream, cancellationToken);
 
         return true;
     }

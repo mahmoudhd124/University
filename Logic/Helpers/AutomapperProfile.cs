@@ -98,7 +98,7 @@ public class AutomapperProfile : Profile
                     PhoneNumber = src.DoctorSubject.Doctor.PhoneNumber,
                     NationalNumber = src.DoctorSubject.Doctor.NationalNumber
                 }))
-            .ForMember(dest =>dest.Files,opt => 
+            .ForMember(dest => dest.Files, opt =>
                 opt.MapFrom(src => src.SubjectFiles.Select(f => new SubjectFileDto()
                 {
                     Id = f.Id,

@@ -74,7 +74,8 @@ public class GetTokenAndRefreshTokenHandler : IRequestHandler<GetTokenAndRefresh
         var tokenDescriptor = new SecurityTokenDescriptor()
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.Now.AddMinutes(_expiry.TokenExpiryInMinutes).ToLocalTime(),
+            Expires = DateTime.UtcNow.AddMinutes(_expiry.TokenExpiryInMinutes),
+            // Expires = DateTime.Now.AddMinutes(_expiry.TokenExpiryInMinutes).ToLocalTime(),
             // Expires = DateTime.Now.AddSeconds(5).ToLocalTime(),
             SigningCredentials = new SigningCredentials(_jwt.SecurityKey, SecurityAlgorithms.HmacSha256)
         };

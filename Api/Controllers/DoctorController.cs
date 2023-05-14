@@ -17,9 +17,10 @@ public class DoctorController : BaseController
     [HttpGet]
     [Authorize(Roles = "Admin")]
     [Route("{pageIndex:int}/{pageSize:int}/{usernamePrefix?}")]
-    public async Task<ActionResult> Page(int pageIndex, int pageSize,bool? hasSubject = null, string usernamePrefix = "") =>
-        Return(await Mediator.Send(new GetDoctorsPageQuery(pageSize, pageIndex, usernamePrefix,hasSubject)));
-    
+    public async Task<ActionResult> Page(int pageIndex, int pageSize, bool? hasSubject = null,
+        string usernamePrefix = "") =>
+        Return(await Mediator.Send(new GetDoctorsPageQuery(pageSize, pageIndex, usernamePrefix, hasSubject)));
+
     [HttpGet]
     [Authorize(Roles = "Admin")]
     [Route("Report/{id}")]
@@ -41,12 +42,12 @@ public class DoctorController : BaseController
     [HttpDelete]
     public async Task<ActionResult> Delete(string id) =>
         Return(await Mediator.Send(new DeleteDoctorCommand(id)));
-    
+
     [Route("GetEditInfo/{id}")]
     [HttpGet]
     public async Task<ActionResult> GetEditInfo(string id) =>
         Return(await Mediator.Send(new GetEditDoctorDataQuery(id)));
-    
+
 
     [Authorize(Roles = "Admin")]
     [HttpGet]

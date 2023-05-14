@@ -1,6 +1,7 @@
 ﻿using Logic.Models;
 
 namespace Logic.Dtos.SubjectDto;
+
 using SubjectMaterialDto;
 
 public class SubjectDto

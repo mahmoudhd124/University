@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logic.MediatR.Handlers.MessageHandler;
 
-public class GetReceivedMessagesHandler : IRequestHandler<GetReceivedMessagesQuery, Response<IEnumerable<MessageForReceivedListDto>>>
+public class
+    GetReceivedMessagesHandler : IRequestHandler<GetReceivedMessagesQuery,
+        Response<IEnumerable<MessageForReceivedListDto>>>
 {
     private readonly IdentityContext _context;
     private readonly IMapper _mapper;
@@ -23,7 +25,7 @@ public class GetReceivedMessagesHandler : IRequestHandler<GetReceivedMessagesQue
     public async Task<Response<IEnumerable<MessageForReceivedListDto>>> Handle(GetReceivedMessagesQuery request,
         CancellationToken cancellationToken)
     {
-        var (userId,userName,pageIndex,pageSize) = request;
+        var (userId, userName, pageIndex, pageSize) = request;
         var messagesDto = await _context.Messages
             .Where(m => m.ReceiverId.Equals(userId))
             .Skip(pageIndex * pageSize)
@@ -31,7 +33,7 @@ public class GetReceivedMessagesHandler : IRequestHandler<GetReceivedMessagesQue
             .OrderByDescending(m => m.Date)
             .ProjectTo<MessageForReceivedListDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
-        
+
 
         var messagesSendersId = messagesDto.Select(m => m.SenderId);
 

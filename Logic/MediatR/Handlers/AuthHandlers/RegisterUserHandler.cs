@@ -33,11 +33,13 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Response
     {
         var registerUserDto = request.RegisterUserDto;
 
-        var isValidUsername = await _mediator.Send(new IsValidUsernameQuery(registerUserDto.Username), cancellationToken);
+        var isValidUsername =
+            await _mediator.Send(new IsValidUsernameQuery(registerUserDto.Username), cancellationToken);
         if (isValidUsername == false)
             return Response<bool>.Failure(UserErrors.UsernameAlreadyUsedError);
 
-        var isValidPassword = await _mediator.Send(new IsValidPasswordQuery(registerUserDto.Password), cancellationToken);
+        var isValidPassword =
+            await _mediator.Send(new IsValidPasswordQuery(registerUserDto.Password), cancellationToken);
         if (isValidPassword == false)
             return Response<bool>.Failure(UserErrors.WeakPasswordError);
 

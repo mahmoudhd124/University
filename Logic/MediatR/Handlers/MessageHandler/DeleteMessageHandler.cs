@@ -18,20 +18,20 @@ public class DeleteMessageHandler : IRequestHandler<DeleteMessageCommand, Respon
 
     public async Task<Response<bool>> Handle(DeleteMessageCommand request, CancellationToken cancellationToken)
     {
-        var (messageId,userId) = request;
+        var (messageId, userId) = request;
         var message = await _context.Messages
             .Where(m => m.Id == messageId)
             .FirstOrDefaultAsync(cancellationToken);
-        
-        if(message == null)
+
+        if (message == null)
             return Response<bool>.Failure(MessageErrors.WrongId);
-        
-        if(message.SenderId.Equals(userId) == false)
+
+        if (message.SenderId.Equals(userId) == false)
             return Response<bool>.Failure(MessageErrors.UnAuthorizeDelete);
 
         _context.Messages.Remove(message);
         await _context.SaveChangesAsync(cancellationToken);
-        
+
         return true;
     }
 }

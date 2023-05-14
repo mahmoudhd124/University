@@ -33,9 +33,9 @@ public class GetDoctorReportHandler : IRequestHandler<GetDoctorReportQuery, Resp
             .ProjectTo<DoctorReportDto>(_mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(d => d.Id.Equals(id), cancellationToken);
 
-        if(doctorReportDto == null)
+        if (doctorReportDto == null)
             return Response<DoctorReportDto>.Failure(UserErrors.WrongId);
-        
+
         var enumValues = Enum.GetValues<SubjectFileTypes>();
 
         doctorReportDto.IsComplete = doctorReportDto.Subjects
