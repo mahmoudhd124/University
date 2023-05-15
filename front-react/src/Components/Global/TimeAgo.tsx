@@ -1,5 +1,5 @@
 import React from 'react';
-import {formatDistanceToNow, parseISO} from 'date-fns'
+import {formatDistanceToNow } from 'date-fns'
 import {utcToZonedTime} from 'date-fns-tz'
 
 const TimeAgo = ({timestamp, className = ''}: { timestamp: string, className?: string }) => {
