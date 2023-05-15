@@ -74,7 +74,7 @@ public class AuthController : BaseController
         {
             HttpOnly = true,
             SameSite = SameSiteMode.Strict,
-            Expires = DateTime.Now.AddDays(_expiry.RefreshTokenExpiryInDays).ToLocalTime(),
+            Expires = DateTime.UtcNow.AddDays(_expiry.RefreshTokenExpiryInDays).ToLocalTime(),
             // Expires = DateTime.Now.AddSeconds(15).ToLocalTime(),
             Secure = true,
         };

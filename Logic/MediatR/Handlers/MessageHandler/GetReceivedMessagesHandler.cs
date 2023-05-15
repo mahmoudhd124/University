@@ -28,9 +28,9 @@ public class
         var (userId, userName, pageIndex, pageSize) = request;
         var messagesDto = await _context.Messages
             .Where(m => m.ReceiverId.Equals(userId))
+            .OrderByDescending(m => m.Date)
             .Skip(pageIndex * pageSize)
             .Take(pageSize)
-            .OrderByDescending(m => m.Date)
             .ProjectTo<MessageForReceivedListDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 

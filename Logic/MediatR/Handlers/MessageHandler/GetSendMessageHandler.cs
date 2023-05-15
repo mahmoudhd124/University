@@ -27,9 +27,9 @@ public class GetSendMessageHandler : IRequestHandler<GetSendMessagesQuery, Respo
 
         var messagesDto = await _context.Messages
             .Where(m => m.SenderId.Equals(userId))
+            .OrderByDescending(m => m.Date)
             .Skip(pageIndex * pageSize)
             .Take(pageSize)
-            .OrderByDescending(m => m.Date)
             .ProjectTo<MessageForSendListDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 

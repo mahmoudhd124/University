@@ -11,6 +11,6 @@ public class Message
     public User Receiver { get; set; }
     public string Title { get; set; }
     public string Content { get; set; }
-    public DateTime Date { get; set; } = DateTime.Now;
+    public DateTime Date { get; set; } = DateTime.UtcNow;
     public bool Read { get; set; }
 }
