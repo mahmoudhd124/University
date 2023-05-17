@@ -162,7 +162,7 @@ const SubjectMaterials = ({
                                                 onClick={e => setShowUpload(true)}
                         >Add Material </button>}
 
-                        {showUpload && <div className={'d-flex gap-3 justify-content-center'}>
+                        {showUpload && <div className={'d-flex flex-wrap gap-3 justify-content-center'}>
                             {selectTypeForUploadFile()}
                             <button className="btn btn-outline-primary"
                                     disabled={fileType.valueOf() == -1}

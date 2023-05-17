@@ -68,6 +68,12 @@ public class AuthController : BaseController
     public async Task<ActionResult> IsValidUsername(string username) =>
         Ok(await Mediator.Send(new IsValidUsernameQuery(username)));
 
+    [HttpPost]
+    [Authorize]
+    [Route("ChangePassword")]
+    public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordDto changePasswordDto) =>
+        Return(await Mediator.Send(new ChangePasswordCommand(Id, changePasswordDto)));
+
     private void SetToHttpCookie(RefreshTokenDto refreshTokenDto)
     {
         var cookiesOption = new CookieOptions

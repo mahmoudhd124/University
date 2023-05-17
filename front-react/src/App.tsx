@@ -27,6 +27,7 @@ import Message from "./Components/Message/Message";
 import SubjectReport from "./Components/Subject/SubjectReport";
 import DoctorReport from "./Components/Doctor/DoctorReport";
 import SubjectFileTypesPage from "./Components/Subject/SubjectFileTypesPage";
+import ChangePassword from "./Components/Auth/ChangePassword";
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -64,6 +65,10 @@ const App = () => {
                 <Route path={'auth'} element={<AuthLayout/>}>
                     <Route path={'login'} element={<Login/>}/>
                     <Route path={'reg'} element={<Signup/>}/>
+                </Route>
+
+                <Route path={'auth'} element={<RouteProtector allowedRoles={[]}/>}>
+                    <Route path={'changePassword'} element={<ChangePassword/>}/>
                 </Route>
 
                 //doctor routes

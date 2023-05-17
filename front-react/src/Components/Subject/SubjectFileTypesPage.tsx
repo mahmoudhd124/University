@@ -51,8 +51,8 @@ const SubjectFileTypesPage = () => {
 
     return (
         <main>
-            <div className="container position-relative">
-                {err.length > 0 && <Alert variant={'danger'}>{err}</Alert>}
+            <div className="container py-2">
+                {err.length > 0 && <Alert className='text-center' variant={'danger'}>{err}</Alert>}
                 <div className="row justify-content-center">
                     {types.map((t, i) => <div key={t}
                                               className={'border border-3 rounded-3 p-3 text-center col-12 col-sm-10 col-md-8 col-lg-7 my-3'}>

@@ -4,7 +4,7 @@ import useAppSelector from "../../Hookes/useAppSelector";
 import {logout} from "../../Feutures/Auth/authSlice";
 import useAppDispatch from "../../Hookes/useAppDispatch";
 import './Navbar.scss'
-import {faBars} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faShieldAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useLazyGetIsHasUnReadMessagesQuery} from "../../App/Api/MessageApi";
 
@@ -121,6 +121,10 @@ const Navbar = () => {
                                                 <li><Link to={'/subject/files/types'} className="dropdown-item">
                                                     <img src="/Images/fileTemplate.png" alt="" style={styleImg}/>
                                                     Templates</Link>
+                                                </li>
+                                                <li><Link to={'/auth/changePassword'} className="dropdown-item">
+                                                    <img src="/Images/changePassword.png" alt="" style={styleImg}/>
+                                                    Change Password</Link>
                                                 </li>
                                                 <li>
                                                     <div className="dropdown-item"

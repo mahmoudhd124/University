@@ -53,8 +53,8 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Response
 
         if (result.Succeeded)
             return true;
-        else
-            return Response<bool>.Failure(new Error("User.UnknownError",
-                string.Join("\n", result.Errors.Select(e => e.Description))));
+        
+        return Response<bool>.Failure(new Error("User.UnknownError",
+            string.Join("\n", result.Errors.Select(e => e.Description))));
     }
 }
