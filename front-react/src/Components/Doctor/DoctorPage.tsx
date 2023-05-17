@@ -63,11 +63,11 @@ const DoctorPage = () => {
 
             <div className="doctor bg-white shadow rounded-lg d-block d-sm-flex flex-sm-wrap justify-content-center">
                 <div className="profile-tab-nav border-right">
-                    <div className="p-4">
+                    <div>
                         <div className="img-circle text-center mb-3 ">
                             <img src="/images/doctor.png" alt="Image" className="shadow"></img>
                         </div>
-                        <h3 className="text-center text-wrap">
+                        <h3 className="text-center text-wrap" id={'doctor-name'}>
                             {data?.firstname! + " " + data?.lastname!}
                         </h3>
                         {isAdmin && <div className="row justify-content-center my-1 mt-5">
@@ -95,7 +95,13 @@ const DoctorPage = () => {
                     <div><DoctorField title={'National Number:'} data={data?.nationalNumber!} /></div>
 
                     <div>
-                        <div className="text-primary mb-3">Has Done</div>
+                        <div className="text-primary mb-3 d-flex">
+                            <span>Has Done</span>
+                            <span className={'ms-auto'}>{data?.subjects
+                                .map(s => s.numberOfFilesTypes)
+                                .filter(n => n == (Object.keys(SubjectFileTypes).length / 2))
+                                .length ?? -1}/{data?.subjects.length ?? -1}</span>
+                        </div>
                         <div className="progress col-lg-10" style={{ height: "24px" }}>
                             <div className="progress-bar" style={{ width: `${per}%` }}>{per}%</div>
                         </div>
@@ -113,7 +119,7 @@ const DoctorPage = () => {
                 <div className="row justify-content-center justify-content-sm-around gap-3">
                     {data?.subjects?.length ?? 0 > 0 ? data?.subjects.map(s =>
                         <div key={s.id}
-                            className={'col-11 col-sm-8 col-md-5 col-lg-3 d-flex flex-column align-items-center border text-center border-3 rounded-3 subject'}
+                            className={'col-11 col-sm-8 col-md-6 col-lg-4 col-xl-3 d-flex flex-column align-items-center border text-center border-3 rounded-3 subject'}
                             onClick={e => navigator('/subject/' + s.code, { state: { from: loc } })}>
                             <h3 className={'text-wrap'}>{s.name}</h3>
                             <h3 className={'mt-1'}>{s.department}</h3>

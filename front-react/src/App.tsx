@@ -26,6 +26,7 @@ import InboxMessages from "./Components/Message/InboxMessages";
 import Message from "./Components/Message/Message";
 import SubjectReport from "./Components/Subject/SubjectReport";
 import DoctorReport from "./Components/Doctor/DoctorReport";
+import SubjectFileTypesPage from "./Components/Subject/SubjectFileTypesPage";
 
 const App = () => {
     const stayLogin = JSON.parse(localStorage.getItem('stayLogin') ?? 'false')
@@ -87,6 +88,7 @@ const App = () => {
                     <Route path={'List/:pageIndex'} element={<SubjectList/>}/>
                     <Route path={'Edit/:code'} element={<EditSubject/>}/>
                     <Route path={'Report/:id'} element={<SubjectReport/>}/>
+                    <Route path={'Files/Types'} element={<SubjectFileTypesPage/>}/>
                 </Route>
 
                 <Route path={'subject'} element={<RouteProtector allowedRoles={[]}/>}>

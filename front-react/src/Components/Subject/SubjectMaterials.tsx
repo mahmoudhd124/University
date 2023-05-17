@@ -1,6 +1,11 @@
 import {SubjectFileModel} from "../../Models/SubjectMaterial/SubjectFileModel";
 import React, {useRef, useState} from "react";
-import {useAddSubjectMaterialMutation, useDeleteSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
+import {
+    downloadFile,
+    useAddSubjectMaterialMutation,
+    useDeleteSubjectMaterialMutation,
+    useDownloadSubjectFileTypeTemplate
+} from "../../App/Api/SubjectMaterialApi";
 import {useNavigate} from "react-router-dom";
 import useAppDispatch from "../../Hookes/useAppDispatch";
 import useAppSelector from "../../Hookes/useAppSelector";
@@ -9,6 +14,7 @@ import useAxiosApi from "../../Hookes/useAxiosApi";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 import {faX, faUpload} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Alert} from "react-bootstrap";
 
 const SubjectMaterials = ({
                               materials,
@@ -28,6 +34,8 @@ const SubjectMaterials = ({
     const [showUpload, setShowUpload] = useState(false)
     const [addError, setAddError] = useState('')
     const [filter, setFilter] = useState(-1)
+    const downloadTemplate = useDownloadSubjectFileTypeTemplate(api)
+    const [err, setErr] = useState('')
 
     const addMaterialHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -49,6 +57,17 @@ const SubjectMaterials = ({
         setFileType(-1)
         navigator('/subject/' + code)
     }
+
+    const downloadTypeTemplate = (type: keyof typeof SubjectFileTypes) => () =>
+        downloadTemplate(type)
+            .then(({data}) => {
+                downloadFile(data, `${type}-template.docx`)
+                setErr('')
+            })
+            .catch(e => //@ts-ignore
+                setErr('Failed to download template of type ' + m.name + '\n' + e?.response?.data?.message ?? '')
+            )
+
 
     const handleXClick = (e: React.MouseEvent) => {
         e.preventDefault()
@@ -111,6 +130,7 @@ const SubjectMaterials = ({
     return (
         <div style={{backgroundColor: '#eee'}}>
             <h3 className={'text-center'}>Materials</h3>
+            {err.length > 0 && <Alert variant={'danger'}>{err}</Alert>}
             {idToRemove && <div
                 className='border border-3 rounded rounded-3 mx-auto p-3 bg-white' style={{width: '90%'}}>
                 <h3 className='text-center'>Are You Sure You Want To
@@ -144,6 +164,11 @@ const SubjectMaterials = ({
 
                         {showUpload && <div className={'d-flex gap-3 justify-content-center'}>
                             {selectTypeForUploadFile()}
+                            <button className="btn btn-outline-primary"
+                                    disabled={fileType.valueOf() == -1}
+                                    onClick={downloadTypeTemplate(SubjectFileTypes[fileType] as keyof typeof SubjectFileTypes)}>
+                                Template
+                            </button>
                             <button className="btn btn-outline-primary"
                                     disabled={fileType.valueOf() == -1}
                                     onClick={e => file.current.click()}>

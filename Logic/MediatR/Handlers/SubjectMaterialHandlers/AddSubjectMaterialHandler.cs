@@ -35,12 +35,6 @@ public class AddSubjectMaterialHandler : IRequestHandler<AddSubjectMaterialComma
         if (isAssigned == false)
             return Response<bool>.Failure(SubjectMaterialErrors.UnAuthorizedAdd);
 
-        // var isTypeFound = await _context.SubjectMaterials
-        //     .AnyAsync(s => s.SubjectId == addSubjectMaterialDto.SubjectId && s.Type == addSubjectMaterialDto.Type,
-        //         cancellationToken);
-        // if (isTypeFound)
-        //     return Response<bool>.Failure(SubjectMaterialErrors.RepeatedFileOnTheSameType);
-
         var newFileName = $"{Guid.NewGuid()}-{userId}-{fileName}";
 
         var wwwroot = await _mediator.Send(new GetWwwrootPathQuery(), cancellationToken);

@@ -1,6 +1,7 @@
 ﻿using Logic.Dtos.SubjectMaterialDto;
 using Logic.MediatR.Commands.SubjectMaterialCommands;
 using Logic.MediatR.Queries.SubjectMaterialsQueries;
+using Logic.Models;
 using Logic.Models.IdentityModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,25 @@ public class SubjectFileController : BaseController
         if (response.IsSuccess == false)
             return Return(response);
 
-        return File(response.Data.Bytes, "application/octet-stream", returnName ?? name);
+        return File(response.Data.Bytes, "application/octet-stream");
     }
+
+    [HttpGet]
+    [Route("Template/{type}")]
+    public async Task<ActionResult> GetTemplate(SubjectFileTypes type)
+    {
+        var response = await Mediator.Send(new GetSubjectFileTypeTemplateQuery(type));
+        if (response.IsSuccess == false)
+            return Return(response);
+
+        return File(response.Data.Bytes, "application/octet-stream");
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    [Route("Template")]
+    public async Task<ActionResult> AddTemplate([FromForm] IFormFile file, [FromForm] SubjectFileTypes type)
+        => Return(await Mediator.Send(new AddFileTypeTemplateCommand(type, file.OpenReadStream(), file.FileName)));
 
     [HttpPost]
     [Authorize(Roles = "Doctor")]

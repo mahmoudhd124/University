@@ -59,7 +59,30 @@
     margin: 5px 0;
     white-space: pre;
     width: 100%;
+    max-width: 100%;
 }
+
+@media only screen and (width <= 576px) {
+    .container .info > div > div :last-child {
+        overflow-y: scroll;
+    }
+    
+    #doctor-name{
+        overflow-y: scroll;
+    }
+}
+
+.container .info > div {
+    font-family: Roboto;
+    text-decoration: none;
+    border: 1px solid #cccccc74;
+    padding: 3px 10px;
+    margin: 5px 0;
+    white-space: pre;
+    width: 100%;
+    max-width: 100%;
+}
+
 
 .container .btn {
     font-family: Roboto;

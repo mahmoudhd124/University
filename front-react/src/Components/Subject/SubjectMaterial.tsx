@@ -1,11 +1,12 @@
-﻿import React from 'react';
+﻿import React, {useState} from 'react';
 import TimeAgo from "../Global/TimeAgo";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {SubjectFileModel} from "../../Models/SubjectMaterial/SubjectFileModel";
 import useAxiosApi from "../../Hookes/useAxiosApi";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
-import {useDownloadSubjectMaterialMutation} from "../../App/Api/SubjectMaterialApi";
+import {downloadFile, useDownloadSubjectMaterial} from "../../App/Api/SubjectMaterialApi";
+import {Alert} from "react-bootstrap";
 
 interface Props {
     material: SubjectFileModel,
@@ -17,27 +18,24 @@ interface Props {
 }
 
 const SubjectMaterial = ({material: m, isOwner, removeHandler, api}: Props) => {
-    const download = useDownloadSubjectMaterialMutation(api)
-    const handleDownload = () => {
+    const download = useDownloadSubjectMaterial(api)
+    const [err, setErr] = useState('')
+    const handleDownload = () =>
         download(m.storedName)
-            .then((response) => {
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', m.name);
-                document.body.appendChild(link);
-                link.click();
+            .then(({data}) => {
+                downloadFile(data, m.name)
+                setErr('')
             })
-            .catch((error) => {
-                console.error('Error downloading file:', error);
-            });
-    }
+            .catch(e => //@ts-ignore
+                setErr('Failed to download  ' + m.name + '\n' + e?.response?.data?.message ?? '')
+            )
 
 
     return (
         <div
             className="col-12 col-md-5 col-lg-3 bg-white border border-3 rounded rounded-3 d-flex flex-column
             align-items-center mx-1 my-1 card">
+            {err.length>0 && <Alert variant={'danger'}>{err}</Alert>}
             <h5 className={'my-1 card-title'}>{m.name}</h5>
             <p className={'mt-auto'}><TimeAgo timestamp={m.date}/></p>
             <p className={'mt-auto'}>{SubjectFileTypes[m.type]}</p>

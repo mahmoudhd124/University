@@ -1,6 +1,8 @@
 import {BASE_URL, baseApi} from "./BaseApi";
 import {AppDispatch} from "../store";
-import {AxiosInstance} from "axios";
+import {AxiosInstance, AxiosResponse} from "axios";
+import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
+import React from "react";
 
 export const subjectMaterialApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -43,15 +45,36 @@ export const useAddSubjectMaterialMutation = (dispatch: AppDispatch, api: AxiosI
         return response
     }
 }
-export const useDownloadSubjectMaterialMutation = (api: AxiosInstance) => {
-    return async (name: string) => {
-        return await api.get<Blob>(BASE_URL + 'subjectFile/' + name,)
-    }
+export const useDownloadSubjectMaterial = (api: AxiosInstance) =>
+    async (name: string) =>
+        await api.get<Blob>(BASE_URL + 'subjectFile/' + name, {responseType: 'blob'})
+
+
+export const useDownloadSubjectFileTypeTemplate = (api: AxiosInstance) =>
+     (type: keyof typeof SubjectFileTypes) =>
+        api.get<Blob>(BASE_URL + 'subjectFile/Template/' + type, {responseType: "blob"})
+
+export const useUploadSubjectFileTypeTemplate = (api: AxiosInstance) =>
+    async (d: FormData) =>
+        await api.post<boolean>(BASE_URL + 'subjectFile/Template', d, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+
+
+export const downloadFile = (blobParts: Blob, name: string) => {
+    const url = window.URL.createObjectURL(new Blob([blobParts]));
+    const link = document.createElement('a');
+    link.href = url
+    link.setAttribute('download', name);
+    document.body.appendChild(link);
+    link.click()
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
 }
 
-// export const SubjectMaterialApi = 'https://localhost:7035/Api/SubjectFile/'
 export const {
-    // useAddSubjectMaterialMutation,
     useDeleteSubjectMaterialMutation,
     useGetSubjectMaterialQuery,
     useLazyGetSubjectMaterialQuery
