@@ -43,7 +43,7 @@ namespace Logic.Migrations
                     b.HasIndex("SubjectId")
                         .IsUnique();
 
-                    b.ToTable("DoctorSubjects", (string)null);
+                    b.ToTable("DoctorSubjects");
                 });
 
             modelBuilder.Entity("Logic.Models.IdentityModels.Role", b =>
@@ -129,6 +129,11 @@ namespace Logic.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ProfilePhoto")
+                        .IsRequired()
+                        .HasMaxLength(511)
+                        .HasColumnType("nvarchar(511)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -187,7 +192,7 @@ namespace Logic.Migrations
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL AND [UserAgent] IS NOT NULL");
 
-                    b.ToTable("UserRefreshTokens", (string)null);
+                    b.ToTable("UserRefreshTokens");
                 });
 
             modelBuilder.Entity("Logic.Models.Message", b =>
@@ -226,7 +231,7 @@ namespace Logic.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Logic.Models.Subject", b =>
@@ -264,7 +269,7 @@ namespace Logic.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("Logic.Models.SubjectFiles", b =>
@@ -298,7 +303,7 @@ namespace Logic.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("SubjectMaterials", (string)null);
+                    b.ToTable("SubjectMaterials");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

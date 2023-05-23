@@ -14,6 +14,7 @@ public class SubjectDto
     public bool HasADoctor { get; set; }
     public string DoctorId { get; set; }
     public string DoctorUsername { get; set; }
+    public string DoctorProfilePhoto { get; set; }
     public bool IsOwner { get; set; }
     public IList<SubjectFileDto> Files { get; set; }
     public int TotalNumberOfFilesRequired { get; set; } = Enum.GetValues(typeof(SubjectFileTypes)).Length;

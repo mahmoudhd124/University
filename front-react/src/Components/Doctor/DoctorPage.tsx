@@ -6,6 +6,11 @@ import './DoctorPage.css'
 import DoctorField from "./DoctorField";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 import useAppSelector from "../../Hookes/useAppSelector";
+import {BASE_URL} from "../../App/Api/BaseApi";
+import React, {useRef} from "react";
+import useAppDispatch from "../../Hookes/useAppDispatch";
+import UseAxiosApi from "../../Hookes/useAxiosApi";
+import {useChangeProfilePhoto} from "../../App/Api/UserApi";
 
 const DoctorPage = () => {
     const {id} = useParams()
@@ -13,6 +18,19 @@ const DoctorPage = () => {
     const loc = useLocation()
     const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
     const navigator = useNavigate()
+    const docImgPath = `${BASE_URL.slice(0, BASE_URL.length - 5)}/ProfileImages/${data?.profilePhoto}`
+    const newImg = useRef() as React.MutableRefObject<HTMLInputElement>
+    const dispatch = useAppDispatch()
+    const api = UseAxiosApi()
+    const changeProfilePhotoApi = useChangeProfilePhoto(api,dispatch)
+    
+    const changeProfilePhotoHandler = async (e:React.ChangeEvent) => {
+        const formData = new FormData()
+        const f = newImg.current.files?.item(0)!
+        formData.append('file',f)
+        console.log(f)
+        await changeProfilePhotoApi(formData,data?.id ?? 'ME')
+    }
 
     if (isFetching) {
         const s: JSX.Element[] = []
@@ -68,9 +86,19 @@ const DoctorPage = () => {
             <div className="doctor bg-white shadow rounded-lg d-block d-sm-flex flex-sm-wrap justify-content-center">
                 <div className="profile-tab-nav border-right">
                     <div>
-                        <div className="img-circle text-center mb-3 ">
-                            <img src="/images/doctor.png" alt="Image" className="shadow"></img>
-                        </div>
+                        {data?.isOwner ? <div className={'d-flex justify-content-center'}>
+                            <div className="img-circle text-center mb-3" style={{
+                                width:'fit-content'
+                            }}>
+                                <img src={docImgPath} alt="Image" className="shadow" 
+                                     style={{cursor:'pointer'}}
+                                     onClick={e => newImg.current.click()}/>
+                                <input type="file" onChange={changeProfilePhotoHandler} ref={newImg} className={'d-none'}/>
+                            </div>
+                            </div> :
+                            <div className="img-circle text-center mb-3 ">
+                                <img src={docImgPath} alt="Image" className="shadow"></img>
+                            </div>}
                         <h3 className="text-center text-wrap" id={'doctor-name'}>
                             {data?.firstname! + " " + data?.lastname!}
                         </h3>

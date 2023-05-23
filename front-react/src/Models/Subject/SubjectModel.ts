@@ -9,6 +9,7 @@ export interface SubjectModel {
     hasADoctor: boolean;
     doctorId: string;
     doctorUsername: string;
+    doctorProfilePhoto:string,
     isOwner: boolean;
     files: SubjectFileModel[];
     totalNumberOfFilesRequired:number

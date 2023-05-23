@@ -4,6 +4,9 @@ import {DoctorModel} from "../../Models/Doctor/DoctorModel";
 import {baseApi} from "./BaseApi";
 import {EditDoctorModel} from "../../Models/Doctor/EditDoctorModel";
 import {DoctorReportModel} from "../../Models/Doctor/DoctorReportModel";
+import {AxiosInstance} from "axios";
+import useAppDispatch from "../../Hookes/useAppDispatch";
+import {AppDispatch} from "../store";
 
 export const DoctorApi = baseApi.injectEndpoints({
     endpoints: builder => ({

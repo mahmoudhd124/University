@@ -14,4 +14,5 @@ public class DoctorDto
     public bool IsOwner { get; set; }
     public IList<SubjectForPageDto> Subjects { get; set; }
     public bool IsComplete { get; set; }
+    public string ProfilePhoto { get; set; }
 }

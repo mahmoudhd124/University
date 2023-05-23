@@ -74,6 +74,8 @@ public class AutomapperProfile : Profile
                 opt.MapFrom(src => src.DoctorSubject.DoctorId))
             .ForMember(dest => dest.DoctorUsername, opt =>
                 opt.MapFrom(src => src.DoctorSubject.Doctor.UserName))
+            .ForMember(dest => dest.DoctorProfilePhoto,opt => 
+                opt.MapFrom(src => src.DoctorSubject.Doctor.ProfilePhoto))
             .ForMember(dest => dest.Files, opt =>
                 opt.MapFrom(src =>
                     src.SubjectFiles.Select(x => new SubjectFileDto

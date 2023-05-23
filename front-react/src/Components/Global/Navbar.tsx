@@ -12,6 +12,7 @@ const Navbar = () => {
     const token = useAppSelector(s => s.auth.token)
     const dispatch = useAppDispatch()
     const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
+    const isDoctor = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'doctor')
     const [send, {data: hasUnReadMessages}] = useLazyGetIsHasUnReadMessagesQuery()
     const loc = useLocation()
 
@@ -100,6 +101,10 @@ const Navbar = () => {
                                                 {hasUnReadMessages && redNotification}
                                             </div>
                                             <ul className="dropdown-menu">
+                                                {isDoctor &&
+                                                    <li><Link to={'/doctor/'} className="dropdown-item"><img
+                                                        src="/images/doctor.png"
+                                                        style={styleImg}/>Profile</Link></li> }
                                                 <li><Link to={'/doctor/list/0'} className="dropdown-item"><img
                                                     src="/images/doctor.png"
                                                     style={styleImg}/>Doctors</Link></li>
