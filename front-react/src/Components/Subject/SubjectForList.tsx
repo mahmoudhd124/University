@@ -15,7 +15,7 @@ const SubjectForList = ({ subject: s, onClickHandler, onDelete }: Props) => {
     const isComplete = s.numberOfFilesTypes == Object.keys(SubjectFileTypes).length / 2
     return (
         <div
-            className={'col-11 col-sm-8 col-md-5 col-lg-3 d-flex flex-column align-items-center border text-center border-3 rounded-3 subject'}
+            className={'col-sm-5 col-lg-3 d-flex flex-column align-items-center border text-center border-3 rounded-3 subject'}
             onClick={onClickHandler}
         >
             <h3>{s.name}</h3>

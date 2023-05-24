@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     useDeleteAssignedDoctorMutation,
     useGetSubjectByCodeQuery
 } from "../../App/Api/SubjectApi";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import useGetAppError from "../../Hookes/useGetAppError";
 import './SubjectPage.css'
 import useAppSelector from "../../Hookes/useAppSelector";
@@ -16,12 +16,13 @@ import SubjectMaterials from "./SubjectMaterials";
 import Forbidden403 from "../Global/Forbidden/Forbidden403";
 import ProgressLine from "./ProgressBar/ProgressLine";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
+import {BASE_URL} from "../../App/Api/BaseApi";
 
 const SubjectPage = () => {
-    const { code } = useParams()
+    const {code} = useParams()
     const p = useRef() as React.MutableRefObject<HTMLDivElement>
     const navigator = useNavigate()
-    const { data: subject, isError, error, isFetching } = useGetSubjectByCodeQuery(Number(code))
+    const {data: subject, isError, error, isFetching} = useGetSubjectByCodeQuery(Number(code))
     const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
     const [deleteDoctor, deleteDoctorResult] = useDeleteAssignedDoctorMutation()
     const [assignDoctor, assignDoctorResult] = useAssignDoctorToSubjectMutation()
@@ -47,7 +48,7 @@ const SubjectPage = () => {
             return
         send({
             pageIndex: 0,
-            pageSize: 10,
+            pageSize: 5,
             usernamePrefix: doctorUsername
         })
     }, [doctorUsername])
@@ -66,7 +67,7 @@ const SubjectPage = () => {
         return (e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault()
             setDoctorUsername('')
-            assignDoctor({ did, sid: subject?.id! })
+            assignDoctor({did, sid: subject?.id!})
         }
     }
 
@@ -76,11 +77,11 @@ const SubjectPage = () => {
         const code = useGetAppError(error)?.code ?? "NO-CODE"
 
         if (code == 'Subject.WrongCode')
-            return <Forbidden403 errors={[{ title: 'WRONG CODE', text: msg }]} />
+            return <Forbidden403 errors={[{title: 'WRONG CODE', text: msg}]}/>
         else if (code == 'Subject.UnAuthorizedGet')
-            return <Forbidden403 errors={[{ title: 'FORBIDDEN', text: msg }]} />
+            return <Forbidden403 errors={[{title: 'FORBIDDEN', text: msg}]}/>
         else if (isFetching == false)
-            return <Forbidden403 errors={[{ title: 'Error', text: msg + ' Try To Login Again!' }]} />
+            return <Forbidden403 errors={[{title: 'Error', text: msg + ' Try To Login Again!'}]}/>
         else
             return <h3>Loading</h3>
     }
@@ -91,19 +92,19 @@ const SubjectPage = () => {
         .length
 
     const line = <ProgressLine label="Files Uploaded"
-        text={`${numberOfFileTypes}/${Object.keys(SubjectFileTypes).length / 2}`}
-        visualParts={[{
-            percentage: `${numberOfFileTypes / Object.keys(SubjectFileTypes).length * 200}%`,
-            color: 'blue'
-        }]}
-        backgroundColor={'lightblue'}
+                               text={`${numberOfFileTypes}/${Object.keys(SubjectFileTypes).length / 2}`}
+                               visualParts={[{
+                                   percentage: `${numberOfFileTypes / Object.keys(SubjectFileTypes).length * 200}%`,
+                                   color: 'blue'
+                               }]}
+                               backgroundColor={'lightblue'}
     />
 
     return (
         <div className="container" ref={p}>
             {isAdmin && <div className={'row justify-content-center'}>
                 <button className={'col-8 col-md-6 btn btn-outline-dark my-3'}
-                    onClick={e => navigator('/subject/edit/' + subject?.code!)}>Edit
+                        onClick={e => navigator('/subject/edit/' + subject?.code!)}>Edit
                 </button>
             </div>}
 
@@ -133,15 +134,24 @@ const SubjectPage = () => {
 
                     {subject.hasADoctor ? <div className="row">
                         <div className="col-md-6">
-                            <p>
-                                <strong>Doctor:</strong> <Link to={`/doctor/${subject.doctorId}`}
-                                    state={{ from: loc }}
-                                >{subject.doctorUsername}</Link>
+                            <p onClick={e => navigator(`/doctor/${subject.doctorId}`, {state: {from: loc}})}
+                               style={{cursor: "pointer"}}
+                            >
+                                <img
+                                    className='rounded-circle img-thumbnail'
+                                    style={{
+                                        width: '50px',
+                                        height: '50px',
+                                        objectFit: 'contain'
+                                    }}
+                                    src={BASE_URL.slice(0, BASE_URL.length - 5) + '/profileImages/' + subject.doctorProfilePhoto}
+                                    alt=""/>
+                                {subject.doctorUsername}
                             </p>
                         </div>
                         {isAdmin && <div className={'col-md-6'}>
                             <button className={'btn btn-outline-danger'}
-                                onClick={deleteDoctorHandler}
+                                    onClick={deleteDoctorHandler}
                             >Remove Doctor
                             </button>
                         </div>}
@@ -152,9 +162,9 @@ const SubjectPage = () => {
                         <div className={'row justify-content-center'}>
                             <div className={'col-md-6'}>
                                 <input type="text"
-                                    placeholder={'Doctor Username'}
-                                    className={'form-control'}
-                                    onChange={e => setDoctorUsername(e.currentTarget.value)}
+                                       placeholder={'Doctor Username'}
+                                       className={'form-control'}
+                                       onChange={e => setDoctorUsername(e.currentTarget.value)}
                                 />
                                 {doctorUsername.trim().length > 0 && <div className="list-group">
                                     {doctorListResult?.data?.map(d => <button
@@ -162,6 +172,15 @@ const SubjectPage = () => {
                                         key={d.id}
                                         onClick={assignDoctorHandler(d.id)}
                                     >
+                                        <img
+                                            className='rounded-circle img-thumbnail'
+                                            style={{
+                                                width: '50px',
+                                                height: '50px',
+                                                objectFit: 'contain'
+                                            }}
+                                            src={BASE_URL.slice(0, BASE_URL.length - 5) + '/profileImages/' + d.profilePhoto}
+                                            alt=""/>
                                         {d.username}
                                     </button>)}
                                 </div>}
@@ -175,16 +194,16 @@ const SubjectPage = () => {
 
                     {isAdmin && <div className="row justify-content-center">
                         <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 btn btn-primary text-white my-3"
-                            onClick={e => navigator(`/subject/report/${subject?.id}`, { state: { from: loc } })}
+                             onClick={e => navigator(`/subject/report/${subject?.id}`, {state: {from: loc}})}
                         >
                             Generate Report
                         </div>
                     </div>}
 
                     <SubjectMaterials materials={subject?.files}
-                        isOwner={subject.isOwner}
-                        id={subject?.id!}
-                        code={subject?.code!} />
+                                      isOwner={subject.isOwner}
+                                      id={subject?.id!}
+                                      code={subject?.code!}/>
                 </div>
             </div>
         </div>

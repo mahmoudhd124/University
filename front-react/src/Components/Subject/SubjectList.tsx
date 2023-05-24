@@ -46,7 +46,7 @@ const SubjectList = () => {
     }
 
     return (
-        <>
+        <div style={{background:'#F5F5F5'}}>
             <div className='container'>
                 {isError && <Alert variant='danger'>{useGetAppError(error)?.message}</Alert>}
 
@@ -135,27 +135,24 @@ const SubjectList = () => {
                         </Link>
                     </div>
                 </div>
-
-
             </div>
             <div className={' my-2'}>
                 <div className={'container'}>
-                    <div className="row justify-content-center justify-content-sm-around gap-3">
+                    <div className="row gap-3 justify-content-center">
                         {data?.map(s => <SubjectForList key={s.id}
                                                         subject={s}
                                                         onClickHandler={e => navigator('/subject/' + s.code, {state: {from: loc}})}
                                                         onDelete={removeHandlerOne(s.id)}
                         />)}
                     </div>
-
-                    <Pagination page={page}
-                                setPage={setPage}
-                                hasNext={(data?.length ?? 0) == 0 || (data?.length ?? 0) < PAGE_SIZE}
-                                className={'my-3'}
-                    />
                 </div>
             </div>
-        </>
+            <Pagination page={page}
+                        setPage={setPage}
+                        hasNext={(data?.length ?? 0) == 0 || (data?.length ?? 0) < PAGE_SIZE}
+                        className={'mt-3'}
+            /> 
+        </div>
     )
 };
 
