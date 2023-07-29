@@ -43,7 +43,7 @@ namespace Logic.Migrations
                     b.HasIndex("SubjectId")
                         .IsUnique();
 
-                    b.ToTable("DoctorSubjects");
+                    b.ToTable("DoctorSubjects", (string)null);
                 });
 
             modelBuilder.Entity("Logic.Models.IdentityModels.Role", b =>
@@ -192,7 +192,7 @@ namespace Logic.Migrations
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL AND [UserAgent] IS NOT NULL");
 
-                    b.ToTable("UserRefreshTokens");
+                    b.ToTable("UserRefreshTokens", (string)null);
                 });
 
             modelBuilder.Entity("Logic.Models.Message", b =>
@@ -231,7 +231,7 @@ namespace Logic.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("Logic.Models.Subject", b =>
@@ -269,7 +269,7 @@ namespace Logic.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("Logic.Models.SubjectFiles", b =>
@@ -303,7 +303,7 @@ namespace Logic.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("SubjectMaterials");
+                    b.ToTable("SubjectMaterials", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
