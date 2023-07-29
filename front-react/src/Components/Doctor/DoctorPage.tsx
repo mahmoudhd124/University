@@ -156,7 +156,9 @@ const DoctorPage = () => {
                             <h3 className={'text-wrap'}>{s.name}</h3>
                             <h3 className={'mt-1'}>{s.department}</h3>
                             <p>{s.code}</p>
-                            <h5 className={'mt-1'}><b>{s.numberOfFilesTypes}</b> File Type Uploaded</h5>
+                            <h5 className={'mt-auto'}
+                                style={{display:'flex',alignItems:'end',color:s.numberOfFilesTypes == (Object.keys(SubjectFileTypes).length / 2) ? 'blue':'red'}}
+                            ><b>{s.numberOfFilesTypes}</b>&nbsp;File Type Uploaded</h5>
                         </div>
                     ) : (
                         <>

@@ -1,16 +1,14 @@
-import {BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import {setCredentials, logout} from '../../Feutures/Auth/authSlice'
+import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from '@reduxjs/toolkit/query/react'
+import {logout, setCredentials} from '../../Feutures/Auth/authSlice'
 import {RootState} from '../store'
 import useRefreshToken from '../../Hookes/useRefreshToken'
+import {BASE_URL} from "./axiosApi";
 
 export interface AppError {
     code: string,
     message: string
 }
 
-// export const BASE_URL = 'https://localhost:7035/api/'
-export const BASE_URL = 'http://localhost:5016/api/'
-// export const BASE_URL = 'https://qualityms-001-site1.gtempurl.com/api/'
 
 export const sendDefualt = fetchBaseQuery({
     baseUrl: BASE_URL,
@@ -31,11 +29,11 @@ const baseQuery: BaseQueryFn<
     if (tokenExp != null) {
         const now = +new Date().getTime().toString().slice(0, -3)
         if (now >= tokenExp) {
-            const refreshToken = useRefreshToken()
-            const data = await refreshToken()
-            if (data) {
+            try {
+                const refreshToken = useRefreshToken()
+                const data = await refreshToken()
                 api.dispatch(setCredentials(data))
-            } else {
+            } catch (e) {
                 api.dispatch(logout())
             }
         }
@@ -48,5 +46,5 @@ export const baseApi = createApi({
     baseQuery,
     tagTypes: ['user', 'doctor', 'subject', 'message'],
     endpoints: () => ({}),
-    keepUnusedDataFor: 0
+    // keepUnusedDataFor: 0
 })
