@@ -6,6 +6,8 @@ import {faArrowDown} from "@fortawesome/free-solid-svg-icons";
 import SubjectFileTypes from "../../Models/Subject/SubjectFileTypes";
 import useAppNavigator from "../../Hookes/useAppNavigator";
 import useAppSelector from "../../Hookes/useAppSelector";
+import useGetAppError from "../../Hookes/useGetAppError";
+import DoctorNotFound from "./DoctorNotFound";
 
 const DoctorPage = () => {
     const {id} = useParams()
@@ -112,6 +114,9 @@ const DoctorPage = () => {
 
     if (isFetching)
         return <h3>Loading...</h3>
+    
+    if(isError)
+        return <DoctorNotFound id={'fasdf'} error={useGetAppError(error)!}/>
 
     return (<>
         <div className="bg-gradient-to-b from-blue-300 to-blue-200 min-h-remaining text-gray-900 flex items-center">

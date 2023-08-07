@@ -6,6 +6,7 @@ import useAppNavigator from "../../Hookes/useAppNavigator";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faX} from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../../Components/Global/Pagination";
+import './doctor.css'
 
 const PAGE_SIZE = 12
 const DoctorList = () => {
@@ -47,12 +48,12 @@ const DoctorList = () => {
             type="text"
             value={usernamePrefixField}
             id={'usernamePrefix'}
-            className="w-4/5 text-2xl bg-blue-50 rounded-2xl rounded-r-none border-2 border-r-0 border-solid border-blue-500 focus:border-blue-500 focus:outline-blue-500"
+            className="doctor-list-search-input"
             onChange={e => setUsernamePrefixField(e.currentTarget.value)}
             placeholder={'Username Prefix...'}
         />
         <button
-            className="w-1/5 h-full bg-blue-500 rounded-2xl border border-blue-300 rounded-l-none hover:bg-blue-600 focus:bg-blue-700"
+            className="doctor-list-search-button"
             onClick={e => {
                 setUsernamePrefix(usernamePrefixField)
                 setPageIndex(0)
@@ -68,7 +69,7 @@ const DoctorList = () => {
                 setHasSubject(e.target.value.length == 0 ? null : e.target.value == 'true')
                 setPageIndex(0)
             }}
-            className="w-full p-2.5 text-blue-500 bg-blue-50 border rounded-xl shadow-sm outline-none focus:border-blue-600">
+            className="doctor-list-select-menu">
             <option value={''}>All</option>
             <option value={'true'}>Has subject</option>
             <option value={'false'}>Has no subject</option>
@@ -91,21 +92,21 @@ const DoctorList = () => {
                 <div className="h-1/4 flex bg-gradient-to-r from-blue-200 to-red-200 rounded-b-2xl">
                     <button
                         onClick={e => navigator('/doctor/' + d.id)}
-                        className="w-1/2 hover:bg-blue-400 focus:bg-blue-500 rounded-bl-2xl transition-all text-2xl sm:text-xl text-blue-900 focus:bg-opacity-50">More
+                        className="doctor-list-card-more-button">More
                     </button>
                     <button
                         onClick={e => setId(d.id)}
-                        className="w-1/2 hover:bg-red-400 focus:bg-red-500 rounded-br-2xl transition-all text-2xl sm:text-xl text-red-900 focus:bg-opacity-50">Remove
+                        className="doctor-list-card-remove-button">Remove
                     </button>
                 </div>
             </div>)}
         </div>
 
     const removeDoctor = <div
-        className={'fixed w-screen h-screen top-0 left-0 bg-gray-900 bg-opacity-90 flex justify-center items-center origin-center animate-open-menu'}
+        className={'doctor-list-remove-doctor-window'}
         onClick={e => setId(null)}>
         <div
-            className="border-2 border-blue-200 bg-blue-100 flex flex-col justify-evenly items-center rounded-lg w-5/6 sm:w-1/2 lg:w-1/3 gap-1 h-5/6 sm:h-2/3 text-3xl sm:text-2xl text-center relative">
+            className="doctor-list-remove-doctor-inner-window">
             <div className="absolute top-0 right-0 -translate-x-1 translate-y-1">
                 <FontAwesomeIcon icon={faX} className={'hover:cursor-pointer'}/>
             </div>
@@ -115,7 +116,7 @@ const DoctorList = () => {
             <div className="h-1/4 flex bg-gradient-to-r from-blue-200 to-red-200 rounded-xl w-3/4">
                 <button
                     onClick={e => setId(null)}
-                    className="w-1/2 hover:bg-blue-400 focus:bg-blue-500 rounded-l-lg transition-all text-2xl sm:text-xl text-blue-900 focus:bg-opacity-50">
+                    className="doctor-list-remove-card-return-back-button">
                     Return Back
                 </button>
                 <button
@@ -124,7 +125,7 @@ const DoctorList = () => {
                         remove(id!)
                     }}
                     disabled={removeResult.isLoading}
-                    className="w-1/2 hover:bg-red-400 focus:bg-red-500 rounded-r-lg transition-all text-2xl sm:text-xl text-red-900 focus:bg-opacity-50 text-center">
+                    className="doctor-list-remove-card-remove-button">
                     {removeResult.isLoading ? spinner : 'Remove'}
                 </button>
             </div>
@@ -151,10 +152,10 @@ const DoctorList = () => {
             </div>
             <div className="h-1/4 flex bg-gradient-to-r from-blue-200 to-red-200 rounded-b-2xl">
                 <button
-                    className="w-1/2 hover:bg-blue-400 focus:bg-blue-500 rounded-bl-2xl transition-all text-2xl sm:text-xl text-blue-900 focus:bg-opacity-50">More
+                    className="doctor-list-card-more-button">More
                 </button>
                 <button
-                    className="w-1/2 hover:bg-red-400 focus:bg-red-500 rounded-br-2xl transition-all text-2xl sm:text-xl text-red-900 focus:bg-opacity-50">Remove
+                    className="doctor-list-card-remove-button">Remove
                 </button>
             </div>
         </div>)}
@@ -171,7 +172,7 @@ const DoctorList = () => {
                 <div className="w-full flex">
                     <button
                         onClick={e => navigator('/doctor/add')}
-                        className="bg-blue-200 border border-blue-500 hover:bg-blue-300 focus:bg-blue-400 transition-all p-4 rounded-xl text-2xl sm:text-xl mx-auto sm:ml-auto sm:mr-0 my-2">Add Doctor</button>
+                        className="doctor-list-add-doctor-button">Add Doctor</button>
                 </div>
                 {usernamePrefixInput}
                 {hasSubjectInput}

@@ -5,6 +5,7 @@ import {faBars, faX} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 import useAppDispatch from "../../Hookes/useAppDispatch";
 import {logout} from "../../Feutures/Auth/authSlice";
+import './navbar.css'
 
 const Navbar = () => {
     const loc = useLocation()
@@ -12,19 +13,13 @@ const Navbar = () => {
     const [showMobMenu, setShowMobMenu] = useState(false)
     const dispatch = useAppDispatch()
     const isAdmin = useAppSelector(s => s.auth.roles)?.some(r => r.toLowerCase() == 'admin')
-
-    const mobLinkClasses = 'text-3xl flex justify-center items-center p-1 py-3 hover:bg-gray-900 hover:bg-opacity-70 transition-all'
     const mobLink = (link: string, text: string) =>
-        <Link to={link} state={{from: loc}}
-              className={mobLinkClasses}>{text}</Link>
-
-    const navBarClasses = 'ml-auto text-2xl sm:text-xl hover:text-blue-900 transition-all mx-1'
+        <Link to={link} state={{from: loc}} className='nav-bar-mobile-link'>{text}</Link>
     const navBarLink = (link: string, text: string) =>
-        <Link to={link} state={{from: loc}}
-              className={navBarClasses}>{text}</Link>
+        <Link to={link} state={{from: loc}} className='nav-bar-non-mobile-link'>{text}</Link>
 
     const mobMenu = <div
-        className={'absolute top-0 left-0 w-full h-screen flex flex-col bg-gray-800 bg-opacity-90 origin-top animate-open-menu'}
+        className='nav-bar-mobile-menu'
         onClick={e => setShowMobMenu(false)}
     >
         <div className="self-end -translate-x-1 translate-y-1 text-3xl text-white mb-3">
@@ -32,10 +27,10 @@ const Navbar = () => {
         </div>
 
         {/*Mob Links Here*/}
-        {isAdmin && mobLink('/AdminDashboard','Admin Dashboard')}
+        {isAdmin && mobLink('/AdminDashboard', 'Admin Dashboard')}
 
         {token ? <div
-            className={mobLinkClasses + ' text-red-600 hover:text-red-800 hover:cursor-pointer'}
+            className={'nav-bar-mobile-link text-red-600 hover:text-red-800 hover:cursor-pointer'}
             onClick={e => dispatch(logout())}
         >SignOut</div> : mobLink('/login', 'Login')}
     </div>
@@ -46,7 +41,7 @@ const Navbar = () => {
         />
     </div>
 
-    return (<nav className={'h-16 sticky z-50 top-0 w-screen bg-blue-400 text-white'}>
+    return (<nav className={'nav-bar'}>
         <div className="container mx-auto p-4 flex items-baseline">
             <Link to={'/'} state={{from: loc}}
                   className={'text-3xl sm:text-2xl hover:text-blue-700 transition-all'}>Home</Link>
@@ -55,10 +50,10 @@ const Navbar = () => {
 
             <div className="hidden sm:flex ml-auto">
                 {/*Non-Mob Links */}
-                {isAdmin && navBarLink('/AdminDashboard','AdminDashboard')}
+                {isAdmin && navBarLink('/AdminDashboard', 'AdminDashboard')}
 
                 {token ? <div
-                    className={navBarClasses + ' text-red-600 hover:text-red-800 hover:cursor-pointer'}
+                    className={'nav-bar-non-mobile-link text-red-600 hover:text-red-800 hover:cursor-pointer'}
                     onClick={e => dispatch(logout())}
                 >SignOut</div> : navBarLink('/login', 'Login')}
             </div>

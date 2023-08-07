@@ -1,7 +1,7 @@
 import useGetRoute from "../../Hookes/useGetRoute";
 import {useLocation} from "react-router-dom";
 
-const NotFound = () => {
+const PathNotFound = () => {
     const loc = useLocation()
 
     return (<div className={'min-h-remaining bg-blue-800 flex flex-col justify-center items-center text-blue-200'}>
@@ -12,4 +12,4 @@ const NotFound = () => {
     </div>)
 }
 
-export default NotFound
+export default PathNotFound

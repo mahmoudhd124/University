@@ -5,7 +5,7 @@ import useGetAppError from "../../Hookes/useGetAppError";
 import {BASE_URL} from "../../App/Api/axiosApi";
 import {AddDoctorModel} from "../../Models/Doctor/AddDoctorModel";
 import * as Yup from "yup";
-
+import './doctor.css'
 const AddDoctor = () => {
 
     const [add, addResult] = useAddDoctorMutation();
@@ -28,6 +28,7 @@ const AddDoctor = () => {
             username: Yup.string().required("username is required"),
             phoneNumber: Yup.string().required("phone is required"),
             email: Yup.string().required("email is required"),
+            nationalNumber: Yup.string().required("national number is required"),
             password: Yup.string()
                 .test({
                     message: "The password must has more than 8 characters and at least one small and one capital character and one non-alphabitic character and at least one number",
@@ -83,7 +84,7 @@ const AddDoctor = () => {
                                 {formik.errors.firstName}</label> :
                             <label htmlFor="firstName" className={"text-blue-500"}>First Name</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="text"
                             id={"firstName"}
                             name={"firstName"}
@@ -100,7 +101,7 @@ const AddDoctor = () => {
                                 {formik.errors.lastName}</label> :
                             <label htmlFor="lastName" className={"text-blue-500"}>Last Name</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="text"
                             id={"lastName"}
                             name={"lastName"}
@@ -117,7 +118,7 @@ const AddDoctor = () => {
                                 {formik.errors.username}</label> :
                             <label htmlFor="uname" className={"text-blue-500"}>Username</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="text"
                             id={"username"}
                             name={"username"}
@@ -134,7 +135,7 @@ const AddDoctor = () => {
                                 {formik.errors.phoneNumber}</label> :
                             <label htmlFor="phoneNumber" className={"text-blue-500"}>Phone Number</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="text"
                             id={"phoneNumber"}
                             name={"phoneNumber"}
@@ -151,7 +152,7 @@ const AddDoctor = () => {
                                 {formik.errors.nationalNumber}</label> :
                             <label htmlFor="nationalNumber" className={"text-blue-500"}>National Number</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="text"
                             id={"nationalNumber"}
                             name={"nationalNumber"}
@@ -168,7 +169,7 @@ const AddDoctor = () => {
                                 {formik.errors.email}</label> :
                             <label htmlFor="email" className={"text-blue-500"}>Email</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="email"
                             id={"email"}
                             name={"email"}
@@ -185,7 +186,7 @@ const AddDoctor = () => {
                                 {formik.errors.password}</label> :
                             <label htmlFor="password" className={"text-blue-500"}>Password</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="password"
                             id={"password"}
                             name={"password"}
@@ -202,7 +203,7 @@ const AddDoctor = () => {
                                 {formik.errors.confirmPassword}</label> :
                             <label htmlFor="confirmPassword" className={"text-blue-500"}>Confirm Password</label>}
                         <input
-                            className="border-2 border-blue-500 bg-blue-50 p-2 focus:border-blue-600 focus:ring-blue-700 rounded-2xl mt-1 w-full"
+                            className="add-doctor-input"
                             type="password"
                             id={"con-confirmPassword"}
                             name={"confirmPassword"}
@@ -217,7 +218,7 @@ const AddDoctor = () => {
 
                 <div className="flex justify-center mt-3">
                     <button
-                        className={"w-1/2 bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 border border-blue-600 rounded-2xl p-3 transition-all hover:shadow-xl hover:shadow-blue-200"}>Signup
+                        className={"add-doctor-add-button"}>Add
                     </button>
                 </div>
             </form>

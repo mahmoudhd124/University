@@ -6,7 +6,7 @@ import {logout, setCredentials} from "./Feutures/Auth/authSlice";
 import TokenModel from "./Models/Auth/TokenModel";
 import Home from "./Pages/Home";
 import Layout from "./Pages/Layout";
-import NotFound from "./Pages/NotFound/NotFound";
+import PathNotFound from "./Pages/NotFound/PathNotFound";
 import Login from "./Pages/Login";
 import DoctorList from "./Pages/DoctorPages/DoctorList";
 import RouteProtector from "./Components/Global/RouteProtector";
@@ -58,7 +58,7 @@ function App() {
                     <Route index element={<AdminDashboard/>}/>
                 </Route>
 
-                <Route path='*' element={<NotFound/>}/>
+                <Route path='*' element={<PathNotFound/>}/>
             </Route>
         </Routes>)
 }

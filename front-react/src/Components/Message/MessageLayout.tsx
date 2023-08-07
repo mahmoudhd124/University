@@ -12,13 +12,15 @@ const MessageLayout = () => {
                 <div className="row justify-content-between">
                     <div className="col-md-3">
                         <div className="list-group">
-                            <Link to={'/message/inbox'} className={`list-group-item ${lastPath == 'inbox' && 'active'}`}><i
+                            <Link to={'/message/inbox'}
+                                  className={`list-group-item ${lastPath == 'inbox' && 'active'}`}><i
                                 className="fa fa-download me-2"></i>Inbox</Link>
-                            {isAdmin && <Link to={'/message/sent'} className={`list-group-item ${lastPath == 'sent' && 'active'}`}>
+                            {isAdmin && <Link to={'/message/sent'}
+                                              className={`list-group-item ${lastPath == 'sent' && 'active'}`}>
                                 <i className="fa fa-star-o me-2"></i>Sent</Link>}
                         </div>
                     </div>
-                    <div className="col-md-9">
+                    <div className="col-md-9" style={{overflowX: 'scroll'}}>
                         <Outlet/>
                     </div>
                 </div>
